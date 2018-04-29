@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.permission.Role" >
+    <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_DESCRIPTION" property="roleDescription" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION, STATUS, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_role
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_role
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.permission.Role" >
+    insert into t_role (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION, 
+      STATUS, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleDescription,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.permission.Role" >
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="roleDescription != null" >
+        ROLE_DESCRIPTION,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescription != null" >
+        #{roleDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.permission.Role" >
+    update t_role
+    <set >
+      <if test="roleName != null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescription != null" >
+        ROLE_DESCRIPTION = #{roleDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.permission.Role" >
+    update t_role
+    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_DESCRIPTION = #{roleDescription,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getAllRoleMessage" resultMap="BaseResultMap">
+    SELECT * FROM t_role
+  </select>
+
+  <select id="getAllVaildRoles" resultMap="BaseResultMap">
+    SELECT * FROM t_role
+    WHERE STATUS=1
+  </select>
+
+  <select id="getRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT r.* FROM
+    t_role r LEFT JOIN
+    t_user_role u ON r.ROLE_ID=u.ROLE_ID
+    WHERE
+    u.USER_ID = #{userId}
+  </select>
+
+  <select id="getAllRoles" resultMap="BaseResultMap">
+    SELECT * FROM t_role
+    WHERE STATUS=1
+  </select>
+
+  <select id="getAllRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT r.* FROM
+    t_role r LEFT JOIN
+    t_user_role u ON
+    r.ROLE_ID=u.ROLE_ID
+    WHERE u.USER_ID = #{userId}
+  </select>
+</mapper>

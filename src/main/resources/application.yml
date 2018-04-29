@@ -1,0 +1,68 @@
+# 数据源基础配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hrm_db?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: 123456
+
+    # 连接池配置
+    # 初始化大小，最小，最大
+    initialSize: 1
+    minIdle: 1
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM T_USER
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+  #配置redis
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    pool:
+      max-active: 8
+      min-idle: 0
+      max-idle: 8
+      max-wait: -1
+    timeout: 1000
+
+  #配置thymeleaf
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    cache: false
+
+  # 配置velocity
+#  velocity:
+#    charset: UTF-8
+#    resource-loader-path: classpath:/templates/
+#    suffix: .vm
+#    toolbox-config-location: configs/toolbox.xml
+#    check-template-location: true
+
+
+# mybatis相关配置
+mybatis:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  config-location: classpath:/configs/mapper-config.xml
+
+server:
+  port: 8090

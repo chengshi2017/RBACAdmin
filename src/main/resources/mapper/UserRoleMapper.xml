@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.UserRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.permission.UserRole" >
+    <id column="USER_ROLE_ID" property="userRoleId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ROLE_ID, USER_ID, ROLE_ID, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_role
+    where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_user_role
+    where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.permission.UserRole" >
+    insert into t_user_role (USER_ROLE_ID, USER_ID, ROLE_ID, 
+      REMARK)
+    values (#{userRoleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.permission.UserRole" >
+    insert into t_user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userRoleId != null" >
+        USER_ROLE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userRoleId != null" >
+        #{userRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.permission.UserRole" >
+    update t_user_role
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.permission.UserRole" >
+    update t_user_role
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_user_role
+    WHERE USER_ID= #{userId}
+  </select>
+
+  <delete id="deleteByUserId" parameterType="java.lang.String">
+    DELETE FROM t_user_role
+    WHERE USER_ID = #{userId}
+  </delete>
+
+  <select id="getUserRoleByUserRole" resultMap="BaseResultMap" parameterType="com.spring.model.permission.UserRole">
+    SELECT * FROM t_user_role
+    WHERE 1=1
+    <if test="userId != null">
+      AND USER_ID = #{userId}
+    </if>
+    <if test="roleId != null">
+      AND ROLE_ID = #{roleId}
+    </if>
+  </select>
+
+</mapper>

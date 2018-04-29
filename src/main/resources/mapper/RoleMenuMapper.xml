@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.RoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.permission.RoleMenu" >
+    <id column="ROLE_MENU_ID" property="roleMenuId" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
+    <result column="MENU_ID" property="menuId" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROLE_MENU_ID, ROLE_ID, MENU_ID, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_role_menu
+    where ROLE_MENU_ID = #{roleMenuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_role_menu
+    where ROLE_MENU_ID = #{roleMenuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.permission.RoleMenu" >
+    insert into t_role_menu (ROLE_MENU_ID, ROLE_ID, MENU_ID, 
+      REMARK)
+    values (#{roleMenuId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.permission.RoleMenu" >
+    insert into t_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleMenuId != null" >
+        ROLE_MENU_ID,
+      </if>
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="menuId != null" >
+        MENU_ID,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleMenuId != null" >
+        #{roleMenuId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.permission.RoleMenu" >
+    update t_role_menu
+    <set >
+      <if test="roleId != null" >
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        MENU_ID = #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_MENU_ID = #{roleMenuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.permission.RoleMenu" >
+    update t_role_menu
+    set ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      MENU_ID = #{menuId,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ROLE_MENU_ID = #{roleMenuId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getRoleMenuByRoleMenu" parameterType="com.spring.model.permission.RoleMenu" resultMap="BaseResultMap">
+    SELECT * FROM t_role_menu
+    WHERE
+    1=1
+    <if test="roleId != null">
+      AND ROLE_ID = #{roleId}
+    </if>
+    <if test="menuId != null">
+      AND MENU_ID = #{menuId}
+    </if>
+  </select>
+
+  <!--根据角色ID查询关联的菜单信息-->
+  <select id="getMenusByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_role_menu
+    WHERE ROLE_ID = #{roleId}
+  </select>
+
+  <!--删除角色菜单关联关系-->
+  <delete id="deleteRoleMenusByRoleId" parameterType="java.lang.String">
+    DELETE FROM t_role_menu
+    WHERE ROLE_ID = #{roleId}
+  </delete>
+  
+  <select id="selectByMenuId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_role_menu
+    WHERE MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="batchDelete" parameterType="java.util.List">
+    DELETE from t_role_menu
+    WHERE ROLE_MENU_ID IN
+    <foreach collection="list" item="roleMenuId" open="(" close=")" separator=",">
+      #{roleMenuId}
+    </foreach>
+  </delete>
+</mapper>

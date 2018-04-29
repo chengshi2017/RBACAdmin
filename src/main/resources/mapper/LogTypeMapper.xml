@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.LogTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.LogType" >
+    <id column="LOG_TYPE_ID" property="logTypeId" jdbcType="VARCHAR" />
+    <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOG_TYPE_ID, TYPE_NAME, STATUS, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_log_type
+    where LOG_TYPE_ID = #{logTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_log_type
+    where LOG_TYPE_ID = #{logTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.LogType" >
+    insert into t_log_type (LOG_TYPE_ID, TYPE_NAME, STATUS, 
+      REMARK)
+    values (#{logTypeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.LogType" >
+    insert into t_log_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logTypeId != null" >
+        LOG_TYPE_ID,
+      </if>
+      <if test="typeName != null" >
+        TYPE_NAME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logTypeId != null" >
+        #{logTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.LogType" >
+    update t_log_type
+    <set >
+      <if test="typeName != null" >
+        TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOG_TYPE_ID = #{logTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.LogType" >
+    update t_log_type
+    set TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where LOG_TYPE_ID = #{logTypeId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getAllVaildLogTypes" resultMap="BaseResultMap">
+    SELECT *
+    FROM t_log_type
+    WHERE STATUS=1
+  </select>
+
+</mapper>

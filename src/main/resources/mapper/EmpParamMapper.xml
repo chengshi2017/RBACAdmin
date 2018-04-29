@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.EmpParamMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.EmpParam" >
+    <id column="EMP_PARAM_ID" property="empParamId" jdbcType="VARCHAR" />
+    <result column="EMP_ID" property="empId" jdbcType="VARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="JOB_ID" property="jobId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EMP_PARAM_ID, EMP_ID, DEPT_ID, JOB_ID, STATUS, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_emp_param
+    where EMP_PARAM_ID = #{empParamId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_emp_param
+    where EMP_PARAM_ID = #{empParamId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.EmpParam" >
+    insert into t_emp_param (EMP_PARAM_ID, EMP_ID, DEPT_ID, 
+      JOB_ID, STATUS, REMARK
+      )
+    values (#{empParamId,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, 
+      #{jobId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.EmpParam" >
+    insert into t_emp_param
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="empParamId != null" >
+        EMP_PARAM_ID,
+      </if>
+      <if test="empId != null" >
+        EMP_ID,
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="jobId != null" >
+        JOB_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="empParamId != null" >
+        #{empParamId,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null" >
+        #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.Emp" >
+    update t_emp_param
+    <set >
+      <if test="deptId != null" >
+        DEPT_ID = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null" >
+        JOB_ID = #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EMP_ID = #{empId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.Emp" >
+    update t_emp_param
+    set EMP_ID = #{empId,jdbcType=VARCHAR},
+      DEPT_ID = #{deptId,jdbcType=VARCHAR},
+      JOB_ID = #{jobId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where EMP_PARAM_ID = #{empParamId,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="save" parameterType="com.spring.model.Emp">
+    INSERT INTO t_emp_param
+    (EMP_PARAM_ID, EMP_ID, DEPT_ID,
+      JOB_ID, STATUS, REMARK)
+    values (#{empParamId,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR},
+      #{jobId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+    )
+  </insert>
+</mapper>

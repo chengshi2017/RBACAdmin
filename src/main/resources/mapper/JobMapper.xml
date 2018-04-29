@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.JobMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.Job" >
+    <id column="JOB_ID" property="jobId" jdbcType="VARCHAR" />
+    <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JOB_ID, JOB_NAME, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_job
+    where JOB_ID = #{jobId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_job
+    where JOB_ID = #{jobId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.Job" >
+    insert into t_job (JOB_ID, JOB_NAME, REMARK
+      )
+    values (#{jobId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.Job" >
+    insert into t_job
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobId != null" >
+        JOB_ID,
+      </if>
+      <if test="jobName != null" >
+        JOB_NAME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobId != null" >
+        #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null" >
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.Job" >
+    update t_job
+    <set >
+      <if test="jobName != null" >
+        JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where JOB_ID = #{jobId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.Job" >
+    update t_job
+    set JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where JOB_ID = #{jobId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getAllJobMessage" resultMap="BaseResultMap">
+    SELECT * FROM t_job
+  </select>
+
+  <select id="getAllJob" resultMap="BaseResultMap">
+    SELECT * FROM t_job
+  </select>
+
+  <select id="getAllJobByJobName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM
+    t_job
+    WHERE
+    JOB_NAME = #{jobName}
+  </select>
+
+</mapper>

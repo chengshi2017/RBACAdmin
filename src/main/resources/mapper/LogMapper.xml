@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.Log" >
+    <id column="LOG_ID" property="logId" jdbcType="VARCHAR" />
+    <result column="LOG_TYPE_ID" property="logTypeId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="OPERATE_TIME" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="REQUEST_URL" property="requestUrl" jdbcType="VARCHAR" />
+    <result column="RESPONSE_CODE" property="responseCode" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+    <result column="TYPE_NAME" jdbcType="VARCHAR" property="typeName"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOG_ID, LOG_TYPE_ID, USER_ID, OPERATE_TIME, REQUEST_URL, RESPONSE_CODE, STATUS, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_log
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_log
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.Log" >
+    insert into t_log (LOG_ID, LOG_TYPE_ID, USER_ID, 
+      OPERATE_TIME, REQUEST_URL, RESPONSE_CODE, 
+      STATUS, REMARK)
+    values (#{logId,jdbcType=VARCHAR}, #{logTypeId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      #{operateTime,jdbcType=TIMESTAMP}, #{requestUrl,jdbcType=VARCHAR}, #{responseCode,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.Log" >
+    insert into t_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="logTypeId != null" >
+        LOG_TYPE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="operateTime != null" >
+        OPERATE_TIME,
+      </if>
+      <if test="requestUrl != null" >
+        REQUEST_URL,
+      </if>
+      <if test="responseCode != null" >
+        RESPONSE_CODE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="logTypeId != null" >
+        #{logTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestUrl != null" >
+        #{requestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null" >
+        #{responseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.Log" >
+    update t_log
+    <set >
+      <if test="logTypeId != null" >
+        LOG_TYPE_ID = #{logTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestUrl != null" >
+        REQUEST_URL = #{requestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null" >
+        RESPONSE_CODE = #{responseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.Log" >
+    update t_log
+    set LOG_TYPE_ID = #{logTypeId,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP},
+      REQUEST_URL = #{requestUrl,jdbcType=VARCHAR},
+      RESPONSE_CODE = #{responseCode,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where LOG_ID = #{logId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getAllLogs" resultMap="BaseResultMap">
+    SELECT
+    l.*,t.TYPE_NAME,u.USER_NAME
+    FROM
+    t_log l LEFT JOIN
+    t_log_type t ON l.LOG_TYPE_ID=t.LOG_TYPE_ID
+    LEFT JOIN
+    t_user u ON l.USER_ID=u.USER_ID
+  </select>
+  
+</mapper>

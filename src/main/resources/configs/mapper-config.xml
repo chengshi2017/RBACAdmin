@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!-- 是否启用下划线与驼峰式命名规则的映射 （如first_name => firstName） -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+
+    <!--  在Mybatis配置xml中配置拦截器插件 -->
+    <!--
+        plugins在配置文件中的位置必须符合要求，否则会报错，顺序如下:
+        properties?, settings?,
+        typeAliases?, typeHandlers?,
+        objectFactory?,objectWrapperFactory?,
+        plugins?,
+        environments?, databaseIdProvider?, mappers?
+    -->
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/><!-- 必选  可选oracle,mysql,mariadb,sqlite,hsqldb,postgresql,sqlserver  表示使用的数据库 -->
+            <property name="rowBoundsWithCount" value="true"/><!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+            <property name="reasonable" value="true"/><!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+            <!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,不配置映射的用默认值 -->
+            <!-- <property name="params" value="pageNum=start;pageSize=limit;pageSizeZero=zero;reasonable=heli;count=contsql"/> -->
+        </plugin>
+    </plugins>
+</configuration>

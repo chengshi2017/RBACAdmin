@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.permission.Menu" >
+    <id column="MENU_ID" property="menuId" jdbcType="VARCHAR" />
+    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="MENU_URL" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="MENU_ICON" property="menuIcon" jdbcType="VARCHAR" />
+    <result column="MENU_INDEX" property="menuIndex" jdbcType="INTEGER" />
+    <result column="PERMISSION" property="permission" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MENU_ID, MENU_NAME, PARENT_ID, MENU_URL, MENU_ICON, MENU_INDEX, PERMISSION, REMARK, 
+    STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_menu
+    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_menu
+    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.permission.Menu" >
+    insert into t_menu (MENU_ID, MENU_NAME, PARENT_ID, 
+      MENU_URL, MENU_ICON, MENU_INDEX, 
+      PERMISSION, REMARK, STATUS
+      )
+    values (#{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},
+      #{menuUrl,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, #{menuIndex,jdbcType=INTEGER}, 
+      #{permission,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.permission.Menu" >
+    insert into t_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        MENU_ID,
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL,
+      </if>
+      <if test="menuIcon != null" >
+        MENU_ICON,
+      </if>
+      <if test="menuIndex != null" >
+        MENU_INDEX,
+      </if>
+      <if test="permission != null" >
+        PERMISSION,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIndex != null" >
+        #{menuIndex,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.permission.Menu" >
+    update t_menu
+    <set >
+      <if test="menuName != null" >
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="menuUrl != null" >
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        MENU_ICON = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIndex != null" >
+        MENU_INDEX = #{menuIndex,jdbcType=INTEGER},
+      </if>
+      <if test="permission != null" >
+        PERMISSION = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.permission.Menu" >
+    update t_menu
+    set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=INTEGER},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      MENU_ICON = #{menuIcon,jdbcType=VARCHAR},
+      MENU_INDEX = #{menuIndex,jdbcType=INTEGER},
+      PERMISSION = #{permission,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER}
+    where MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getAllMenusPage" resultMap="BaseResultMap">
+    SELECT * FROM t_menu
+  </select>
+
+  <select id="getAllFirstMenus" resultMap="BaseResultMap">
+    SELECT * FROM t_menu
+    WHERE PARENT_ID is null or PARENT_ID = ''
+  </select>
+
+  <select id="getMenusById" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_menu m
+    WHERE m.MENU_ID = #{menuId}
+  </select>
+
+  <select id="getAllMenus" resultMap="BaseResultMap">
+    SELECT * FROM t_menu
+    WHERE STATUS=1
+  </select>
+
+  <select id="getAllMenusByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT m.* FROM t_menu m
+    LEFT JOIN t_role_menu r ON
+    m.MENU_ID=r.MENU_ID
+    WHERE
+    r.ROLE_ID = #{roleId}
+  </select>
+
+  <!--根据userId查询一级菜单-->
+  <select id="getFirstLevelMenusByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT DISTINCT m.* FROM t_menu m
+    LEFT JOIN t_role_menu rm ON m.MENU_ID=rm.MENU_ID
+    LEFT JOIN t_role r ON rm.ROLE_ID=r.ROLE_ID
+    LEFT JOIN t_user_role ur ON r.ROLE_ID=ur.ROLE_ID
+    LEFT JOIN t_user u ON ur.USER_ID=u.USER_ID
+    WHERE
+      m.STATUS = '1'
+    AND
+      r.STATUS = '1'
+    AND
+      u.STATUS = '1'
+    AND
+      m.PARENT_ID='' or m.PARENT_ID is null
+    AND
+      u.USER_ID = #{userId}
+    ORDER BY
+      m.MENU_INDEX
+  </select>
+
+  <!--根据父级菜单查询子菜单-->
+  <select id="getMenusByParentId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM
+    t_menu
+    WHERE STATUS='1'
+    AND
+    PARENT_ID = #{parentId}
+    ORDER BY
+    MENU_INDEX
+  </select>
+
+  <select id="getAllMenusByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT DISTINCT m.* FROM t_menu m
+    LEFT JOIN t_role_menu rm ON m.MENU_ID=rm.MENU_ID
+    LEFT JOIN t_role r ON rm.ROLE_ID=r.ROLE_ID
+    LEFT JOIN t_user_role ur ON r.ROLE_ID=ur.ROLE_ID
+    LEFT JOIN t_user u ON ur.USER_ID=u.USER_ID
+    WHERE
+      m.STATUS = '1'
+    AND
+      r.STATUS = '1'
+    AND
+      u.STATUS = '1'
+    AND
+      u.USER_ID = #{userId}
+  </select>
+
+</mapper>

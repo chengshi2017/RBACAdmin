@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.DeptMapper" >
+  <resultMap id="BaseResultMap" type="com.spring.model.Dept" >
+    <id column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="DEPT_REMARK" property="deptRemark" jdbcType="VARCHAR" />
+    <result column="DEPT_LEADER_ID" property="deptLeaderId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEPT_ID, DEPT_NAME, CREATE_TIME, UPDATE_TIME, STATUS, DEPT_REMARK, DEPT_LEADER_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_dept
+    where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_dept
+    where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.Dept" >
+    insert into t_dept (DEPT_ID, DEPT_NAME, CREATE_TIME, 
+      UPDATE_TIME, STATUS, DEPT_REMARK, 
+      DEPT_LEADER_ID)
+    values (#{deptId,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{deptRemark,jdbcType=VARCHAR},
+      #{deptLeaderId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.Dept" >
+    insert into t_dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="deptName != null" >
+        DEPT_NAME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="deptRemark != null" >
+        DEPT_REMARK,
+      </if>
+      <if test="deptLeaderId != null" >
+        DEPT_LEADER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deptId != null" >
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="deptRemark != null" >
+        #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptLeaderId != null" >
+        #{deptLeaderId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.Dept" >
+    update t_dept
+    <set >
+      <if test="deptName != null" >
+        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="deptRemark != null" >
+        DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptLeaderId != null" >
+        DEPT_LEADER_ID = #{deptLeaderId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.Dept" >
+    update t_dept
+    set DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=INTEGER},
+      DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      DEPT_LEADER_ID = #{deptLeaderId,jdbcType=VARCHAR}
+    where DEPT_ID = #{deptId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getAllDeptMessage" parameterType="com.spring.model.Dept" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM t_dept
+  </select>
+
+  <select id="getAllDept" resultMap="BaseResultMap">
+    SELECT * FROM
+    t_dept
+  </select>
+
+  <select id="getDeptMessageByDeptName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM
+    t_dept
+    WHERE
+    STATUS = 1
+    AND
+    DEPT_NAME = #{deptName}
+  </select>
+
+</mapper>

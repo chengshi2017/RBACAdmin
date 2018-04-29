@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dao.EmpMapper">
+  <resultMap id="BaseResultMap" type="com.spring.model.Emp">
+    <id column="EMP_ID" jdbcType="VARCHAR" property="empId" />
+    <result column="EMP_NUM" jdbcType="VARCHAR" property="empNum"/>
+    <result column="EMP_NAME" jdbcType="VARCHAR" property="empName" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="AGE" jdbcType="INTEGER" property="age" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PACE" jdbcType="VARCHAR" property="pace" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName" />
+    <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EMP_ID, EMP_NUM, EMP_NAME, SEX, AGE, ADDRESS, PHONE, EMAIL, PACE, REMARK, STATUS, CREATE_TIME,
+    UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_emp
+    where EMP_ID = #{empId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_emp
+    where EMP_ID = #{empId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.Emp">
+    insert into t_emp (EMP_ID, EMP_NUM, EMP_NAME, SEX,
+      AGE, ADDRESS, PHONE, 
+      EMAIL, PACE, REMARK, 
+      STATUS, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{empId,jdbcType=VARCHAR}, #{empNum,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+      #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{pace,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.Emp">
+    insert into t_emp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        EMP_ID,
+      </if>
+      <if test="empNum != null">
+        EMP_NUM,
+      </if>
+      <if test="empName != null">
+        EMP_NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="pace != null">
+        PACE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="empNum != null">
+        #{empNum,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pace != null">
+        #{pace,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{REMARK,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.Emp">
+    update t_emp
+    <set>
+      <if test="empNum != null">
+        EMP_NUM = #{empNum,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        EMP_NAME = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pace != null">
+        PACE = #{pace,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EMP_ID = #{empId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.Emp">
+    update t_emp
+    set
+      EMP_NUM = #{empNum,jdbcType=VARCHAR}
+      EMP_NAME = #{empName,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=INTEGER},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PACE = #{pace,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where EMP_ID = #{empId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getAllEmp" resultMap="BaseResultMap">
+    SELECT e.*,d.DEPT_NAME,j.JOB_NAME FROM
+    t_emp e LEFT JOIN t_emp_param em
+    ON  e.EMP_ID=em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID=d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID=j.JOB_ID
+  </select>
+
+  <select id="getEmpByEmpId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT e.*,d.DEPT_NAME,j.JOB_NAME FROM
+    t_emp e LEFT JOIN t_emp_param em
+    ON  e.EMP_ID=em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID=d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID=j.JOB_ID
+    WHERE
+    e.EMP_ID = #{empId}
+  </select>
+
+  <delete id="delete" parameterType="java.lang.String">
+    DELETE e.*,em.*
+    FROM t_emp e
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID=em.EMP_ID
+    WHERE
+    e.EMP_ID = #{empId}
+  </delete>
+
+  <select id="getCount" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM t_emp WHERE STATUS = 1
+  </select>
+
+  <select id="getEmpMessageByEmpName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_emp
+    WHERE 1=1
+    AND EMP_NAME = #{empName}
+  </select>
+</mapper>
