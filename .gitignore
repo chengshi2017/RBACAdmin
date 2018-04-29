@@ -48,8 +48,8 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-/target
 .idea
+/target
 /.settings
 /HRM.iml
 
