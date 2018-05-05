@@ -31,24 +31,29 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
   #配置redis
-  redis:
-    host: localhost
-    port: 6379
-    password: 123456
-    pool:
-      max-active: 8
-      min-idle: 0
-      max-idle: 8
-      max-wait: -1
-    timeout: 1000
+#  redis:
+#    host: localhost
+#    port: 6379
+#    password: 123456
+#    pool:
+#      max-active: 8
+#      min-idle: 0
+#      max-idle: 8
+#      max-wait: -1
+#    timeout: 1000
 
   #配置thymeleaf
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
-    encoding: UTF-8
     mode: HTML5
     cache: false
+    content-type: text/html;charset=UTF-8
+    encoding: UTF-8
+
+  devtools:
+    restart:
+      enabled: true
 
   # 配置velocity
 #  velocity:
@@ -65,4 +70,4 @@ mybatis:
   config-location: classpath:/configs/mapper-config.xml
 
 server:
-  port: 8090
+  port: 9000

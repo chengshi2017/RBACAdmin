@@ -30,19 +30,21 @@ public class PUserController extends SuperController {
     
     //加载用户权限相关页面
     @RequiresPermissions(value = "permission:user:page")
-    @RequestMapping(value = "/page",method = RequestMethod.GET)
-    public String page(){
-        return "permission/user/page";
-    }
-
-    //加载用户权限相关数据
-    @RequestMapping(value = "/data",method = RequestMethod.POST)
-    public String date(Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize, Model model){
-
+    @RequestMapping(value = "/page")
+    public String page(Integer pageNo,@RequestParam(defaultValue = "10")Integer pageSize,Model model){
         Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize));
         model.addAttribute("lists",lists);
-        return "permission/user/data";
+        return "system/userList";
     }
+
+//    //加载用户权限相关数据
+//    @RequestMapping(value = "/data",method = RequestMethod.POST)
+//    public String date(Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize, Model model){
+//
+//        Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize));
+//        model.addAttribute("lists",lists);
+//        return "permission/user/data";
+//    }
 
     //加载用户编辑信息页面
     @RequestMapping(value = "/toUpdate",method = RequestMethod.GET,produces="text/html;charset=UTF-8")

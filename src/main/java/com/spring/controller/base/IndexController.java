@@ -94,7 +94,8 @@ public class IndexController extends SuperController {
             currentUser.login(token);
             if(currentUser.isAuthenticated()){
                 //通过权限验证，将当前用户添加到session,并返回首页
-                session.setAttribute(Constants.Regular.onlineUser,userService.getUserByName(info.getUserName()));
+                User user=userService.getUserByName(info.getUserName());
+                session.setAttribute(Constants.Regular.onlineUser,user);
                 //写入数据库登录日志
                 Log log=new Log();
                 log.setLogTypeId(LogTypeEnums.LOGIN.getValue()); //设置日志类型
@@ -144,7 +145,6 @@ public class IndexController extends SuperController {
     @RequestMapping(value = "loginOut",method = RequestMethod.GET)
     public String loginOut(){
         session.setAttribute(Constants.Regular.onlineUser, null);
-        session.invalidate();
         return "redirect:login.html";
     }
 

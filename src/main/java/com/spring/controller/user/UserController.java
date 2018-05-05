@@ -42,15 +42,15 @@ public class UserController extends SuperController {
 
         User user=userService.getUserMessageById(userId);
         if(user!=null){
-            if(EncodeMD5.GetMD5Code(oldPassword).equals(info.getUserPassword())){
+            if(EncodeMD5.GetMD5Code(oldPassword).equals(user.getUserPassword())){
                 //加密密码
                 info.setUserPassword(EncodeMD5.GetMD5Code(info.getUserPassword()));
                 userService.update(info);
                 ResponseUtils.writeSuccessReponse(request,response,"用户登录密码修改成功");
             }
-            ResponseUtils.writeSuccessReponse(request,response,"原密码输入错误");
+            ResponseUtils.writeErrorResponse(request,response,"原密码输入错误");
         }
-        ResponseUtils.writeSuccessReponse(request,response,"用户不存在，请刷新后重新登录");
+        ResponseUtils.writeErrorResponse(request,response,"用户不存在，请刷新后重新登录");
 
 
     }

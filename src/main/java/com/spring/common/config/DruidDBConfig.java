@@ -15,7 +15,6 @@ import java.sql.SQLException;
  * @description 配置druid数据源
  */
 @Component
-@ConfigurationProperties(prefix="spring.datasource", locations = "classpath:application.yml", ignoreUnknownFields = true)
 public class DruidDBConfig {
     @Value("${spring.datasource.url}")
     private String dbUrl;

@@ -38,6 +38,7 @@ public class ResponseUtils {
      * @param response
      */
     public static void setContentTypeHeader(HttpServletResponse response){
+        response.setCharacterEncoding(DEFALT_ENCODING);
         String encoding = response.getCharacterEncoding();
         if(StringUtils.isBlank(encoding)){
             encoding = DEFALT_ENCODING;
@@ -94,6 +95,7 @@ public class ResponseUtils {
                 writer.write(content);
             } else {
                 writer.write(jsoncallback + "(" + content + ")");
+                System.out.println(writer);
             }
         } catch (IOException e) {
             logger.error("write response error", e);
@@ -122,10 +124,13 @@ public class ResponseUtils {
     }
 
     public static void writeSuccessReponse(HttpServletRequest request, HttpServletResponse response, Object data) {
+        System.out.println(data);
         writeResponse(request, response, Constants.ResponseCode.success, "success", data );
+
     }
 
     public static void writeErrorResponse(HttpServletRequest request, HttpServletResponse response, Object data) {
+        System.out.println(data);
         writeResponse(request, response, Constants.ResponseCode.error, "error", data );
     }
 
