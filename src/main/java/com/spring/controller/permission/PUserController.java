@@ -10,10 +10,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author 施成
@@ -31,19 +28,18 @@ public class PUserController extends SuperController {
     //加载用户权限相关页面
     @RequiresPermissions(value = "permission:user:page")
     @RequestMapping(value = "/page")
-    public String page(Integer pageNo,@RequestParam(defaultValue = "10")Integer pageSize,Model model){
+    public String page(@RequestParam(defaultValue = "1")Integer pageNo,@RequestParam(defaultValue = "10")Integer pageSize,Model model){
         Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize));
         model.addAttribute("lists",lists);
         return "system/userList";
     }
 
 //    //加载用户权限相关数据
-//    @RequestMapping(value = "/data",method = RequestMethod.POST)
-//    public String date(Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize, Model model){
-//
+//    @PostMapping(value = "/data")
+//    public String date(Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize,Model model){
 //        Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize));
 //        model.addAttribute("lists",lists);
-//        return "permission/user/data";
+//        return "system/userList";
 //    }
 
     //加载用户编辑信息页面
