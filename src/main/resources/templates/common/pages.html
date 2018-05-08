@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+    <body>
+        <script th:fragment="pages">
+            layui.use(['laypage','layer'],function () {
+                var laypage = layui.laypage,layer = layui.layer;
+                var page=[[${lists.pages}]];
+                laypage({
+                    cont: 'pages',
+                    pages: page, //总页数
+                    skin: '#00AA91', //加载内置皮肤，也可以直接赋值16进制颜色值，如:#c00
+                    //groups: 7, //连续显示分页数
+                    curr: $(".laypage_curr").text() || 1, //当前页
+                    jump: function(obj, first){ //触发分页后的回调
+                        console.log(obj.curr);
+                        if(!first){ //一定要加此判断，否则初始时会无限刷新
+                            //console.log(e.curr);
+                            $(".laypage_curr").text(obj.curr);
+                            reload(obj);
+                        }
+                    }
+                })
+            });
+        </script>
+    </body>
+
+
+</html>
