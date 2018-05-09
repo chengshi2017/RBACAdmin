@@ -186,6 +186,7 @@ function layer_show(title,url,w,h){
 	if (title == null || title == '') {
 		title=false;
 	};
+	console.log(url);
 	if (url == null || url == '') {
 		url="404.html";
 	};

@@ -52,7 +52,6 @@ public class UserController extends SuperController {
         }
         ResponseUtils.writeErrorResponse(request,response,"用户不存在，请刷新后重新登录");
 
-
     }
 
 }

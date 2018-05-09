@@ -45,7 +45,7 @@ public class PUserController extends SuperController {
     //加载用户编辑信息页面
     @RequestMapping(value = "/toUpdate",method = RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String toAdd(){
-        return "permission/user/update";
+        return "system/user-add";
     }
 
     //加载用户信息修改页面
@@ -53,7 +53,7 @@ public class PUserController extends SuperController {
     public String toUpdate(@PathVariable("userId") String userId, Model model){
         User user=userService.getUserMessageById(userId);
         model.addAttribute("user",user);
-        return "permission/user/update";
+        return "system/user-add";
     }
 
     @RequestMapping(value = "update",method = RequestMethod.POST,produces="text/html;charset=UTF-8")

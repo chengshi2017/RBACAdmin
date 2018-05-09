@@ -15,7 +15,7 @@
 				<li class="dropDown dropDown_hover">
 					<a href="#" class="dropDown_A" th:text="${onlineUser.userName}"><i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="javascript:void(0);" onClick="showEdit()">修改密码</a></li>
+						<li><a href="javascript:void(0);" onClick="layer_show('修改用户密码','')">修改密码</a></li>
 						<li><a th:href="@{/loginOut}">切换账户</a></li>
 						<li><a th:href="@{/loginOut}">退出</a></li>
 				</ul>
@@ -98,7 +98,7 @@
 		<div class="row cl" style="margin-top:10px;">
 			<div class="col-xs-5 col-sm-5 col-xs-offset-2 col-sm-offset-3">
 				<input class="btn btn-primary radius" id="submit1" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
-				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+				<button onclick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
 	</form>
