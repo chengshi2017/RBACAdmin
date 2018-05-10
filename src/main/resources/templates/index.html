@@ -15,7 +15,7 @@
 				<li class="dropDown dropDown_hover">
 					<a href="#" class="dropDown_A" th:text="${onlineUser.userName}"><i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="javascript:void(0);" onClick="layer_show('修改用户密码','')">修改密码</a></li>
+						<li><a href="javascript:void(0);" onClick="showEdit('修改用户密码','')">修改密码</a></li>
 						<li><a th:href="@{/loginOut}">切换账户</a></li>
 						<li><a th:href="@{/loginOut}">退出</a></li>
 				</ul>

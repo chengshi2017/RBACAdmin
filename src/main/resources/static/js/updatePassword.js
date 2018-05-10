@@ -4,15 +4,20 @@ function showEdit() {
     index = layer.open({
         type: 1,
         title: '修改密码',
-        fix: false,
-        maxmin: true,
+        fix: false,  //不固定
+        maxmin: true,   //开启最大最小化
+        shade: 0.4,    //遮罩
+        shadeClose: true,    //遮罩关闭
         skin: 'layui-layer-rim', //加上边框
-        area: ['800px', '300px'], //宽高
+        area: ['510px', '300px'], //宽高
         content: $('#updatePwd')
     });
 };
 
 // function submit1() {
+function layer_close() {
+    layer.close(index);
+}
 
 
     console.log("submit");
@@ -59,17 +64,6 @@ function showEdit() {
     });
 
 
-    // $.post("/user/updatePassword", $('#changefrom').serialize(), function (result) {
-    //     if (result.code == 0){
-    //         console.log(result.data);
-    //         layer.msg(result.data , {icon: 6 , time: 2000}, function () {
-    //             layer.close();
-    //         })
-    //     }else{
-    //         layer.msg(result.data, {icon: 5, time:2000});
-    //         console.log(result.data);
-    //     }
-    // },"json");
 
 
 

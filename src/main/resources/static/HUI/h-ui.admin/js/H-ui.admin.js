@@ -190,17 +190,12 @@ function layer_show(title,url,w,h){
 	if (url == null || url == '') {
 		url="404.html";
 	};
-	if (w == null || w == '') {
-		w=800;
-	};
-	if (h == null || h == '') {
-		h=($(window).height() - 50);
-	};
 	layer.open({
 		type: 2,
-		area: [w+'px', h +'px'],
+		area: [w, h],
 		fix: false, //不固定
 		maxmin: true,
+        shadeClose: true,  //开启遮罩关闭
 		shade:0.4,
 		title: title,
 		content: url

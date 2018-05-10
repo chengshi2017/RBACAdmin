@@ -22,7 +22,6 @@ var common={
             },
             success: function (data) {
                 var result= $(data).find("table");
-                console.log(result);
                 _element.html(result);
             }
         })

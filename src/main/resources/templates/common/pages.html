@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org" lang="zh">
     <body>
         <script th:fragment="pages">
+            var laypage_curr;
             layui.use(['laypage','layer'],function () {
                 var laypage = layui.laypage,layer = layui.layer;
                 var page=[[${lists.pages}]];
@@ -16,8 +17,9 @@
                         console.log(obj.curr);
                         if(!first){ //一定要加此判断，否则初始时会无限刷新
                             //console.log(e.curr);
-                            $(".laypage_curr").text(obj.curr);
-                            reload(obj);
+                            laypage_curr=obj.curr;
+                            console.log(laypage_curr);
+                            reload();
                         }
                     }
                 })
