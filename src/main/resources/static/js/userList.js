@@ -1,5 +1,6 @@
-
-
+/***
+ * ajax 异步请求刷新页面
+ */
 function reload() {
     var data={
         "pageNo": laypage_curr || 1,
@@ -8,15 +9,10 @@ function reload() {
     common.getData("post", "/permission/user/page", data, "html", $("#page_data"));
 }
 
-/*弹出层*/
-/*
-	参数解释：
-	title	标题
-	url		请求的url
-	id		需要操作的数据id
-	w		弹出层宽度（缺省调默认值）
-	h		弹出层高度（缺省调默认值）
-*/
+/***
+ * 用户更新页面弹出层
+ * @param userId
+ */
 function layer_update(userId){
     var url='/permission/user/'+userId+'/toUpdate';
     console.log(url);
@@ -36,34 +32,10 @@ function layer_update(userId){
     });
 }
 
-/**用户删除**/
-// function admin_del(obj,id) {
-//     var url='user/permission/'+id+'/delete';
-//     console.log(url);
-//     layer.confirm('确定要删除吗？',function (index) {
-//         $.ajax({
-//             type: 'POST',
-//             url: url,
-//             dataType: 'json',
-//             success: function (result) {
-//                 $(obj).parents("tr").remove();
-//                 layer.msg(result.data, {icon: 6, time: 2000}, function () {
-//                     //var index=parent.layer.getFrameIndex(window.name);
-//                     //parent.$('.btn-refresh').click();
-//                     window.parent.location.reload();//刷新父页面
-//                     parent.layer.close(index);//关闭弹出层
-//                 })
-//             },
-//             error: function (result) {
-//                 layer.msg(result.data, {icon: 5, time: 2000}, function () {
-//                     window.parent.location.reload();//刷新父页面
-//                     parent.layer.close(index);//关闭弹出层
-//                 })
-//             }
-//         })
-//     })
-// }
-
+/***
+ * 用户删除
+ * @param id
+ */
 function admin_del(id) {
     var url='/permission/user/'+id+'/delete';
     console.log(url);
@@ -86,5 +58,134 @@ function admin_del(id) {
 
     })
 }
+
+function datadel() {
+    var checkNum=$("input[name='subCheck']:checked").length;
+    if (checkNum == 0){
+        layerOpen('请选择至少一项');
+        return false;
+    }
+    //批量选择
+    layer.confirm('确定要删除吗？', function (index) {
+        //获取所有选中的checked框
+        var option = $(":checked");
+        var checkedId = "";
+        var flag=true;
+        //拼接除全选框外所有选中的id
+        for (var i=0, len = option.length; i < len; i++){
+            if (flag){
+                if (option[i].id == 'subCheck'){
+                    flag = true;
+                }else {
+                    flag = false;
+                    checkedId += option[i].value;
+                }
+            }else {
+                checkedId += "," +option[i].value
+            }
+        }
+        $.ajax({
+            type: "post",
+            url: "/permission/user/batchDelete",
+            dataType: "json",
+            data: {"checkedId":checkedId},
+            success: function (result) {
+                layer.msg(result.data, {icon: 6, time: 2000}, function () {
+                    reload();
+                })
+            },
+            error: function (reslut) {
+                layer.msg(reslut.data, {icon: 5, time: 2000});
+            }
+        })
+    })
+}
+
+function layerOpen(msg) {
+    var index=layer.open({
+        content: msg,
+        btn: ['确定'],
+        shade: 0.4,
+        shadeClose: false,
+        title: ['错误信息',],
+        yes: function () {
+            layer.close(index);
+        }
+    })
+}
+
+/*管理员-停用*/
+function admin_stop(obj,id){
+    layer.confirm('确认要停用吗？',function(index){
+        //此处请求后台程序，下方是成功后的前台处理……
+        var url='/permission/user/'+id+'/update';
+        $.ajax({
+            type: 'post',
+            dateType: 'json',
+            url: url,
+            success: function (result) {
+                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="label radius">已禁用</span>');
+                $(obj).remove();
+                layer.msg('已停用!',{icon: 5,time:1000});
+            },
+            error: function () {
+                layer.msg('系统故障，请联系管理员', {icon: 5, time: 1000});
+                layer.close(index);
+            }
+        });
+
+    });
+}
+
+/*管理员-启用*/
+function admin_start(obj,id){
+    layer.confirm('确认要启用吗？',function(index){
+        //此处请求后台程序，下方是成功后的前台处理……
+        var url='/permission/user/'+id+'/update';
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: url,
+            success: function (result) {
+                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+                $(obj).remove();
+                layer.msg('已启用!', {icon: 6,time:1000});
+            },
+            error: function () {
+                layer.msg('程序出现错误', {icon: 5, time: 1000});
+                layer.close(index);
+            }
+        })
+
+
+    });
+}
+
+$(function () {
+    $("#retrieve").click(function () {
+        var data = {
+            "pageNo": laypage_curr || 1,
+            "pageSize": 10,
+            "userName": $("#userName").val(),
+            "startTime": $("#datemin").val(),
+            "endTime": $("#datemax").val(),
+        };
+        $.ajax({
+            type: 'post',
+            data: data,
+            dateType: 'html',
+            url: '/permission/user/page',
+            async: false,
+            success: function (result) {
+                var table=$(result).find("table");
+                console.log(table);
+                $("#page_data").html(table);
+            }
+        })
+    })
+});
+
 
 

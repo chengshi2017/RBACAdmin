@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.github.pagehelper.Page;
 import com.spring.model.permission.User;
+import com.spring.param.UserFilter;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
@@ -20,7 +21,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    Page<User> getAll(RowBounds rowBounds);
+    Page<User> getAll(RowBounds rowBounds, UserFilter filter);
 
     List<User> getAllUsers();
 
@@ -28,4 +29,6 @@ public interface UserMapper {
     User getUserByName(String username);
 
     Integer getCountByUserName(String userName);
+
+    int batchDelete(List<String> list);
 }

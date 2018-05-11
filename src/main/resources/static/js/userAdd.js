@@ -1,3 +1,8 @@
+/***
+ * 通用方法
+ * 新增用户信息和修改用户信息
+ * 包括数据的校验
+ */
 $(function(){
     $('.skin-minimal input').iCheck({
         checkboxClass: 'icheckbox-blue',
@@ -47,7 +52,7 @@ $(function(){
 
                         var index=parent.layer.getFrameIndex(window.name);
                         //parent.$('.btn-refresh').click();
-                        window.parent.location.reload();//刷新父页面
+                        parent.reload();//刷新父页面
                         parent.layer.close(index);//关闭弹出层
                     });
                 },

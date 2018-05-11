@@ -140,9 +140,22 @@
     where USER_ID = #{userId,jdbcType=VARCHAR}
   </update>
 
-  <select id="getAll" resultMap="BaseResultMap">
+  <select id="getAll" resultMap="BaseResultMap" parameterType="com.spring.param.UserFilter">
     SELECT * FROM
-    t_user
+    t_user WHERE 1 = 1
+    <if test="userName != null and userName != ''">
+      AND USER_NAME = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime != null and startTime != ''">
+      <![CDATA[
+        AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{startTime}, '%Y-%m-%d')
+      ]]>
+    </if>
+    <if test="endTime != null and endTime != ''">
+      <![CDATA[
+          AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{endTime,jdbcType=VARCHAR}, '%Y-%m-%d')
+      ]]>
+    </if>
   </select>
 
   <select id="getAllUsers" resultMap="BaseResultMap">
@@ -162,5 +175,13 @@
     SELECT count(*) FROM t_user
     WHERE USER_NAME = #{userName,jdbcType=VARCHAR}
   </select>
+  
+  <delete id="batchDelete" parameterType="java.util.List">
+    DELETE FROM t_user
+    WHERE USER_ID IN 
+    <foreach collection="list" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+  </delete>
 
 </mapper>

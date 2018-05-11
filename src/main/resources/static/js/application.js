@@ -25,9 +25,5 @@ var common={
                 _element.html(result);
             }
         })
-    },
-
-
-
-
-}
+    }
+};

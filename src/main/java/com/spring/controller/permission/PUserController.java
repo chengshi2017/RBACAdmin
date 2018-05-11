@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
 import com.spring.model.permission.User;
+import com.spring.param.UserFilter;
 import com.spring.service.permission.UserService;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -11,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author 施成
@@ -28,8 +33,8 @@ public class PUserController extends SuperController {
     //加载用户权限相关页面
     @RequiresPermissions(value = "permission:user:page")
     @RequestMapping(value = "/page")
-    public String page(@RequestParam(defaultValue = "1")Integer pageNo,@RequestParam(defaultValue = "10")Integer pageSize,Model model){
-        Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize));
+    public String page(@RequestParam(defaultValue = "1")Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize, UserFilter filter, Model model){
+        Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
         model.addAttribute("lists",lists);
         return "system/userList";
     }
@@ -56,7 +61,7 @@ public class PUserController extends SuperController {
         return "system/user-add";
     }
 
-    @RequestMapping(value = "update",method = RequestMethod.POST,produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/update",method = RequestMethod.POST,produces="text/html;charset=UTF-8")
     public void update(User user){
         if(user.getUserId()==null){
             //新增操作
@@ -77,12 +82,28 @@ public class PUserController extends SuperController {
     }
 
     //删除用户信息
-    @RequestMapping(value = "{userId}/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/{userId}/delete",method = RequestMethod.POST)
     public void delete(@PathVariable("userId") String userId){
         userService.delete(userId);
         ResponseUtils.writeSuccessReponse(request,response,"删除用户信息成功");
     }
 
+    //批量删除所选用户
+    @PostMapping(value = "/batchDelete")
+    public void batchDelete(String checkedId){
+        String[] userId=checkedId.split(",");
+        List<String> list=Arrays.asList(userId);
+        userService.batchDelete(list);
+        ResponseUtils.writeSuccessReponse(request,response,"批量删除用户信息成功");
+    }
+
+    @PostMapping(value = "/{userId}/update")
+    public void update(@PathVariable("userId")String userId){
+        User user=userService.getUserMessageById(userId);
+        user.setStatus(user.getStatus()^1);
+        userService.update(user);
+        ResponseUtils.writeSuccessReponse(request,response,"启用用户成功");
+    }
 
 
 

@@ -2,6 +2,7 @@ package com.spring.service.permission;
 
 import com.github.pagehelper.Page;
 import com.spring.model.permission.User;
+import com.spring.param.UserFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @Describe:
  */
 public interface UserService {
-    Page<User> getAllUserMessage(RowBounds rowBounds);
+    Page<User> getAllUserMessage(RowBounds rowBounds, UserFilter filter);
 
     User getUserMessageById(String userId);
 
@@ -28,4 +29,6 @@ public interface UserService {
     User getUserByName(String username);
 
     Integer getCountByUserName(String userName);
+
+    void batchDelete(List<String> list);
 }

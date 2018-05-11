@@ -9,6 +9,7 @@ import com.spring.dao.UserMapper;
 import com.spring.dao.UserRoleMapper;
 import com.spring.model.permission.User;
 import com.spring.model.permission.UserRole;
+import com.spring.param.UserFilter;
 import com.spring.service.permission.UserService;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
@@ -39,8 +40,8 @@ public class UserServiceImpl implements UserService{
     private UserRoleMapper userRoleMapper;
 
     @Override
-    public Page<User> getAllUserMessage(RowBounds rowBounds) {
-        return userMapper.getAll(rowBounds);
+    public Page<User> getAllUserMessage(RowBounds rowBounds, UserFilter filter) {
+        return userMapper.getAll(rowBounds,filter);
     }
 
     @Override
@@ -104,4 +105,24 @@ public class UserServiceImpl implements UserService{
     public Integer getCountByUserName(String userName) {
         return userMapper.getCountByUserName(userName);
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void batchDelete(List<String> list) {
+        //先删除关联表中的信息
+        for (String userId: list){
+            List<UserRole> userRoleList=userRoleMapper.selectRoleByUserId(userId);
+            if(userRoleList!=null&&userRoleList.size()>0){
+                if (userRoleMapper.deleteByUserId(userId)<1){
+                    Log.error("删除用户角色关联信息失败");
+                }
+            }
+        }
+        //批量删除用户表中的信息
+        if (userMapper.batchDelete(list)<1){
+            Log.error("批量删除用户信息失败");
+        }
+    }
+
+
 }
