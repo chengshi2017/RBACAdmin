@@ -144,17 +144,10 @@
     SELECT * FROM
     t_user WHERE 1 = 1
     <if test="userName != null and userName != ''">
-      AND USER_NAME = #{userName,jdbcType=VARCHAR}
+      AND USER_NAME LIKE concat(concat('%', #{userName}),'%')
     </if>
-    <if test="startTime != null and startTime != ''">
-      <![CDATA[
-        AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{startTime}, '%Y-%m-%d')
-      ]]>
-    </if>
-    <if test="endTime != null and endTime != ''">
-      <![CDATA[
-          AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{endTime,jdbcType=VARCHAR}, '%Y-%m-%d')
-      ]]>
+    <if test="phone != null and phone != ''">
+      AND PHONE LIKE concat(concat('%', #{phone}),'%')
     </if>
   </select>
 

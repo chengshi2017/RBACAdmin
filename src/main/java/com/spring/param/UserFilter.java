@@ -13,9 +13,8 @@ public class UserFilter {
 
     private String userName;
 
-    private String startTime;
+    private String phone;
 
-    private String endTime;
 
     public String getUserName() {
         return userName;
@@ -25,19 +24,11 @@ public class UserFilter {
         this.userName = userName;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

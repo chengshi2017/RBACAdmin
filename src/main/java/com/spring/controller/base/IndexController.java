@@ -85,6 +85,14 @@ public class IndexController extends SuperController {
             model.addAttribute("error","验证码错误");
             return "login";
         }
+        //判断用户是否已经禁用
+        User userInfo=userService.getUserByName(info.getUserName());
+        if (userInfo.getStatus()!=1){
+            Logger.info("用户已被禁用");
+            model.addAttribute("error","用户已被禁用，请与系统管理员联系");
+            return "login";
+        }
+
         Logger.info("开始shiro权限验证");
 
         try {

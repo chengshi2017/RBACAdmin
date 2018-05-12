@@ -230,5 +230,10 @@ public class DateUtils {
         return timestr;
     }
 
-
+    public static String getCurrentTime(){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=new Date();
+        String current=sdf.format(date);
+        return current;
+    }
 }

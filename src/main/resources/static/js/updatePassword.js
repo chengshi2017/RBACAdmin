@@ -26,12 +26,19 @@ function layer_close() {
             var oldPassword = $("#oldPassword").val();
             var userPassword = $("#userPassword").val();
             var repassword = $("#repassword").val();
+            if (oldPassword==null || oldPassword==""){
+                $("#msg").html("原密码不能为空");
+                return;
+            }
+            if (userPassword==null || userPassword==""){
+                $("#msg").html("请输入要修改的密码");
+                return;
+            }
             if (oldPassword == userPassword){
                 $("#msg").html("新密码不能与原密码相同");
                 console.log("111");
                 return;
             }
-
             if (userPassword != repassword){
                 $("#msg").html("两次输入的密码不一致");
                 console.log("222");

@@ -5,6 +5,8 @@ function reload() {
     var data={
         "pageNo": laypage_curr || 1,
         "pageSize": 10,
+        "userName": $("#userName").val(),
+        "phone": $("phone").val(),
     };
     common.getData("post", "/permission/user/page", data, "html", $("#page_data"));
 }
@@ -107,7 +109,7 @@ function layerOpen(msg) {
         btn: ['确定'],
         shade: 0.4,
         shadeClose: false,
-        title: ['错误信息',],
+        title: ['错误信息'],
         yes: function () {
             layer.close(index);
         }

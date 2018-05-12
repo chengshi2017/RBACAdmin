@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author 施成
@@ -36,7 +35,7 @@ public class PUserController extends SuperController {
     public String page(@RequestParam(defaultValue = "1")Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize, UserFilter filter, Model model){
         Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
         model.addAttribute("lists",lists);
-        return "system/userList";
+        return "permission/user/userList";
     }
 
 //    //加载用户权限相关数据
@@ -50,7 +49,7 @@ public class PUserController extends SuperController {
     //加载用户编辑信息页面
     @RequestMapping(value = "/toUpdate",method = RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String toAdd(){
-        return "system/user-add";
+        return "permission/user/user-add";
     }
 
     //加载用户信息修改页面
@@ -58,7 +57,7 @@ public class PUserController extends SuperController {
     public String toUpdate(@PathVariable("userId") String userId, Model model){
         User user=userService.getUserMessageById(userId);
         model.addAttribute("user",user);
-        return "system/user-add";
+        return "permission/user/user-add";
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST,produces="text/html;charset=UTF-8")
@@ -102,7 +101,7 @@ public class PUserController extends SuperController {
         User user=userService.getUserMessageById(userId);
         user.setStatus(user.getStatus()^1);
         userService.update(user);
-        ResponseUtils.writeSuccessReponse(request,response,"启用用户成功");
+        ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
     }
 
 
