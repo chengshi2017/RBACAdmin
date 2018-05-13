@@ -136,6 +136,15 @@
     t_log_type t ON l.LOG_TYPE_ID=t.LOG_TYPE_ID
     LEFT JOIN
     t_user u ON l.USER_ID=u.USER_ID
+    ORDER BY l.OPERATE_TIME DESC
   </select>
+  
+  <delete id="batchDelete" parameterType="java.util.List">
+    DELETE FROM t_log
+    WHERE LOG_ID IN 
+    <foreach collection="list" item="item" index="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </delete>
   
 </mapper>

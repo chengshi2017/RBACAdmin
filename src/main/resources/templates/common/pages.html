@@ -7,11 +7,17 @@
             layui.use(['laypage','layer'],function () {
                 var laypage = layui.laypage,layer = layui.layer;
                 var page=[[${lists.pages}]];
+                var count=[[${lists.total}]];
                 laypage({
                     cont: 'pages',
                     pages: page, //总页数
+                    count: count,
+                    limits: [10,20,30],
+                    skip: true,
+                    first: '首页',
+                    last: '尾页',
                     skin: '#00AA91', //加载内置皮肤，也可以直接赋值16进制颜色值，如:#c00
-                    //groups: 7, //连续显示分页数
+                    groups: 3, //连续显示分页数
                     curr: $(".laypage_curr").text() || 1, //当前页
                     jump: function(obj, first){ //触发分页后的回调
                         console.log(obj.curr);

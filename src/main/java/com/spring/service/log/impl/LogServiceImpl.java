@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author 施成
@@ -69,6 +70,13 @@ public class LogServiceImpl implements LogService{
         log.setRemark("操作日志");
         if (logMapper.insert(log)<1){
             throw new MyException("写入操作日志失败");
+        }
+    }
+
+    @Override
+    public void batchDelete(List<String> list) {
+        if (logMapper.batchDelete(list)<1){
+            throw new MyException("批量删除日志信息失败");
         }
     }
 }

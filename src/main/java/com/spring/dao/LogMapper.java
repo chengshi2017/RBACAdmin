@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.spring.model.Log;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
+
 public interface LogMapper {
     int deleteByPrimaryKey(String logId);
 
@@ -18,4 +20,6 @@ public interface LogMapper {
     int updateByPrimaryKey(Log record);
 
     Page<Log> getAllLogs(RowBounds rowBounds);
+
+    int batchDelete(List<String> list);
 }

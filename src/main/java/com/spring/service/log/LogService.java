@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.spring.model.Log;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
+
 /**
  * @Author 施成
  * @Date 2018/2/11
@@ -18,4 +20,6 @@ public interface LogService {
     void addloginLog(Log log);
 
     void addOperateLog(Log log);
+
+    void batchDelete(List<String> list);
 }

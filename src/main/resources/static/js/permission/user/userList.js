@@ -6,7 +6,7 @@ function reload() {
         "pageNo": laypage_curr || 1,
         "pageSize": 10,
         "userName": $("#userName").val(),
-        "phone": $("phone").val(),
+        "phone": $("#phone").val(),
     };
     common.getData("post", "/permission/user/page", data, "html", $("#page_data"));
 }
@@ -105,6 +105,7 @@ function datadel() {
 
 function layerOpen(msg) {
     var index=layer.open({
+        skin: 'layui-layer-molv',//样式类名,
         content: msg,
         btn: ['确定'],
         shade: 0.4,
