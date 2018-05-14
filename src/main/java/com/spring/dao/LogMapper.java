@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.github.pagehelper.Page;
 import com.spring.model.Log;
+import com.spring.param.LogFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -22,4 +23,8 @@ public interface LogMapper {
     Page<Log> getAllLogs(RowBounds rowBounds);
 
     int batchDelete(List<String> list);
+
+    Log getLogsById(String logId);
+
+    Page<Log> getLogsByCondition(RowBounds rowBounds,LogFilter filter);
 }

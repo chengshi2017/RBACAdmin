@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header"/>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-admin-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">日志编号：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="logId" name="logId" th:value="${log.logId}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">日志类型：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" id="typeName" name="typeName" th:value="${log.typeName}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">操作用户：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" id="userName" name="userName" th:value="${log.userName}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">操作时间：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" name="operateTime" id="operateTime" th:value="${#dates.format(log.operateTime,'yyyy-MM-dd HH:mm:ss')}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">请求路径：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="requestUrl" name="requestUrl" th:value="${log.requestUrl}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">响应状态：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="responseCode" name="responseCode" th:value="${log.responseCode}==0?'成功':'失败'" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">是否有效：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="status" name="status" th:value="${log.status}==1?'有效':'无效'" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">备注：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${log.remark}" style="width: 410px" disabled="disabled"></textarea>
+            </div>
+        </div>
+    </form>
+</article>
+</body>
+</html>

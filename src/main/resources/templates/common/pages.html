@@ -4,27 +4,30 @@
     <body>
         <script th:fragment="pages">
             var laypage_curr;
+            var laypage_limit;
             layui.use(['laypage','layer'],function () {
                 var laypage = layui.laypage,layer = layui.layer;
                 var page=[[${lists.pages}]];
                 var count=[[${lists.total}]];
-                laypage({
-                    cont: 'pages',
-                    pages: page, //总页数
-                    count: count,
-                    limits: [10,20,30],
-                    skip: true,
-                    first: '首页',
-                    last: '尾页',
-                    skin: '#00AA91', //加载内置皮肤，也可以直接赋值16进制颜色值，如:#c00
-                    groups: 3, //连续显示分页数
-                    curr: $(".laypage_curr").text() || 1, //当前页
-                    jump: function(obj, first){ //触发分页后的回调
+                laypage.render({
+                    elem: 'pages'  //指向存放分页的容器
+                    , count: count //总页数
+                    , limits: [10,20,30,40]  //每页显示多少条数
+                    , first: '首页'  //自定义"首页"内容
+                    , last: '尾页'   //自定义"尾页"内容
+                    , layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']   //页面布局
+                    , theme: '#4D4DFF'  //样式
+                    , groups: 3 //连续显示分页数
+                    , hash: true
+                    //curr: $(".laypage_curr").text() || 1, //当前页
+                    , jump: function(obj, first){ //触发分页后的回调
                         console.log(obj.curr);
                         if(!first){ //一定要加此判断，否则初始时会无限刷新
                             //console.log(e.curr);
                             laypage_curr=obj.curr;
                             console.log(laypage_curr);
+                            laypage_limit=obj.limit;
+                            console.log(laypage_limit);
                             reload();
                         }
                     }

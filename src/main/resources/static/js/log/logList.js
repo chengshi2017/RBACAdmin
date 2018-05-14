@@ -2,13 +2,15 @@
  * ajax 异步请求刷新页面
  */
 function reload() {
-    var data={
-        "pageNo": laypage_curr || 1,
-        "pageSize": 10
+    var data = {
+        pageNo: laypage_curr || 1,
+        pageSize: laypage_limit || 10,
+        startTime: $("#datemin").val(),
+        endTime: $("#datemax").val(),
+        logTypeId: $("#logTypeId").val()
     };
-    common.getData("post", "/log/page", data, "html", $("#page_data"));
+   common.getData("post", "/log/retrieve", data, "html", $("#page_data"));
 }
-
 function datadel() {
     var checkNum=$("input[name='subCheck']:checked").length;
     if (checkNum == 0){
@@ -85,7 +87,7 @@ function layerOpen(msg) {
         btn: ['确定'],
         shade: 0.4,
         shadeClose: false,
-        title: ['错误信息'],
+        title: ['错误信息', 'text-align:center; color: red'],
         yes: function () {
             layer.close(index);
         }
@@ -93,14 +95,65 @@ function layerOpen(msg) {
 }
 
 $('.table-sort').dataTable({
-    "lengthMenu":true,//显示数量选择
+    "lengthMenu":false,//显示数量选择
     "bFilter": false,//过滤功能
     "bPaginate": false,//翻页信息
-    "bInfo": true,//数量信息
+    "bInfo": false,//数量信息
     "aaSorting": [[ 1, "asc" ]],//默认第几个排序
     "bStateSave": true,//状态保存
     "aoColumnDefs": [
         //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-        {"orderable":false,"aTargets":[0,2,3,7,5,6,7,8,9]}// 制定列不参与排序
+        {"orderable":false,"aTargets":[0,2,3,5,6,7,8,9]}// 制定列不参与排序
     ]
 });
+
+function log_show(id) {
+    var url = '/log/'+id+'/check';
+    if (url == null || url ==''){
+        url = '404.html';
+    }
+
+    var index = layer.open({
+        type: 2,
+        area: ['800px','95%'],
+        fix: false, //不固定
+        scrollbar: false,
+        btn: ['知道了'],
+        shade: 0.4,
+        //skin: 'layui-layer-rim',
+        title: '查看日志信息',
+        content: url
+    })
+}
+
+$(function () {
+    $("#query").click(function () {
+        refresh();
+    })
+});
+
+function refresh() {
+    var data = {
+        pageNo: laypage_curr || 1,
+        pageSize: laypage_limit || 10,
+        startTime: $("#datemin").val(),
+        endTime: $("#datemax").val(),
+        logTypeId: $("#logTypeId").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: '/log/retrieve',
+        data: data,
+        dataType: 'html',
+        success: function (result) {
+            var data = $(result).find("div");
+            console.log(data);
+            $("#retrieve_data").html(data);
+        },
+        error: function () {
+            layer.msg('系统访问出错，请与系统管理员联系', {icon: 5, time: 2000});
+        }
+    })
+}
+
+

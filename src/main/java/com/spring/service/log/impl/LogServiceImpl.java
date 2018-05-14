@@ -8,6 +8,8 @@ import com.spring.common.utils.Constants;
 import com.spring.common.utils.DateUtils;
 import com.spring.common.utils.UUID;
 import com.spring.dao.LogMapper;
+import com.spring.model.Log;
+import com.spring.param.LogFilter;
 import com.spring.service.log.LogService;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
@@ -29,13 +31,13 @@ import java.util.List;
 @Transactional
 public class LogServiceImpl implements LogService{
 
-    private static final Logger Log= LoggerFactory.getLogger(LogServiceImpl.class);
+    private static final Logger Loger= LoggerFactory.getLogger(LogServiceImpl.class);
 
     @Autowired
     private LogMapper logMapper;
 
     @Override
-    public Page<com.spring.model.Log> getAllLogs(RowBounds rowBounds) {
+    public Page<Log> getAllLogs(RowBounds rowBounds) {
         return logMapper.getAllLogs(rowBounds);
     }
 
@@ -45,7 +47,7 @@ public class LogServiceImpl implements LogService{
         if(logMapper.deleteByPrimaryKey(logId)<1){
             throw new MyException("删除日志信息失败");
         }else
-            Log.info("删除日志信息成功");
+            Loger.info("删除日志信息成功");
     }
 
     @Override
@@ -60,7 +62,7 @@ public class LogServiceImpl implements LogService{
     }
 
     @Override
-    public void addOperateLog(com.spring.model.Log log) {
+    public void addOperateLog(Log log) {
         log.setLogId(UUID.getUUID());
         //设置操作时间
         log.setOperateTime(DateUtils.today());
@@ -78,5 +80,15 @@ public class LogServiceImpl implements LogService{
         if (logMapper.batchDelete(list)<1){
             throw new MyException("批量删除日志信息失败");
         }
+    }
+
+    @Override
+    public Log getLogsById(String logId) {
+        return logMapper.getLogsById(logId);
+    }
+
+    @Override
+    public Page<Log> getLogsByCondition(RowBounds rowBounds,LogFilter filter) {
+        return logMapper.getLogsByCondition(rowBounds,filter);
     }
 }

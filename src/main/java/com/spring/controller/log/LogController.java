@@ -1,6 +1,7 @@
 package com.spring.controller.log;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
 import com.spring.model.Log;
@@ -53,14 +54,6 @@ public class LogController extends SuperController {
         return "log/logList";
     }
 
-    //加载data页面
-    @RequestMapping(value = "/data",method = RequestMethod.POST)
-    public String date(Integer pageNo, @RequestParam(defaultValue = "10") Integer pageSize, Model model){
-        Page<Log> lists=logService.getAllLogs(new RowBounds((pageNo-1)*pageSize,pageSize));
-        model.addAttribute("lists",lists);
-        return "log/data";
-    }
-
     //删除日志信息
     @RequestMapping(value = "{logId}/delete",method = RequestMethod.POST)
     public void delete(@PathVariable(value = "logId")String logId){
@@ -75,5 +68,23 @@ public class LogController extends SuperController {
         List<String> list=Arrays.asList(logId);
         logService.batchDelete(list);
         ResponseUtils.writeSuccessReponse(request,response,"批量删除日志信息成功");
+    }
+
+    //根据id查询日志信息
+    @GetMapping(value = "/{logId}/check")
+    public String check(@PathVariable(value = "logId") String logId, Model model){
+        Log log=logService.getLogsById(logId);
+        model.addAttribute("log",log);
+        return "log/logShow";
+    }
+
+    //根据条件查询日志信息
+    @PostMapping(value = "/retrieve")
+    public String getMessage(LogFilter filter,Model model){
+        int pageNo=filter.getPageNo();
+        int pageSize=filter.getPageSize();
+        Page<Log> lists=logService.getLogsByCondition(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
+        model.addAttribute("lists",lists);
+        return "log/logList";
     }
 }

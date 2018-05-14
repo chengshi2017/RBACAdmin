@@ -7,7 +7,7 @@
 <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 日志管理 <span class="c-gray en">&gt;</span> 日志信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container" id="form_data">
-	<div class="text-c"> 日期范围：
+	<section class="text-c" id="search"> 日期范围：
 		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;"/>
 		-
 		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;"/>
@@ -18,8 +18,9 @@
 				<option th:each="logType:${logTypes}" th:value="${logType.logTypeId}" th:text="${logType.typeName}"></option>
 			</select>
 		</span>
-		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜日志</button>
-	</div>
+		<button type="submit" class="btn btn-success" id="query" name=""><i class="Hui-iconfont">&#xe665;</i> 搜日志</button>
+	</section>
+	<div id="retrieve_data">
 	<div class="cl pd-5 bg-1 bk-gray mt-20">
 		<span class="l">
 			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
@@ -54,17 +55,19 @@
 				<td th:text="${item.status}==1?'有效':'无效'"></td>
 				<td th:text="${item.remark}"></td>
 				<td class="td-manage">
-					<a title="详情" href="javascript:;" onclick="log_show(this,'10001')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>
+					<a title="详情" href="javascript:;" th:onclick="'javascript:log_show(\''+${item.logId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>
 					<a title="删除" href="javascript:;" th:onclick="'javascript:admin_del(\''+${item.logId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
 
 				</td>
 			</tr>
 			</tbody>
 		</table>
+
 		<script th:include="common/pages::pages" th:inline="javascript"></script>
 	</div>
+	</div>
 </div>
-<div th:replace="common/footer::footer"></div>
 <script th:src="@{/js/log/logList.js}" th:inline="javascript"></script>
+<footer th:replace="common/footer::footer"></footer>
 </body>
 </html>

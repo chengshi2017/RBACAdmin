@@ -197,6 +197,7 @@ function layer_show(title,url,w,h){
 		maxmin: true,
         shadeClose: true,  //开启遮罩关闭
 		shade:0.4,
+        scrollbar: false,
 		title: title,
 		content: url
 	});

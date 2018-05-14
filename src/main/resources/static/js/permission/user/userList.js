@@ -26,6 +26,7 @@ function layer_update(userId){
         area: ['800px', '95%'],
         fix: false, //不固定
         maxmin: true,
+        scrollbar: false,
         shade:0.4,
         shadeClose: true,
         skin: 'layui-layer-rim',
@@ -110,7 +111,7 @@ function layerOpen(msg) {
         btn: ['确定'],
         shade: 0.4,
         shadeClose: false,
-        title: ['错误信息'],
+        title: ['错误信息', 'text-align:center; color: red'],
         yes: function () {
             layer.close(index);
         }
@@ -165,30 +166,6 @@ function admin_start(obj,id){
 
     });
 }
-
-$(function () {
-    $("#retrieve").click(function () {
-        var data = {
-            "pageNo": laypage_curr || 1,
-            "pageSize": 10,
-            "userName": $("#userName").val(),
-            "startTime": $("#datemin").val(),
-            "endTime": $("#datemax").val(),
-        };
-        $.ajax({
-            type: 'post',
-            data: data,
-            dateType: 'html',
-            url: '/permission/user/page',
-            async: false,
-            success: function (result) {
-                var table=$(result).find("table");
-                console.log(table);
-                $("#page_data").html(table);
-            }
-        })
-    })
-});
 
 
 

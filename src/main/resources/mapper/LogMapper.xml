@@ -147,4 +147,40 @@
     </foreach>
   </delete>
   
+  <select id="getLogsById" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    l.*,t.TYPE_NAME,u.USER_NAME
+    FROM
+    t_log l LEFT JOIN
+    t_log_type t ON l.LOG_TYPE_ID=t.LOG_TYPE_ID
+    LEFT JOIN
+    t_user u ON l.USER_ID=u.USER_ID
+    WHERE l.LOG_ID = #{logId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getLogsByCondition" resultMap="BaseResultMap" parameterType="com.spring.param.LogFilter">
+      SELECT
+    l.*,t.TYPE_NAME,u.USER_NAME
+    FROM
+    t_log l LEFT JOIN
+    t_log_type t ON l.LOG_TYPE_ID=t.LOG_TYPE_ID
+    LEFT JOIN
+    t_user u ON l.USER_ID=u.USER_ID
+    WHERE 1=1
+    <if test="logTypeId != null and logTypeId != ''">
+      AND t.LOG_TYPE_ID = #{logTypeId}
+    </if>
+    <if test="startTime != null and startTime != ''">
+      <![CDATA[
+          and DATE_FORMAT(l.OPERATE_TIME, '%Y-%m-%d %H:%T:%s') >=DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
+      ]]>
+    </if>
+    <if test="endTime != null and endTime != ''">
+      <![CDATA[
+          and DATE_FORMAT(l.OPERATE_TIME, '%Y-%m-%d %H:%T:%s') <=DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%T:%s')
+      ]]>
+    </if>
+    ORDER BY l.OPERATE_TIME DESC
+  </select>
+  
 </mapper>

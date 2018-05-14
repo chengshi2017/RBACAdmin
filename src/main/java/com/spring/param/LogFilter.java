@@ -9,11 +9,15 @@ package com.spring.param;
  */
 public class LogFilter {
 
+    private Integer pageNo;
+
+    private Integer pageSize;
+
     private String startTime;
 
     private String endTime;
 
-    private String typeName;
+    private String logTypeId;
 
     public String getStartTime() {
         return startTime;
@@ -31,11 +35,27 @@ public class LogFilter {
         this.endTime = endTime;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getLogTypeId() {
+        return logTypeId;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setLogTypeId(String logTypeId) {
+        this.logTypeId = logTypeId;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 }
