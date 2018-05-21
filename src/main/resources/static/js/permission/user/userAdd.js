@@ -52,7 +52,7 @@ $(function(){
 
                         var index=parent.layer.getFrameIndex(window.name);
                         //parent.$('.btn-refresh').click();
-                        parent.reload();//刷新父页面
+                        parent.retrieve();//刷新父页面
                         parent.layer.close(index);//关闭弹出层
                     });
                 },

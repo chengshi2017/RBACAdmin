@@ -3,6 +3,8 @@ package com.spring.dao;
 import com.spring.model.Emp;
 import com.spring.model.EmpParam;
 
+import java.util.List;
+
 public interface EmpParamMapper {
     int deleteByPrimaryKey(String empParamId);
 
@@ -17,4 +19,8 @@ public interface EmpParamMapper {
     int updateByPrimaryKey(Emp record);
 
     void save(Emp emp);
+
+    List<EmpParam> getAllByDeptId(String deptId);
+
+    List<EmpParam> getAllByJobId(String jobId);
 }

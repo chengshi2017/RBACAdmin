@@ -1,9 +1,13 @@
 package com.spring.controller.job;
 
 import com.github.pagehelper.Page;
+import com.spring.common.exceptions.MyException;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
+import com.spring.model.EmpParam;
 import com.spring.model.Job;
+import com.spring.param.JobFilter;
+import com.spring.service.emp.EmpParamService;
 import com.spring.service.job.JobService;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,10 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Author 施成
@@ -32,36 +36,38 @@ public class JobController extends SuperController {
     @Autowired
     private JobService jobService;
 
+    @Autowired
+    private EmpParamService empParamService;
+
     //加载page页面
     @RequiresPermissions(value = "job:page")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
-    public String toPage(){
-        return "job/page";
-    }
-
-    //加载date数据页面
-    @RequestMapping(value = "/data", method = RequestMethod.POST)
-    public String date(Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize, Model model){
+    public String toPage(@RequestParam(defaultValue = "1") Integer pageNo,
+                         @RequestParam(defaultValue = "10") Integer pageSize,
+                         Model model){
+        //获取所有职位信息
+        List<Job> jobList=jobService.getAllJob();
+        model.addAttribute("jobList",jobList);
         Page<Job> lists=jobService.getAllJobMessage(new RowBounds((pageNo-1)*pageSize,pageSize));
         model.addAttribute("lists",lists);
-        return "job/data";
+        return "job/jobList";
     }
 
     //添加职位信息
     @RequestMapping(value = "/toUpdate", method = RequestMethod.GET)
     public String toAdd(Model model){
-        return "job/update";
+        return "job/job_add";
     }
 
     //修改职位相关信息
-    @RequestMapping(value = "{jobId}/toUpdate", method = RequestMethod.GET)
+    @RequestMapping(value = "/{jobId}/toUpdate", method = RequestMethod.GET)
     public String toUpdate(@PathVariable("jobId") String jobId, Model model){
         Job job=jobService.getJobMessageById(jobId);
         model.addAttribute("job",job);
-        return "job/update";
+        return "job/job_add";
     }
 
-    @RequestMapping(value = "toUpdate", method = RequestMethod.POST)
+    @RequestMapping(value = "/toUpdate", method = RequestMethod.POST)
     public void toUpdate(Job info){
         //根据传入的信息判断进行的操作
         if(null==info.getJobId()){
@@ -74,9 +80,46 @@ public class JobController extends SuperController {
     }
 
     //根据职位id删除职位信息
-    @RequestMapping(value = "/{jobId}/delete", method = RequestMethod.POST)
-    public void delete(@PathVariable("jobId") String jobId){
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public void delete(String jobId){
+        List<EmpParam> list=empParamService.getJobMessageById(jobId);
+        if (list!=null&&list.size()>0){
+            ResponseUtils.writeSuccessReponse(request,response,"仍有员工处于此岗位，请重新分配后删除");
+            throw new MyException("存在关联信息，无法删除");
+        }
         jobService.delete(jobId);
-        ResponseUtils.writeSuccessReponse(request,response,"D删除职位信息成功");
+        ResponseUtils.writeSuccessReponse(request,response,"删除职位信息成功");
+    }
+
+    @PostMapping(value = "/batchDelete")
+    public void batchDelete(String checkedId){
+        String[] record=checkedId.split(",");
+        List<String> list=Arrays.asList(record);
+        for (String jobId: list){
+            List<EmpParam> jobList=empParamService.getJobMessageById(jobId);
+            if (jobList!=null&&jobList.size()>0){
+                ResponseUtils.writeErrorResponse(request,response,"仍有员工处于需要删除岗位，请重新分配后删除");
+                throw new MyException("存在关联信息，不能删除");
+            }
+        }
+        jobService.batchDelete(list);
+        ResponseUtils.writeSuccessReponse(request,response,"批量删除职位信息成功！");
+    }
+
+    @PostMapping(value = "/start")
+    public void start(String jobId){
+        Job job=jobService.getJobMessageById(jobId);
+        job.setStatus(job.getStatus()^1);
+        jobService.update(job);
+        ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
+    }
+
+    @PostMapping(value = "retrieve")
+    public String getMessageByCondition(JobFilter filter, Model model){
+        Integer pageNo=filter.getPageNo();
+        Integer pageSize=filter.getPageSize();
+        Page<Job> lists=jobService.getMessageByCondition(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
+        model.addAttribute("lists",lists);
+        return "job/jobList";
     }
 }

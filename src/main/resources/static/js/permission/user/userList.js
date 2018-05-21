@@ -4,11 +4,11 @@
 function reload() {
     var data={
         "pageNo": laypage_curr || 1,
-        "pageSize": 10,
+        "pageSize": laypage_limit || 10,
         "userName": $("#userName").val(),
         "phone": $("#phone").val(),
     };
-    common.getData("post", "/permission/user/page", data, "html", $("#page_data"));
+    common.getData("post", "/permission/user/retrieve", data, "html", $("#page_data"));
 }
 
 /***
@@ -50,7 +50,7 @@ function admin_del(id) {
         yes: function () {
             $.post(url, {}, function (result) {
                 layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                    reload();
+                    retrieve();
                     layer.close(index);
                 })
             },'json')
@@ -94,7 +94,7 @@ function datadel() {
             data: {"checkedId":checkedId},
             success: function (result) {
                 layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                    reload();
+                    retrieve();
                 })
             },
             error: function (reslut) {
@@ -165,6 +165,31 @@ function admin_start(obj,id){
 
 
     });
+}
+
+$(function () {
+    $("#search").click(function () {
+        retrieve();
+    })
+});
+
+function retrieve() {
+    var data={
+        pageNo: laypage_curr || 1,
+        pageSize: laypage_limit || 10,
+        userName: $("userName").val(),
+        phone: $("phone").val()
+    };
+    $.ajax({
+        type: 'post',
+        url: '/permission/user/retrieve',
+        data: data,
+        dataType: 'html',
+        success: function (result) {
+            var data= $(result).find("div");
+            $("#search_data").html(data);
+        }
+    })
 }
 
 

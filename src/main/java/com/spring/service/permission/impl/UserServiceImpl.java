@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
     private UserRoleMapper userRoleMapper;
 
     @Override
-    public Page<User> getAllUserMessage(RowBounds rowBounds, UserFilter filter) {
+    public Page<User> getAllUserMessage(RowBounds rowBounds,UserFilter filter) {
         return userMapper.getAll(rowBounds,filter);
     }
 
@@ -122,6 +122,11 @@ public class UserServiceImpl implements UserService{
         if (userMapper.batchDelete(list)<1){
             Log.error("批量删除用户信息失败");
         }
+    }
+
+    @Override
+    public Page<User> getMessageByCondition(RowBounds rowBounds, UserFilter filter) {
+        return userMapper.getMessageByCondition(rowBounds,filter);
     }
 
 

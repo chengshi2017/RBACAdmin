@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header"/>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-dept-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>部门名称：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="deptName" name="deptName" th:value="${dept}?'deptName':''" style="width: 410px"/>
+            </div>
+        </div>
+        <span th:if="${dept}">
+            <input type="hidden" name="userId" id="userId" th:value="${dept.deptId}"/>
+        </span>
+        <div th:if="${dept}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <span class="select-box" style="width:410px;">
+                        <select class="select" name="status" size="1" th:switch="${dept.status}">
+                            <option th:text="${dept.status}==1?'正常':'解散'" th:attr="value=${dept.status}"></option>
+                            <option th:text="${dept.status}==0?'已解散':'正常'" th:attr="value=(${dept.status}==1?'0':'1')"></option>
+
+                        </select>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div th:unless="${dept}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">是否启用：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <span class="select-box" style="width:410px;">
+                        <select class="select" name="status" size="1">
+                            <option value="0">待启用</option>
+                            <option value="1">正常</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">部门描述：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <textarea name="deptRemark" id="deptRemark" class="textarea"  placeholder="" th:text="${dept}?(${dept.deptRemark}):''" style="width: 410px"></textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" id="sub" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+                <button onclick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+<script th:src="@{/js/dept/deptAdd.js}" th:inline="javascript"/>
+</body>
+</html>

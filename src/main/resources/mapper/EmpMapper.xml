@@ -221,12 +221,54 @@
   </delete>
 
   <select id="getCount" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM t_emp WHERE STATUS = 1
+    SELECT max(EMP_NUM) FROM t_emp
   </select>
 
   <select id="getEmpMessageByEmpName" resultMap="BaseResultMap" parameterType="java.lang.String">
     SELECT * FROM t_emp
     WHERE 1=1
     AND EMP_NAME = #{empName}
+  </select>
+  
+  <delete id="batchDelete" parameterType="java.util.List">
+    DELETE e.*,em.*
+    FROM t_emp e
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID=em.EMP_ID
+    WHERE e.EMP_ID IN
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </delete>
+  
+  <select id="getMessageByCondition" resultMap="BaseResultMap" parameterType="com.spring.param.EmpFilter">
+    SELECT e.*, d.DEPT_NAME, j.JOB_NAME
+    FROM t_emp e
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
+    WHERE 1=1
+    <if test="empName != null and empName != ''">
+      AND e.EMP_NAME LIKE concat(concat('%', #{empName},'%'))
+    </if>
+    <if test="deptName !=null and deptName != ''">
+      AND d.DEPT_NAME = #{deptName}
+    </if>
+    <if test="jobName != null and jobName != ''">
+      AND  j.JOB_NAME = #{jobName}
+    </if>
+    <if test="startTime != null and startTime != ''">
+      <![CDATA[
+        AND DATE_FORMAT(e.CREATE_TIME, '%Y-%m-%d %H:%T:%s') <= DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
+      ]]>
+    </if>
+    <if test="endTime != null and endTime != ''">
+        <![CDATA[
+          AND DATE_FORMAT(e.CREATE_TIME, '%Y-%m-%d %H:%T:%s') >= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%T:%s')
+        ]]>
+    </if>
   </select>
 </mapper>

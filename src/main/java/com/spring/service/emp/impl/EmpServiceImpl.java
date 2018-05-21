@@ -1,5 +1,7 @@
 package com.spring.service.emp.impl;
 
+import com.github.pagehelper.Page;
+import com.spring.common.exceptions.MyException;
 import com.spring.common.utils.DateUtils;
 import com.spring.common.utils.UUID;
 import com.spring.dao.DeptMapper;
@@ -9,6 +11,7 @@ import com.spring.dao.JobMapper;
 import com.spring.model.Dept;
 import com.spring.model.Emp;
 import com.spring.model.Job;
+import com.spring.param.EmpFilter;
 import com.spring.service.emp.EmpService;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
@@ -47,7 +50,7 @@ public class EmpServiceImpl implements EmpService{
     private JobMapper jobMapper;
 
     @Override
-    public List<Emp> getAllEmp(RowBounds rowBounds) {
+    public Page<Emp> getAllEmp(RowBounds rowBounds) {
         return empMapper.getAllEmp(rowBounds);
     }
 
@@ -100,12 +103,39 @@ public class EmpServiceImpl implements EmpService{
     @Override
     public void delete(String empId) {
         if(empMapper.delete(empId)<1){
-            LOGGER.info("删除员工信息失败");
+            throw new MyException("删除员工信息失败");
         }
     }
 
     @Override
     public List<Emp> getEmpMessageByEmpName(String empName) {
         return empMapper.getEmpMessageByEmpName(empName);
+    }
+
+    @Override
+    public void batchDelete(List<String> list) {
+        if (list!=null&&list.size()>0){
+            if (empMapper.batchDelete(list)<1){
+                throw new MyException("批量删除员工信息失败！");
+            }
+        }else {
+            throw new MyException("要删除的员工信息为空");
+        }
+    }
+
+    @Override
+    public Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter) {
+        Integer startYear=filter.getStartYear();
+        Integer endYear=filter.getEndYear();
+        if (startYear!=null&&startYear!=0) {
+            String startTime = DateUtils.getLimitTime(startYear);
+            filter.setStartTime(startTime);
+        }
+        if (endYear!=null&&endYear!=0){
+            String endTime = DateUtils.getLimitTime(endYear);
+            filter.setEndTime(endTime);
+        }
+        Page<Emp> lists=empMapper.getMessageByCondition(rowBounds,filter);
+        return lists;
     }
 }

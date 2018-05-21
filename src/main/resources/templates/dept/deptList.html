@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header"/>
+<body>
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 部门管理 <span class="c-gray en">&gt;</span> 部门信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container" id="form_data">
+    <section class="text-c"> 创建时间:
+        <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;"/>
+        -
+        <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;"/>
+        &emsp;&emsp;部门名称:
+        <span class="select-box inline">
+			<select id="deptName" name="deptName" class="select" style="width: 170px">
+				<option value="">请选择职位名称</option>
+				<option th:each="deptItem:${dept}" th:value="${deptItem.deptName}" th:text="${deptItem.deptName}"></option>
+			</select>
+		</span>
+        <button type="submit" class="btn btn-success" id="search" ><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+    </section>
+    <div id="search_data">
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="l">
+				<a href="javascript:;" onclick="batch_delete()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+				<a href="javascript:;" onclick="layer_show('添加部门信息','/dept/toUpdate','76%','95%')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+			</span>
+            <span class="r">共有数据：<strong th:text="${lists.total}">54</strong> 条</span>
+        </div>
+        <div class="mt-20" id="page_data">
+            <table class="table table-border table-bordered table-bg">
+                <thead>
+                <tr class="text-c">
+                    <th width="25"><input type="checkbox" name="subCheck" id="subCheck"/></th>
+                    <th width="40">序号</th>
+                    <th width="">部门编号</th>
+                    <th width="">部门描述</th>
+                    <th width="">创建时间</th>
+                    <th width="">是否存在</th>
+                    <th width="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-c" th:each="item:${lists}">
+                    <td><input type="checkbox" th:attr="value=${item.deptId}" name="subCheck" /></td>
+                    <td th:text="${itemStat.count}"></td>
+                    <td th:text="${item.deptName}"></td>
+                    <td th:text="${item.deptRemark}"></td>
+                    <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></td>
+                    <th:block th:if="${item.status}==1">
+                        <td class="td-status"><span class="label label-success radius">正常</span></td>
+                    </th:block>
+                    <th:block th:if="${item.status}==0">
+                        <td class="td-status"><span class="label radius">已解散</span></td>
+                    </th:block>
+                    <td class="td-manage" th:switch="${item.status}">
+							<span th:case="1">
+								<a style="text-decoration:none" th:onClick="'javascript:dept_stop(this,\''+${item.deptId}+'\')'" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
+							</span>
+                        <span th:case="0">
+								<a style="text-decoration:none" th:onClick="'javascript:dept_start(this,\''+${item.deptId}+'\')'" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a>
+							</span>
+                        <a title="编辑" href="javascript:;" th:onclick="'javascript:layer_update(\''+${item.deptId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> </a>
+                        <a title="删除" href="javascript:;" th:onclick="'javascript:dept_del(\''+${item.deptId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <script th:include="common/pages::pages" th:inline="javascript"></script>
+        </div>
+    </div>
+</div>
+<footer th:replace="common/footer::footer"></footer>
+<script th:src="@{/js/dept/deptList.js}" th:inline="javascript"></script>
+</body>
+</html>

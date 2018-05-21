@@ -7,69 +7,68 @@
 <nav class="breadcrumb">
 	<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 权限管理 <span class="c-gray en">&gt;</span> 用户信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container" id="form_data">
-	<form action="" method="post" class="form form-horizontal" id="form">
-		<div class="text-c"> 手机号码：
+		<section class="text-c"> 手机号码：
 			<input type="text" class="input-text" style="width:250px" placeholder="手机号码" id="phone" name="phone"/>
 			<span>&emsp;&emsp;用户名:</span>
 			<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="userName" name="userName"/>&emsp;&emsp;
-			<button type="submit" class="btn btn-success" onclick="reload()"><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+			<button type="submit" class="btn btn-success" id="search" ><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		</section>
+	<div id="search_data">
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="l">
+				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+				<a href="javascript:;" onclick="layer_show('添加用户信息','/permission/user/toUpdate','76%','95%')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+			</span>
+			<span class="r">共有数据：<strong th:text="${lists.total}">54</strong> 条</span>
 		</div>
-	</form>
-	<div class="cl pd-5 bg-1 bk-gray mt-20">
-		<span class="l">
-			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-			<a href="javascript:;" onclick="layer_show('添加用户信息','/permission/user/toUpdate','76%','95%')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
-		</span>
-	<span class="r">共有数据：<strong th:text="${lists.total}">54</strong> 条</span>
-	</div>
-	<div class="mt-20" id="page_data">
-		<table class="table table-border table-bordered table-bg">
-			<thead>
-			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="subCheck" id="subCheck"/></th>
-				<th width="40">序号</th>
-				<th width="">用户名</th>
-				<th width="">手机号码</th>
-				<th width="">邮箱</th>
-				<th width="">加入时间</th>
-				<th width="">备注</th>
-				<th width="">是否已启用</th>
-				<th width="">操作</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr class="text-c" th:each="item:${lists}">
-				<td><input type="checkbox" th:attr="value=${item.userId}" name="subCheck" /></td>
-				<td th:text="${itemStat.count}"></td>
-				<td th:text="${item.userName}"></td>
-				<td th:text="${item.phone}"></td>
-				<td th:text="${item.email}"></td>
-				<td th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></td>
-				<td th:text="${item.remark}"></td>
-				<th:block th:if="${item.status}==1">
-					<td class="td-status"><span class="label label-success radius">已启用</span></td>
-				</th:block>
-				<th:block th:if="${item.status}==0">
-					<td class="td-status"><span class="label radius">已停用</span></td>
-				</th:block>
-				<td class="td-manage" th:switch="${item.status}">
-						<span th:case="1">
-							<a style="text-decoration:none" th:onClick="'javascript:admin_stop(this,\''+${item.userId}+'\')'" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
-						</span>
-					<span th:case="0">
-							<a style="text-decoration:none" th:onClick="'javascript:admin_start(this,\''+${item.userId}+'\')'" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a>
-						</span>
-					<a title="编辑" href="javascript:;" th:onclick="'javascript:layer_update(\''+${item.userId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> </a>
-					<a title="删除" href="javascript:;" th:onclick="'javascript:admin_del(\''+${item.userId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
-
-				</td>
-			</tr>
-			</tbody>
-		</table>
-		<script th:include="common/pages::pages" th:inline="javascript"></script>
+		<div class="mt-20" id="page_data">
+			<table class="table table-border table-bordered table-bg">
+				<thead>
+				<tr class="text-c">
+					<th width="25"><input type="checkbox" name="subCheck" id="subCheck"/></th>
+					<th width="40">序号</th>
+					<th width="">用户名</th>
+					<th width="">手机号码</th>
+					<th width="">邮箱</th>
+					<th width="">加入时间</th>
+					<th width="">备注</th>
+					<th width="">是否已启用</th>
+					<th width="">操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr class="text-c" th:each="item:${lists}">
+					<td><input type="checkbox" th:attr="value=${item.userId}" name="subCheck" /></td>
+					<td th:text="${itemStat.count}"></td>
+					<td th:text="${item.userName}"></td>
+					<td th:text="${item.phone}"></td>
+					<td th:text="${item.email}"></td>
+					<td th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></td>
+					<td th:text="${item.remark}"></td>
+					<th:block th:if="${item.status}==1">
+						<td class="td-status"><span class="label label-success radius">已启用</span></td>
+					</th:block>
+					<th:block th:if="${item.status}==0">
+						<td class="td-status"><span class="label radius">已停用</span></td>
+					</th:block>
+					<td class="td-manage" th:switch="${item.status}">
+							<span th:case="1">
+								<a style="text-decoration:none" th:onClick="'javascript:admin_stop(this,\''+${item.userId}+'\')'" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
+							</span>
+						 	<span th:case="0">
+								<a style="text-decoration:none" th:onClick="'javascript:admin_start(this,\''+${item.userId}+'\')'" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a>
+							</span>
+						<a title="编辑" href="javascript:;" th:onclick="'javascript:layer_update(\''+${item.userId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> </a>
+						<a title="删除" href="javascript:;" th:onclick="'javascript:admin_del(\''+${item.userId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<script th:include="common/pages::pages" th:inline="javascript"></script>
+		</div>
 	</div>
 </div>
+<footer th:replace="common/footer::footer"></footer>
 <script th:src="@{/js/permission/user/userList.js}" th:inline="javascript"></script>
-<div th:replace="common/footer::footer"></div>
 </body>
 </html>

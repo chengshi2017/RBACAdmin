@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header"/>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-emp-add">
+        <span th:if="${emp}">
+            <input type="hidden" name="empId" id="empId" th:value="${emp.empId}"/>
+            <input type="hidden" name="empNum" id="empNum" th:value="${emp.empNum}"/>
+        </span>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>员工姓名：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="empName" name="empName" th:attr="value=(${emp}?(${emp.empName}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <span th:unless="${emp}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <select class="input-text" id="sex" name="sex" style="width: 410px">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+            </div>
+        </span>
+        <span th:if="${emp}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <select class="input-text" id="sex1" name="sex" style="width: 410px">
+                        <option th:value="${emp.sex}" th:text="${emp.sex}"></option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+            </div>
+        </span>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>年龄：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="age" name="age" th:attr="value=(${emp}?(${emp.age}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>家庭住址：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="address" name="address" th:attr="value=(${emp}?(${emp.address}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="email" name="email" th:attr="value=(${emp}?(${emp.email}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电话号码：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" name="phone" id="phone" th:attr="value=(${emp}?(${emp.phone}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>民族：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="pace" name="pace" th:attr="value=(${emp}?(${emp.pace}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <div th:if="${emp}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>部门名称：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="deptName" size="1">
+                        <option th:text="${emp.deptName}" th:value="${emp.deptName}"></option>
+                        <option th:each="empItem:${deptList}" th:text="${empItem.deptName}" th:value="${empItem.deptName}"></option>
+                    </select>
+			    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职位名称：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="jobName" size="1">
+                        <option th:text="${emp.jobName}" th:value="${emp.jobName}"></option>
+                        <option th:each="jobItem:${jobList}" th:text="${jobItem.jobName}" th:value="${jobItem.jobName}"></option>
+                    </select>
+			    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>工作状态：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="status" size="1" th:switch="${emp.status}">
+                        <option th:text="${emp.status}==1?'正常':'请假'" th:attr="value=${emp.status}"></option>
+                        <option th:text="${emp.status}==0?'正常':'请假'" th:attr="value=(${emp.status}==1?'0':'1')"></option>
+                    </select>
+			    </span>
+                </div>
+            </div>
+        </div>
+        <div th:unless="${emp}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>部门名称：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="deptName" size="1">
+                        <option value="">---请选择所属部门---</option>
+                        <option th:each="deptItem:${deptList}" th:text="${deptItem.deptName}" th:value="${deptItem.deptName}"></option>
+                    </select>
+			    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职位名称：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="jobName" size="1">
+                        <option value="">---请选择所属职位---</option>
+                        <option th:each="jobItem:${jobList}" th:text="${jobItem.jobName}" th:value="${jobItem.jobName}"></option>
+                    </select>
+			    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否在职：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <span class="select-box" style="width:410px;">
+                        <select class="select" name="status" size="1">
+                            <option value="0">未入职</option>
+                            <option value="1">正常</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">备注：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${emp}?(${emp.remark}):''" style="width: 410px"></textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" id="sub" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+                <button onclick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+<script th:src="@{/js/emp/empAdd.js}" th:inline="javascript"/>
+</body>
+</html>

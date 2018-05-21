@@ -109,4 +109,15 @@
       #{jobId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
     )
   </insert>
+  
+  <select id="getAllByDeptId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_emp_param
+    WHERE DEPT_ID = #{deptId}
+  </select>
+  
+  <select id="getAllByJobId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_emp_param
+    WHERE JOB_ID = #{jobId}
+  </select>
+  
 </mapper>

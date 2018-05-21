@@ -2,6 +2,7 @@ package com.spring.service.job;
 
 import com.github.pagehelper.Page;
 import com.spring.model.Job;
+import com.spring.param.JobFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -24,4 +25,8 @@ public interface JobService {
     void delete(String jobId);
 
     List<Job> getAllJob();
+
+    void batchDelete(List<String> list);
+
+    Page<Job> getMessageByCondition(RowBounds rowBounds, JobFilter filter);
 }

@@ -21,7 +21,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    Page<User> getAll(RowBounds rowBounds, UserFilter filter);
+    Page<User> getAll(RowBounds rowBounds,UserFilter filter);
 
     List<User> getAllUsers();
 
@@ -31,4 +31,6 @@ public interface UserMapper {
     Integer getCountByUserName(String userName);
 
     int batchDelete(List<String> list);
+
+    Page<User> getMessageByCondition(RowBounds rowBounds, UserFilter filter);
 }

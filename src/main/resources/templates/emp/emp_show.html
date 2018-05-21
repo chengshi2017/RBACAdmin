@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header"/>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-emp-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">员工工号：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" name="empNum" id="empNum" th:value="${emp.empNum}" disabled="disabled" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">员工姓名：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="empName" name="empName" th:value="${emp.empName}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">性别：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="sex" name="sex" th:value="${emp.sex}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">年龄：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="age" name="age" th:value="${emp.age}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">家庭住址：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="address" name="address" th:value="${emp.address}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">邮箱：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="email" name="email" th:value="${emp.email}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">电话号码：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" name="phone" id="phone" th:value="${emp.phone}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">民族：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="pace" name="pace" th:value="${emp.pace}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">部门名称：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="deptName" name="deptName" th:value="${emp.deptName}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">职位名称：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="jobName" name="jobName" th:value="${emp.jobName}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">工作状态：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="status" name="status" th:value="${emp.status}==0?'请假':'正常'" disabled="disabled" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">备注：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${emp.remark}" style="width: 410px" disabled="disabled"></textarea>
+            </div>
+        </div>
+    </form>
+</article>
+</body>
+</html>

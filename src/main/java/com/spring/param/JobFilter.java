@@ -1,32 +1,21 @@
 package com.spring.param;
 
-import java.util.Date;
-
 /**
  * @Author: Jeremy
- * @Date: 2018/5/11
- * @Time: 14:39
+ * @Date: 2018/5/18
+ * @Time: 21:05
  * @Version: 1.0
  * @Describe:
  */
-public class UserFilter {
+public class JobFilter {
 
     private Integer pageNo;
 
     private Integer pageSize;
 
-    private String userName;
+    private String jobName;
 
-    private String phone;
-
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    private Integer status;
 
     public Integer getPageNo() {
         return pageNo;
@@ -44,11 +33,19 @@ public class UserFilter {
         this.pageSize = pageSize;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getJobName() {
+        return jobName;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

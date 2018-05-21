@@ -236,4 +236,18 @@ public class DateUtils {
         String current=sdf.format(date);
         return current;
     }
+
+    /**
+     *  计算年限
+     *  返回String类型时间
+     */
+    public static String getLimitTime(int year){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.YEAR,year);
+        Date date=calendar.getTime();
+        String StringDate=sdf.format(date);
+        return StringDate;
+    }
 }

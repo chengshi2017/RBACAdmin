@@ -44,7 +44,7 @@ public class LogController extends SuperController {
     @RequestMapping(value = "/page")
     public String toPage(@RequestParam(defaultValue = "1")Integer pageNo,
                          @RequestParam(defaultValue = "10")Integer pageSize,
-                         LogFilter filter,Model model){
+                         Model model){
         //加载日志类型
         List<LogType> list=logTypeService.getAllVaildLogTypes();
         model.addAttribute("logTypes",list);

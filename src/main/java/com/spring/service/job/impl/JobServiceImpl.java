@@ -5,6 +5,7 @@ import com.spring.common.exceptions.MyException;
 import com.spring.common.utils.UUID;
 import com.spring.dao.JobMapper;
 import com.spring.model.Job;
+import com.spring.param.JobFilter;
 import com.spring.service.job.JobService;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,14 +45,16 @@ public class JobServiceImpl implements JobService {
     @Override
     public void insert(Job job) {
         job.setJobId(UUID.getUUID());
-        if(jobMapper.insert(job)<1){
+        job.setCreateTime(new Date());
+        if(jobMapper.insertSelective(job)<1){
             throw new MyException("新增职位信息失败");
         }
     }
 
     @Override
     public void update(Job info) {
-        if(jobMapper.updateByPrimaryKey(info)<1){
+        info.setUpdateTime(new Date());
+        if(jobMapper.updateByPrimaryKeySelective(info)<1){
             throw new MyException("修改职位信息失败");
         }
     }
@@ -65,5 +69,17 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<Job> getAllJob() {
         return jobMapper.getAllJob();
+    }
+
+    @Override
+    public void batchDelete(List<String> list) {
+        if (jobMapper.batchDelete(list)<1){
+            throw new MyException("批量删除职位信息失败");
+        }
+    }
+
+    @Override
+    public Page<Job> getMessageByCondition(RowBounds rowBounds, JobFilter filter) {
+        return jobMapper.getMessageByCondition(rowBounds,filter);
     }
 }

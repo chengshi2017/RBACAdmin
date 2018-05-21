@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.github.pagehelper.Page;
 import com.spring.model.Dept;
+import com.spring.param.DeptFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -24,4 +25,8 @@ public interface DeptMapper {
     List<Dept> getAllDept();
 
     List<Dept> getDeptMessageByDeptName(String deptName);
+
+    Page<Dept> getMessageByCondition(RowBounds rowBounds, DeptFilter filter);
+
+    int batchDelete(List<String> list);
 }

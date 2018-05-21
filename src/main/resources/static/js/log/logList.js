@@ -11,6 +11,11 @@ function reload() {
     };
    common.getData("post", "/log/retrieve", data, "html", $("#page_data"));
 }
+
+/**
+ * 批量删除
+ * @returns {boolean}
+ */
 function datadel() {
     var checkNum=$("input[name='subCheck']:checked").length;
     if (checkNum == 0){

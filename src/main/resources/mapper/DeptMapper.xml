@@ -122,7 +122,7 @@
 
   <select id="getAllDept" resultMap="BaseResultMap">
     SELECT * FROM
-    t_dept
+    t_dept WHERE status = 1
   </select>
 
   <select id="getDeptMessageByDeptName" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -134,4 +134,32 @@
     DEPT_NAME = #{deptName}
   </select>
 
+  <select id="getMessageByCondition" resultMap="BaseResultMap" parameterType="com.spring.param.DeptFilter">
+    SELECT * FROM
+    t_dept
+    WHERE 1=1
+    <if test="startTime != null and startTime != ''">
+      <![CDATA[
+          AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%T:%s') >= DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
+      ]]>
+    </if>
+    <if test="endTime != null and endTime != ''">
+      <![CDATA[
+          AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%T:%s') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%T:%s')
+      ]]>
+    </if>
+    <if test="deptName !=null and deptName != ''">
+        AND DEPT_NAME = #{deptName}
+    </if>
+    ORDER BY CREATE_TIME ASC
+  </select>
+  
+  <delete id="batchDelete" parameterType="java.util.List">
+    DELETE FROM t_dept
+    WHERE DEPT_ID IN
+    <foreach collection="list" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+  </delete>
+  
 </mapper>

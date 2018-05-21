@@ -1,6 +1,8 @@
 package com.spring.dao;
 
+import com.github.pagehelper.Page;
 import com.spring.model.Emp;
+import com.spring.param.EmpFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -18,7 +20,7 @@ public interface EmpMapper {
 
     int updateByPrimaryKey(Emp record);
 
-    List<Emp> getAllEmp(RowBounds rowBounds);
+    Page<Emp> getAllEmp(RowBounds rowBounds);
 
     Emp getEmpByEmpId(String empId);
 
@@ -27,4 +29,8 @@ public interface EmpMapper {
     Integer getCount();
 
     List<Emp> getEmpMessageByEmpName(String empName);
+
+    int batchDelete(List<String> list);
+
+    Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter);
 }

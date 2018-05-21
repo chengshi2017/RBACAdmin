@@ -1,6 +1,8 @@
 package com.spring.service.emp;
 
+import com.github.pagehelper.Page;
 import com.spring.model.Emp;
+import com.spring.param.EmpFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
  */
 public interface EmpService {
 
-    List<Emp> getAllEmp(RowBounds rowBounds);
+    Page<Emp> getAllEmp(RowBounds rowBounds);
 
     Emp getEmpByEmpId(String empId);
 
@@ -24,4 +26,8 @@ public interface EmpService {
     void delete(String empId);
 
     List<Emp> getEmpMessageByEmpName(String empName);
+
+    void batchDelete(List<String> list);
+
+    Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter);
 }

@@ -140,7 +140,7 @@
     where USER_ID = #{userId,jdbcType=VARCHAR}
   </update>
 
-  <select id="getAll" resultMap="BaseResultMap" parameterType="com.spring.param.UserFilter">
+  <select id="getAll" resultMap="BaseResultMap">
     SELECT * FROM
     t_user WHERE 1 = 1
     <if test="userName != null and userName != ''">
@@ -176,5 +176,16 @@
       #{item}
     </foreach>
   </delete>
+  
+  <select id="getMessageByCondition" parameterType="com.spring.param.UserFilter" resultMap="BaseResultMap">
+    SELECT * FROM
+    t_user WHERE 1 = 1
+    <if test="userName != null and userName != ''">
+      AND USER_NAME LIKE concat(concat('%', #{userName}),'%')
+    </if>
+    <if test="phone != null and phone != ''">
+      AND PHONE LIKE concat(concat('%', #{phone}),'%')
+    </if>
+  </select>
 
 </mapper>

@@ -6,6 +6,7 @@ import com.spring.param.UserFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.logging.Filter;
 
 /**
  * @Author 施成
@@ -14,7 +15,7 @@ import java.util.List;
  * @Describe:
  */
 public interface UserService {
-    Page<User> getAllUserMessage(RowBounds rowBounds, UserFilter filter);
+    Page<User> getAllUserMessage(RowBounds rowBounds,UserFilter filter);
 
     User getUserMessageById(String userId);
 
@@ -31,4 +32,6 @@ public interface UserService {
     Integer getCountByUserName(String userName);
 
     void batchDelete(List<String> list);
+
+    Page<User> getMessageByCondition(RowBounds rowBounds, UserFilter filter);
 }

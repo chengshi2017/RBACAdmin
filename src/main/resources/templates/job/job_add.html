@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header"/>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-job-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>职位名称：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="jobName" name="jobName" th:attr="value=(${job}?(${job.jobName}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <span th:if="${job}">
+            <input type="hidden" name="jobId" id="jobId" th:value="${job.jobId}"/>
+        </span>
+        <div th:if="${job}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">是否空缺：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="status" size="1" th:switch="${job.status}">
+                        <option th:text="${job.status}==1?'在职':'空缺'" th:attr="value=${job.status}"></option>
+                        <option th:text="${job.status}==0?'在职':'空缺'" th:attr="value=(${job.status}==1?'0':'1')"></option>
+
+                    </select>
+			    </span>
+                </div>
+            </div>
+        </div>
+        <div th:unless="${job}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">是否空缺：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <span class="select-box" style="width:410px;">
+                        <select class="select" name="status" size="1">
+                            <option value="0">空缺</option>
+                            <option value="1">正常</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">备注：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${job}?(${job.remark}):''" style="width: 410px"></textarea>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" id="submit1" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+                <button onclick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+<script th:src="@{/js/job/jobAdd.js}" th:inline="javascript"/>
+</body>
+</html>

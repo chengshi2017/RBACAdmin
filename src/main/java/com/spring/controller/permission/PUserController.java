@@ -38,14 +38,6 @@ public class PUserController extends SuperController {
         return "permission/user/userList";
     }
 
-//    //加载用户权限相关数据
-//    @PostMapping(value = "/data")
-//    public String date(Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize,Model model){
-//        Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize));
-//        model.addAttribute("lists",lists);
-//        return "system/userList";
-//    }
-
     //加载用户编辑信息页面
     @RequestMapping(value = "/toUpdate",method = RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String toAdd(){
@@ -104,6 +96,14 @@ public class PUserController extends SuperController {
         ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
     }
 
+    @PostMapping(value = "/retrieve")
+    public String getMessages(UserFilter filter,Model model){
+        int pageNo=filter.getPageNo();
+        int pageSize=filter.getPageSize();
+        Page<User> lists=userService.getMessageByCondition(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
+        model.addAttribute("lists",lists);
+        return "permission/user/userList";
 
+    }
 
 }
