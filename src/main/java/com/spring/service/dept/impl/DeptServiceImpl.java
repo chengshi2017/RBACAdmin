@@ -58,7 +58,7 @@ public class DeptServiceImpl implements DeptService{
     public void update(Dept info) {
 
         info.setUpdateTime(DateUtils.today());
-        if(deptMapper.updateByPrimaryKey(info)<1){
+        if(deptMapper.updateByPrimaryKeySelective(info)<1){
             throw new MyException("修改部门信息失败！");
         }
 

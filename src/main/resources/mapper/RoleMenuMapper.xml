@@ -116,4 +116,9 @@
       #{roleMenuId}
     </foreach>
   </delete>
+
+  <delete id="batchDeleteByRoleId" parameterType="java.lang.String">
+    DELETE FROM t_role_menu
+    WHERE ROLE_ID = #{roleId}
+  </delete>
 </mapper>

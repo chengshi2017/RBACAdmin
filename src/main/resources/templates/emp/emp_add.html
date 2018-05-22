@@ -96,8 +96,8 @@
                 <div class="formControls col-xs-8 col-sm-8">
                 <span class="select-box" style="width:410px;">
                     <select class="select" name="status" size="1" th:switch="${emp.status}">
-                        <option th:text="${emp.status}==1?'正常':'请假'" th:attr="value=${emp.status}"></option>
-                        <option th:text="${emp.status}==0?'正常':'请假'" th:attr="value=(${emp.status}==1?'0':'1')"></option>
+                        <option th:text="${emp.status}==1?'正常':'异常'" th:attr="value=${emp.status}"></option>
+                        <option th:text="${emp.status}==0?'正常':'异常'" th:attr="value=(${emp.status}==1?'0':'1')"></option>
                     </select>
 			    </span>
                 </div>
@@ -131,7 +131,7 @@
                 <div class="formControls col-xs-8 col-sm-8">
                     <span class="select-box" style="width:410px;">
                         <select class="select" name="status" size="1">
-                            <option value="0">未入职</option>
+                            <option value="0">异常</option>
                             <option value="1">正常</option>
                         </select>
                     </span>

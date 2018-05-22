@@ -7,13 +7,15 @@ public class Role {
 
     private String roleName;
 
-    private String roleDescription;
+    private String remark;
 
     private Integer status;
 
     private Date createTime;
 
     private Date updateTime;
+
+    private Integer flag;
 
     public String getRoleId() {
         return roleId;
@@ -31,12 +33,20 @@ public class Role {
         this.roleName = roleName == null ? null : roleName.trim();
     }
 
-    public String getRoleDescription() {
-        return roleDescription;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setRoleDescription(String roleDescription) {
-        this.roleDescription = roleDescription == null ? null : roleDescription.trim();
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 
     public Integer getStatus() {

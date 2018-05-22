@@ -27,3 +27,25 @@ var common={
         })
     }
 };
+
+function refresh() {
+    window.location.reload();
+}
+
+/**
+ * 错误信息弹出窗口
+ * @param msg
+ */
+function layerOpen(msg) {
+    var index = layer.open({
+        skin: 'layui-layer-molv', //样式类名
+        content: msg,
+        btn: ['确定'],
+        shade: 0.4,
+        shadeClose: false,
+        title: ['错误信息', 'text-align:center; color: red'],
+        yes: function () {
+            layer.close(index);
+        }
+    })
+}

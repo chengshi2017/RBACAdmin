@@ -127,11 +127,11 @@ public class EmpServiceImpl implements EmpService{
     public Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter) {
         Integer startYear=filter.getStartYear();
         Integer endYear=filter.getEndYear();
-        if (startYear!=null&&startYear!=0) {
+        if (startYear!=null) {
             String startTime = DateUtils.getLimitTime(startYear);
             filter.setStartTime(startTime);
         }
-        if (endYear!=null&&endYear!=0){
+        if (endYear!=null){
             String endTime = DateUtils.getLimitTime(endYear);
             filter.setEndTime(endTime);
         }

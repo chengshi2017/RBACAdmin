@@ -44,7 +44,7 @@ function batch_delete() {
             dataType: 'json',
             data: {"checkedId":checkedId},
             success: function (result) {
-                if (result.code ==0){
+                if (result.code==0){
                     layer.msg(result.data, {icon: 6, time: 2000}, function () {
                         retrieve();
                     })
@@ -58,24 +58,6 @@ function batch_delete() {
                 layer.msg('系统故障,请与系统管理员联系', {icon: 5, time: 2000});
             }
         })
-    })
-}
-
-/**
- * 错误信息弹出窗口
- * @param msg
- */
-function layerOpen(msg) {
-    var index = layer.open({
-        skin: 'layui-layer-molv', //样式类名
-        content: msg,
-        btn: ['确定'],
-        shade: 0.4,
-        shadeClose: false,
-        title: ['错误信息', 'text-align:center; color: red'],
-        yes: function () {
-            layer.close(index);
-        }
     })
 }
 
@@ -111,12 +93,12 @@ function dept_del(id) {
         shadeClose: false,
         yes: function () {
             $.ajax({
-                type: 'POST',
-                data: {deptId: id},
-                dateType: 'json',
-                url: '/dept/delete',
+                type: "POST",
+                url: "/dept/delete",
+                dataType: 'json',
+                data: {"deptId":id},
                 success: function (result) {
-                    if (result.data==0){
+                    if (result.code == 0){
                         layer.msg(result.data, {icon:6, time: 2000}, function () {
                             retrieve();
                         })
@@ -140,11 +122,12 @@ function dept_stop(obj,id) {
         type: 'post',
         url: '/dept/start',
         dateType: 'json',
-        data: {deptId: id},
+        data: {"deptId": id},
         success: function (result) {
             $(obj).parents("tr").find(".td-manage").prepend('<a onClick="dept_start(this,id)" href="javascript:;" title="组建" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
             $(obj).parents("tr").find(".td-status").html('<span class="label radius">已解散</span>');
             $(obj).remove();
+            reload();
             layer.msg('部门已解散!',{icon: 5,time:2000});
         },
         error: function () {
@@ -158,11 +141,12 @@ function dept_start(obj,id) {
         type: 'POST',
         url: '/dept/start',
         dateType: 'json',
-        data: {deptId: id},
+        data: {"deptId": id},
         success: function (result) {
             $(obj).parents("tr").find(".td-manage").prepend('<a onClick="dept_stop(this,id)" href="javascript:;" title="解散" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
             $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">正常</span>');
             $(obj).remove();
+            reload();
             layer.msg('部门组建成功!', {icon: 6,time:2000});
         },
         error: function () {

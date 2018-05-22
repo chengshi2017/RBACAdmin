@@ -26,4 +26,6 @@ public interface RoleMenuMapper {
     List<RoleMenu> selectAllByMenuId(String menuId);
 
     int batchDelete(List<String> list);
+
+    int batchDeleteByRoleId(String roleId);
 }

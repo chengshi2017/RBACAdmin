@@ -8,11 +8,11 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>部门名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" value="" placeholder="" id="deptName" name="deptName" th:value="${dept}?'deptName':''" style="width: 410px"/>
+                <input type="text" class="input-text" value="" placeholder="" id="deptName" name="deptName" th:attr="value=${dept}?${dept.deptName}:''" style="width: 410px"/>
             </div>
         </div>
         <span th:if="${dept}">
-            <input type="hidden" name="userId" id="userId" th:value="${dept.deptId}"/>
+            <input type="hidden" name="deptId" id="deptId" th:value="${dept.deptId}"/>
         </span>
         <div th:if="${dept}">
             <div class="row cl">
@@ -20,8 +20,8 @@
                 <div class="formControls col-xs-8 col-sm-8">
                     <span class="select-box" style="width:410px;">
                         <select class="select" name="status" size="1" th:switch="${dept.status}">
-                            <option th:text="${dept.status}==1?'正常':'解散'" th:attr="value=${dept.status}"></option>
-                            <option th:text="${dept.status}==0?'已解散':'正常'" th:attr="value=(${dept.status}==1?'0':'1')"></option>
+                            <option th:text="${dept.status}==1?'正常':'异常'" th:attr="value=${dept.status}"></option>
+                            <option th:text="${dept.status}==0?'正常':'异常'" th:attr="value=(${dept.status}==1?'0':'1')"></option>
 
                         </select>
                     </span>

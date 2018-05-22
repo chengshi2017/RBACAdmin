@@ -48,7 +48,7 @@ function datadel() {
             data: {"checkedId":checkedId},
             success: function (result) {
                 layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                    reload();
+                    retrieve();
                 })
             },
             error: function (reslut) {
@@ -62,7 +62,7 @@ function datadel() {
  * 用户删除
  * @param id
  */
-function admin_del(id) {
+function log_del(id) {
     var url='/log/'+id+'/delete';
     console.log(url);
     var index=layer.open({
@@ -73,7 +73,7 @@ function admin_del(id) {
         yes: function () {
             $.post(url, {}, function (result) {
                 layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                    reload();
+                    retrieve();
                     layer.close(index);
                 })
             },'json')
@@ -82,20 +82,6 @@ function admin_del(id) {
             layer.close(index);
         }
 
-    })
-}
-
-function layerOpen(msg) {
-    var index=layer.open({
-        skin: 'layui-layer-molv', //样式类名
-        content: msg,
-        btn: ['确定'],
-        shade: 0.4,
-        shadeClose: false,
-        title: ['错误信息', 'text-align:center; color: red'],
-        yes: function () {
-            layer.close(index);
-        }
     })
 }
 
@@ -133,11 +119,11 @@ function log_show(id) {
 
 $(function () {
     $("#query").click(function () {
-        refresh();
+        retrieve();
     })
 });
 
-function refresh() {
+function retrieve() {
     var data = {
         pageNo: laypage_curr || 1,
         pageSize: laypage_limit || 10,

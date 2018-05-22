@@ -101,7 +101,7 @@
   </update>
 
   <select id="getAllJobMessage" resultMap="BaseResultMap">
-    SELECT * FROM t_job WHERE STATUS = 1
+    SELECT * FROM t_job
   </select>
 
   <select id="getAllJob" resultMap="BaseResultMap">

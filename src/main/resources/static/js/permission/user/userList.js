@@ -50,7 +50,7 @@ function admin_del(id) {
         yes: function () {
             $.post(url, {}, function (result) {
                 layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                    retrieve();
+                    parent.retrieve();
                     layer.close(index);
                 })
             },'json')
@@ -104,20 +104,6 @@ function datadel() {
     })
 }
 
-function layerOpen(msg) {
-    var index=layer.open({
-        skin: 'layui-layer-molv',//样式类名,
-        content: msg,
-        btn: ['确定'],
-        shade: 0.4,
-        shadeClose: false,
-        title: ['错误信息', 'text-align:center; color: red'],
-        yes: function () {
-            layer.close(index);
-        }
-    })
-}
-
 /*管理员-停用*/
 function admin_stop(obj,id){
     layer.confirm('确认要停用吗？',function(index){
@@ -131,6 +117,7 @@ function admin_stop(obj,id){
                 $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
                 $(obj).parents("tr").find(".td-status").html('<span class="label radius">已禁用</span>');
                 $(obj).remove();
+                reload();
                 layer.msg('已停用!',{icon: 5,time:1000});
             },
             error: function () {
@@ -155,6 +142,7 @@ function admin_start(obj,id){
                 $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
                 $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
                 $(obj).remove();
+                reload();
                 layer.msg('已启用!', {icon: 6,time:1000});
             },
             error: function () {

@@ -4,7 +4,7 @@
 <head th:replace="common/header::header"/>
 <body>
 <nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 职位管理 <span class="c-gray en">&gt;</span> 职位信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 职位管理 <span class="c-gray en">&gt;</span> 职位信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" onclick="refresh()" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container" id="form_data">
     <section class="text-c"> 职位状态:
         <span class="select-box inline">
@@ -65,7 +65,7 @@
 								<a style="text-decoration:none" th:onClick="'javascript:job_start(this,\''+${item.jobId}+'\')'" href="javascript:;" title="聘用"><i class="Hui-iconfont">&#xe615;</i></a>
 							</span>
                         <a title="编辑" href="javascript:;" th:onclick="'javascript:layer_update(\''+${item.jobId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> </a>
-                        <a title="删除" href="javascript:;" th:onclick="'javascript:dept_del(\''+${item.jobId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                        <a title="删除" href="javascript:;" th:onclick="'javascript:job_del(\''+${item.jobId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                     </td>
                 </tr>
                 </tbody>

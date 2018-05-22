@@ -4,13 +4,14 @@
   <resultMap id="BaseResultMap" type="com.spring.model.permission.Role" >
     <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR" />
     <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
-    <result column="ROLE_DESCRIPTION" property="roleDescription" jdbcType="VARCHAR" />
-    <result column="STATUS" property="status" jdbcType="INTEGER" />
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="FLAG" property="flag" jdbcType="INTEGER"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION, STATUS, CREATE_TIME, UPDATE_TIME
+    ROLE_ID, ROLE_NAME, CREATE_TIME, UPDATE_TIME, REMARK, STATUS,  FLAG
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -23,11 +24,11 @@
     where ROLE_ID = #{roleId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.spring.model.permission.Role" >
-    insert into t_role (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION, 
-      STATUS, CREATE_TIME, UPDATE_TIME
+    insert into t_role (ROLE_ID, ROLE_NAME, CREATE_TIME, UPDATE_TIME, REMARK
+      STATUS, FLAG
       )
-    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleDescription,jdbcType=VARCHAR},
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.spring.model.permission.Role" >
@@ -39,17 +40,20 @@
       <if test="roleName != null" >
         ROLE_NAME,
       </if>
-      <if test="roleDescription != null" >
-        ROLE_DESCRIPTION,
-      </if>
-      <if test="status != null" >
-        STATUS,
-      </if>
       <if test="createTime != null" >
         CREATE_TIME,
       </if>
       <if test="updateTime != null" >
         UPDATE_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="flag != null">
+        FLAG,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -59,18 +63,22 @@
       <if test="roleName != null" >
         #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="roleDescription != null" >
-        #{roleDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.permission.Role" >
@@ -79,17 +87,20 @@
       <if test="roleName != null" >
         ROLE_NAME = #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="roleDescription != null" >
-        ROLE_DESCRIPTION = #{roleDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        STATUS = #{status,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null" >
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=INTEGER},
       </if>
     </set>
     where ROLE_ID = #{roleId,jdbcType=VARCHAR}
@@ -97,10 +108,11 @@
   <update id="updateByPrimaryKey" parameterType="com.spring.model.permission.Role" >
     update t_role
     set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
-      ROLE_DESCRIPTION = #{roleDescription,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=INTEGER},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      FLAG = #{flag,jdbcType=INTEGER}
     where ROLE_ID = #{roleId,jdbcType=VARCHAR}
   </update>
 
@@ -133,4 +145,24 @@
     r.ROLE_ID=u.ROLE_ID
     WHERE u.USER_ID = #{userId}
   </select>
+
+  <delete id="batchDelete" parameterType="java.util.List">
+    DELETE FROM t_role
+    WHERE ROLE_ID IN 
+    <foreach collection="list" separator="," item="item" open="(" close=")">
+      #{item}
+    </foreach>
+  </delete>
+  
+  <select id="getMessageByCondition" resultMap="BaseResultMap" parameterType="com.spring.param.RoleFilter">
+    SELECT * FROM t_role
+    WHERE 1=1
+    <if test="roleName !=null and roleName != ''">
+      AND ROLE_NAME LIKE concat(concat('%', #{roleName}, '%'))
+    </if>
+    <if test="status != null">
+      AND STATUS = #{status}
+    </if>
+  </select>
+  
 </mapper>

@@ -6,7 +6,7 @@ function reload() {
         pageNo: laypage_curr || 1,
         pageSize: laypage_limit || 10
     };
-    common.getData('post','/emp/retrieve',data,'html',$("#search_data"));
+    common.getData('post','/emp/retrieve',data,'html',$("#page_data"));
 }
 
 /**
@@ -15,7 +15,7 @@ function reload() {
 function retrieve() {
     var startYear = $("#startYear").val();
     var endYear = $("#endYear").val();
-    if (startYear>=endYear){
+    if (parseInt(startYear)<parseInt(endYear)){
         layerOpen("最高年限不得低于最低年限");
         return;
     }
@@ -82,20 +82,6 @@ function batch_delete() {
     })
 }
 
-function layerOpen(msg) {
-    var index = layer.open({
-        skin: 'layui-layer-molv', //样式类名
-        content: msg,
-        btn: ['确定'],
-        shade: 0.4,
-        shadeClose: false,
-        title: ['错误信息', 'text-align:center; color: red'],
-        yes: function () {
-            layer.close(index);
-        }
-    })
-}
-
 $(function () {
     $("#search").click(function () {
         retrieve();
@@ -103,35 +89,42 @@ $(function () {
 });
 
 function emp_stop(obj,id) {
-    $.ajax({
-        type: 'post',
-        url: '/emp/start',
-        data: {empId: id},
-        dataType: 'json',
-        success: function (result) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a onClick="emp_start(this,id)" href="javascript:;" title="正常" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label radius">请假</span>');
-            $(obj).remove();
-            layer.msg('员工状态异常!',{icon: 5,time:2000});
-        },
-        error: function () {
-            layer.msg('系统错误，请与系统管理员联系', {icon: 5, time:2000})
-        }
+    layer.confirm('确定要将状态定为异常吗？', function (index) {
+        $.ajax({
+            type: 'post',
+            url: '/emp/start',
+            data: {empId: id},
+            dataType: 'json',
+            success: function (result) {
+                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="emp_start(this,id)" href="javascript:;" title="正常" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="label radius">异常</span>');
+                $(obj).remove();
+                reload();
+                layer.msg('员工状态异常!',{icon: 5,time:2000});
+            },
+            error: function () {
+                layer.msg('系统错误，请与系统管理员联系', {icon: 5, time:2000})
+                layer.close(index);
+            }
+        });
     })
 }
 
 function emp_start(obj,id) {
-    $.ajax({
-        type: 'post',
-        url: '/emp/start',
-        data: {empId: id},
-        dataType: 'json',
-        success: function (result) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a onClick="emp_stop(this,id)" href="javascript:;" title="请假" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label radius">正常</span>');
-            $(obj).remove();
-            layer.msg('员工状态正常!',{icon: 5,time:2000});
-        }
+    layer.confirm('确定要将状态修改为正常吗？' , function (index) {
+        $.ajax({
+            type: 'post',
+            url: '/emp/start',
+            data: {empId: id},
+            dataType: 'json',
+            success: function (result) {
+                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="emp_stop(this,id)" href="javascript:;" title="异常" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">正常</span>');
+                $(obj).remove();
+                reload();
+                layer.msg('员工状态正常!',{icon: 6,time:2000});
+            }
+        });
     })
 }
 
@@ -151,19 +144,31 @@ function layer_update(id) {
     })
 }
 
-function admin_del(id) {
-    $.ajax({
-        type: 'post',
-        data: {empId: id},
-        dataType: 'json',
-        url: '/emp/delete',
-        success:function (result) {
-            layer.msg(result.data, {icon: 6, time:2000}, function () {
-                reload();
+function emp_del(id) {
+    var index=layer.open({
+        content: "确定要删除吗？",
+        btn: ['确定', '取消'],
+        shade: 0.4,
+        shadeClose: true,
+        yes: function () {
+            $.ajax({
+                type: 'post',
+                data: {empId: id},
+                dataType: 'json',
+                url: '/emp/delete',
+                success:function (result) {
+                    layer.msg(result.data, {icon: 6, time:2000}, function () {
+                        retrieve();
+                        layer.close(index);
+                    })
+                },
+                error: function () {
+                    layer.msg('系统故障，请与系统管理员联系', {icon: 5, time: 2000})
+                }
             })
         },
-        error: function () {
-            layer.msg('系统故障，请与系统管理员联系', {icon: 5, time: 2000})
+        no: function () {
+            layer.close(index);
         }
     })
 }

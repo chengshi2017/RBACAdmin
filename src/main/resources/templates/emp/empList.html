@@ -5,7 +5,7 @@
 </head>
 <body>
 <nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 员工管理 <span class="c-gray en">&gt;</span> 员工信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 员工管理 <span class="c-gray en">&gt;</span> 员工信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" onclick="refresh()" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container" id="form_data">
     <section class="text-c">
         <section class="text-c ">用户名:
@@ -91,18 +91,18 @@
                         <td class="td-status"><span class="label label-success radius">正常</span></td>
                     </th:block>
                     <th:block th:if="${item.status}==0">
-                        <td class="td-status"><span class="label radius">请假</span></td>
+                        <td class="td-status"><span class="label radius">异常</span></td>
                     </th:block>
                     <td class="td-manage" th:switch="${item.status}">
                         <span th:case="1">
-                            <a style="text-decoration:none" th:onClick="'javascript:emp_stop(this,\''+${item.empId}+'\')'" href="javascript:;" title="离职"><i class="Hui-iconfont">&#xe631;</i></a>
+                            <a style="text-decoration:none" th:onClick="'javascript:emp_stop(this,\''+${item.empId}+'\')'" href="javascript:;" title="异常"><i class="Hui-iconfont">&#xe631;</i></a>
                         </span>
                         <span th:case="0">
-								<a style="text-decoration:none" th:onClick="'javascript:emp_start(this,\''+${item.empId}+'\')'" href="javascript:;" title="在职"><i class="Hui-iconfont">&#xe615;</i></a>
+								<a style="text-decoration:none" th:onClick="'javascript:emp_start(this,\''+${item.empId}+'\')'" href="javascript:;" title="正常"><i class="Hui-iconfont">&#xe615;</i></a>
                         </span>
                         <a title="详情" href="javascript:;" th:onclick="'javascript:emp_show(\''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>
                         <a title="编辑" href="javascript:;" th:onclick="'javascript:layer_update(\''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> </a>
-                        <a title="删除" href="javascript:;" th:onclick="'javascript:admin_del(\''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                        <a title="删除" href="javascript:;" th:onclick="'javascript:emp_del(\''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                     </td>
                 </tr>
                 </tbody>

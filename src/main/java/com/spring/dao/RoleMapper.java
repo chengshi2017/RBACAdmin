@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.github.pagehelper.Page;
 import com.spring.model.permission.Role;
+import com.spring.param.RoleFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public interface RoleMapper {
 
     List<Role> getAllRoles();
 
-    //List<Role> getAllVaildRoles();
+    int batchDelete(List<String> list);
 
-    //List<Role> getRolesByUserId(String userId);
+    Page<Role> getMessageByCondition(RowBounds rowBounds, RoleFilter filter);
 }

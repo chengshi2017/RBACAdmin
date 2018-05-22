@@ -61,7 +61,7 @@ function batch_delete() {
             success: function (result) {
                 if (result.code==0){
                     layer.msg(result.data ,{icon: 6, time: 2000}, function () {
-                        reload();
+                        retrieve();
                     })
                 }else {
                     layer.msg(result.data ,{icon: 5, time:2000})
@@ -76,20 +76,6 @@ function batch_delete() {
 
 }
 
-function layerOpen(msg) {
-    var index = layer.open({
-        skin: 'layui-layer-molv', //样式类名
-        content: msg,
-        btn: ['确定'],
-        shade: 0.4,
-        shadeClose: false,
-        title: ['错误信息', 'text-align:center; color: red'],
-        yes: function () {
-            layer.close(index);
-        }
-    })
-}
-
 function job_stop(obj,id) {
     $.ajax({
         type: 'post',
@@ -100,6 +86,7 @@ function job_stop(obj,id) {
             $(obj).parents("tr").find(".td-manage").prepend('<a onClick="job_start(this,id)" href="javascript:;" title="组建" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
             $(obj).parents("tr").find(".td-status").html('<span class="label radius">空缺</span>');
             $(obj).remove();
+            reload()
             layer.msg('该职位已空缺!',{icon: 5,time:2000});
         },
         error: function () {
@@ -118,6 +105,7 @@ function job_start(obj,id) {
             $(obj).parents("tr").find(".td-manage").prepend('<a onClick="job_stop(this,id)" href="javascript:;" title="解散" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
             $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">在职</span>');
             $(obj).remove();
+            reload()
             layer.msg('职位已在职!', {icon: 6,time:2000});
         },
         error: function () {
@@ -126,21 +114,37 @@ function job_start(obj,id) {
     })
 }
 
-function dept_del(id) {
-    $.ajax({
-        type: 'post',
-        url: '/job/delete',
-        data: {jobId: id},
-        dataType: 'json',
-        success: function (result) {
-            layer.msg(result.data, {icon: 6,time: 2000},function () {
-                reload();
-            })
-        },
-        error: function () {
-            layer.msg('系统故障，请与系统管理员联系',{icon: 5 ,time: 2000})
-        }
-    })
+function job_del(id) {
+
+        var index=layer.open({
+            content: "确定要删除吗？",
+            btn: ['确定', '取消'],
+            shade: 0.4,
+            shadeClose: true,
+            yes: function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/job/delete",
+                    dataType: 'json',
+                    data: {"jobId":id},
+                    success: function (result) {
+                        layer.msg(result.data, {icon: 6, time: 2000}, function () {
+                            retrieve();
+                            layer.close(index);
+                        })
+                    },
+                    error: function () {
+                        layer.msg('系统故障，请与系统管理员联系', {icon: 5, time: 2000})
+                    }
+                })
+            },
+            no: function () {
+                layer.close(index);
+            }
+        })
+
+
+
 }
 
 function layer_update(id) {
