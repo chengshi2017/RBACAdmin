@@ -34,4 +34,6 @@ public interface UserService {
     void batchDelete(List<String> list);
 
     Page<User> getMessageByCondition(RowBounds rowBounds, UserFilter filter);
+
+    Integer getCountByFilter(Integer count);
 }

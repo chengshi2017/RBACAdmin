@@ -191,4 +191,16 @@ function emp_show(id) {
     })
 }
 
+$('.table-sort').dataTable({
+    "lengthMenu":false,//显示数量选择
+    "bFilter": false,//过滤功能
+    "bPaginate": false,//翻页信息
+    "bInfo": false,//数量信息
+    "aaSorting": [[ 1, "asc" ]],//默认第几个排序
+    "bStateSave": true,//状态保存
+    "aoColumnDefs": [
+        //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+        {"orderable":false,"aTargets":[0,3,4,6,7,8,9]}// 制定列不参与排序
+    ]
+});
 

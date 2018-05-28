@@ -22,7 +22,7 @@
     from t_menu
     where MENU_ID = #{menuId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_menu
     where MENU_ID = #{menuId,jdbcType=VARCHAR}
   </delete>
@@ -215,4 +215,43 @@
       u.USER_ID = #{userId}
   </select>
 
+  <delete id="batchDelete" parameterType="java.util.List">
+    DELETE FROM t_menu
+    WHERE MENU_ID IN 
+    <foreach collection="list" separator="," open="(" close=")" item="item">
+      #{item}
+    </foreach>
+  </delete>
+
+  <select id="getMessageByCondition" resultMap="BaseResultMap" parameterType="com.spring.param.MenuFilter">
+    SELECT * FROM t_menu
+    WHERE 1=1
+    <if test="menuName != null and menuName != ''">
+      AND MENU_NAME LIKE concat(concat('%', #{menuName}, '%'))
+    </if>
+    <if test="status != null">
+      AND STATUS = #{status}
+    </if>
+  </select>
+
+  <select id="getSecondLevelMenusByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT DISTINCT m.* FROM t_menu m
+    LEFT JOIN t_role_menu rm ON m.MENU_ID=rm.MENU_ID
+    LEFT JOIN t_role r ON rm.ROLE_ID=r.ROLE_ID
+    LEFT JOIN t_user_role ur ON r.ROLE_ID=ur.ROLE_ID
+    LEFT JOIN t_user u ON ur.USER_ID=u.USER_ID
+    WHERE
+      m.STATUS = '1'
+    AND
+      r.STATUS = '1'
+    AND
+      u.STATUS = '1'
+    AND
+      m.PARENT_ID!=''
+    AND
+      u.USER_ID = #{userId}
+    ORDER BY
+      m.MENU_INDEX
+  </select>
+  
 </mapper>

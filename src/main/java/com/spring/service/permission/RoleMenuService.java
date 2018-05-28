@@ -16,4 +16,7 @@ public interface RoleMenuService {
 
     void remove(RoleMenu roleMenu);
 
+    List<RoleMenu> getMessageByMenuId(String menuId);
+
+    List<RoleMenu> getMessageByRoleId(String roleId);
 }

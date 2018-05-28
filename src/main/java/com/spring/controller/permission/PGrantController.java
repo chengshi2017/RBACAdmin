@@ -54,27 +54,27 @@ public class PGrantController extends SuperController {
     public String toPage(Model model){
         List<User> lists=userService.getAllUsers();
         model.addAttribute("lists",lists);
-        return "permission/grant/page";
+        return "permission/grant/grant";
     }
 
     //加载角色信息
     @RequestMapping(value = "showResources",method = RequestMethod.POST)
-    public String showResources(Model model, String userId){
+    public void showResources(String userId){
         List<TreeInfo> list=treeService.getRoleTree(userId);
         String json=JSON.toJSONString(list);
-        model.addAttribute("jsonData",json);
-        return "permission/grant/resources";
+        ResponseUtils.writeSuccessReponse(request,response,json);
     }
 
     //加载资源信息
-    @RequestMapping(value = "loadResources",method = RequestMethod.POST)
+    @RequestMapping(value = "/loadResources",method = RequestMethod.POST)
     public void loadResources(String roleId,boolean checked){
         List<TreeInfo> list=treeService.getMenuTree(roleId,checked);
-        ResponseUtils.writeSuccessReponse(request,response,list);
+        String json=JSON.toJSONString(list);
+        ResponseUtils.writeSuccessReponse(request,response,json);
     }
 
     //修改用户角色信息
-    @RequestMapping(value = "updateUserRole",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserRole",method = RequestMethod.POST)
     public void updateUserRole(String userId,String roleId,boolean checked){
         //checked为true时表示新增
         UserRole userRole=new UserRole();
@@ -103,7 +103,7 @@ public class PGrantController extends SuperController {
             roleMenu.setRoleMenuId(UUID.getUUID());
             roleMenu.setStatus(StatusEnums.VALID.getValue());
             roleMenuService.insert(roleMenu);
-            ResponseUtils.writeSuccessReponse(request,response,"修改角色菜单信息成功");
+            ResponseUtils.writeSuccessReponse(request,response,"新增角色菜单信息成功");
         }else {
             roleMenuService.remove(roleMenu);
             ResponseUtils.writeSuccessReponse(request,response,"删除角色菜单信息成功");

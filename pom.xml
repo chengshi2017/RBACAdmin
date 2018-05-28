@@ -171,6 +171,14 @@
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
+
+    <!--第三方jar包，获取服务器状态数据-->
+    <!-- https://mvnrepository.com/artifact/org.fusesource/sigar -->
+    <dependency>
+      <groupId>org.fusesource</groupId>
+      <artifactId>sigar</artifactId>
+      <version>1.6.4</version>
+    </dependency>
   </dependencies>
 
   <build>

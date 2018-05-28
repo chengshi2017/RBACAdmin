@@ -138,4 +138,17 @@ public class EmpServiceImpl implements EmpService{
         Page<Emp> lists=empMapper.getMessageByCondition(rowBounds,filter);
         return lists;
     }
+
+    @Override
+    public Integer getCountByFilter(Integer filter) {
+        String startTime = null;
+        Integer count;
+        if (filter == null){
+            count=empMapper.getCountByFilter(startTime);
+        }else {
+            startTime=DateUtils.getDateTime(filter);
+            count=empMapper.getCountByFilter(startTime);
+        }
+        return count;
+    }
 }

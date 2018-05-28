@@ -2,6 +2,7 @@ package com.spring.service.job.impl;
 
 import com.github.pagehelper.Page;
 import com.spring.common.exceptions.MyException;
+import com.spring.common.utils.DateUtils;
 import com.spring.common.utils.UUID;
 import com.spring.dao.JobMapper;
 import com.spring.model.Job;
@@ -81,5 +82,19 @@ public class JobServiceImpl implements JobService {
     @Override
     public Page<Job> getMessageByCondition(RowBounds rowBounds, JobFilter filter) {
         return jobMapper.getMessageByCondition(rowBounds,filter);
+    }
+
+    @Override
+    public Integer getCountByFilter(Integer filter) {
+        String startTime = null;
+        Integer count;
+        if (filter == null){
+            count=jobMapper.getCountByFilter(startTime);
+        }else {
+            startTime=DateUtils.getDateTime(filter);
+            count=jobMapper.getCountByFilter(startTime);
+
+        }
+        return count;
     }
 }

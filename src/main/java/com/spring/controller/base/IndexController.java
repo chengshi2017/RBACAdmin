@@ -2,9 +2,7 @@ package com.spring.controller.base;
 
 import com.spring.common.Enums.LogTypeEnums;
 import com.spring.common.exceptions.ResponseInfo;
-import com.spring.common.utils.Constants;
-import com.spring.common.utils.CreateImageCode;
-import com.spring.common.utils.EncodeMD5;
+import com.spring.common.utils.*;
 import com.spring.model.Log;
 import com.spring.model.permission.Menu;
 import com.spring.model.permission.User;
@@ -26,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -109,6 +108,7 @@ public class IndexController extends SuperController {
                 log.setLogTypeId(LogTypeEnums.LOGIN.getValue()); //设置日志类型
                 log.setRequestUrl(request.getRequestURI().toString());
                 log.setUserId(getUser().getUserId());
+                log.setIp(SysInfo.getDefaultIpAddress());
                 log.setRemark("登录日志");
                 logService.addloginLog(log);
                 Logger.info("登录成功，进入首页");
@@ -136,21 +136,22 @@ public class IndexController extends SuperController {
         //从数据库中查询menu,一级菜单
         List<Menu> menus=menuService.getFirstLevelMenusByUserId(user.getUserId());
         //加载二级菜单信息
+        List<Menu> menuItems=menuService.getSecondLevelMenusByUserId(user.getUserId());
         for (Menu menu:menus){
-            List<Menu> menuItems=menuService.getMenusByParentId(menu.getMenuId());
-            menu.setListMenus(menuItems);
+            List<Menu> list=new ArrayList<Menu>();
+            for (Menu menuInfo:menuItems){
+                if (menu.getMenuId().equals(menuInfo.getParentId())){
+                    list.add(menuInfo);
+                }
+                menu.setListMenus(list);
+            }
         }
         model.addAttribute("menus",menus);
         model.addAttribute(Constants.Regular.onlineUser,getUser());
         return "index";
     }
 
-    @RequestMapping(value = "welcome",method = RequestMethod.GET)
-    public String welcome(){
-        return "welcome";
-    }
-
-    @RequestMapping(value = "loginOut",method = RequestMethod.GET)
+    @RequestMapping(value = "/loginOut",method = RequestMethod.GET)
     public String loginOut(){
         session.setAttribute(Constants.Regular.onlineUser, null);
         return "redirect:login.html";

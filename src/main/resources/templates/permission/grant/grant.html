@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header">
+</head>
+<body>
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+    <i class="Hui-iconfont">&#xe62c;</i>&nbsp;权限管理
+    <span class="c-gray en">&gt;</span>&nbsp;角色信息
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" onclick="refresh()" title="刷新" >
+        <i id="btn-refresh" class="Hui-iconfont">&#xe68f;</i>
+    </a>
+</nav>
+<div class="page-container">
+    <input type="hidden" id="userId" name="userId" value=""/>
+    <input type="hidden" id="roleId" name="roleId" value=""/>
+    <input type="hidden" id="menuId" name="menuId" value=""/>
+    <div class="panel panel-default ml-10 panel-user">
+        <div class="panel-header">用户</div>
+        <div class="panel-body">
+            <ul class="layui-nav layui-nav-tree" lay-filter="user">
+                <th:block th:each="item:${lists}" >
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" th:id="${item.userId}" th:text="${item.userName}"></a>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </div>
+    <div id="role-panel">
+        <div class="panel panel-default ml-10 panel-site">
+            <div class="panel-header">授权信息</div>
+            <div class="panel-body">
+                <ul id="treeRole" class="ztree"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-panel">
+        <div class="panel panel-default ml-10 panel-site">
+            <div class="panel-header">菜单信息</div>
+            <div class="panel-body">
+                <ul id="treeMenu" class="ztree"></ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" th:src="@{/js/permission/grant/grant.js}" th:inline="javascript"></script>
+</body>
+</html>

@@ -5,6 +5,7 @@
     <id column="LOG_ID" property="logId" jdbcType="VARCHAR" />
     <result column="LOG_TYPE_ID" property="logTypeId" jdbcType="VARCHAR" />
     <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="IP" property="ip" jdbcType="VARCHAR"/>
     <result column="OPERATE_TIME" property="operateTime" jdbcType="TIMESTAMP" />
     <result column="REQUEST_URL" property="requestUrl" jdbcType="VARCHAR" />
     <result column="RESPONSE_CODE" property="responseCode" jdbcType="VARCHAR" />
@@ -14,7 +15,7 @@
     <result column="TYPE_NAME" jdbcType="VARCHAR" property="typeName"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    LOG_ID, LOG_TYPE_ID, USER_ID, OPERATE_TIME, REQUEST_URL, RESPONSE_CODE, STATUS, REMARK
+    LOG_ID, LOG_TYPE_ID, USER_ID, IP, OPERATE_TIME, REQUEST_URL, RESPONSE_CODE, STATUS, REMARK
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -27,10 +28,10 @@
     where LOG_ID = #{logId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.spring.model.Log" >
-    insert into t_log (LOG_ID, LOG_TYPE_ID, USER_ID, 
+    insert into t_log (LOG_ID, LOG_TYPE_ID, USER_ID, IP,
       OPERATE_TIME, REQUEST_URL, RESPONSE_CODE, 
       STATUS, REMARK)
-    values (#{logId,jdbcType=VARCHAR}, #{logTypeId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+    values (#{logId,jdbcType=VARCHAR}, #{logTypeId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
       #{operateTime,jdbcType=TIMESTAMP}, #{requestUrl,jdbcType=VARCHAR}, #{responseCode,jdbcType=VARCHAR}, 
       #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
   </insert>
@@ -45,6 +46,9 @@
       </if>
       <if test="userId != null" >
         USER_ID,
+      </if>
+      <if test="ip != null" >
+        IP,
       </if>
       <if test="operateTime != null" >
         OPERATE_TIME,
@@ -72,6 +76,9 @@
       <if test="userId != null" >
         #{userId,jdbcType=VARCHAR},
       </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
       <if test="operateTime != null" >
         #{operateTime,jdbcType=TIMESTAMP},
       </if>
@@ -98,6 +105,9 @@
       <if test="userId != null" >
         USER_ID = #{userId,jdbcType=VARCHAR},
       </if>
+      <if test="ip != null">
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
       <if test="operateTime != null" >
         OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP},
       </if>
@@ -120,6 +130,7 @@
     update t_log
     set LOG_TYPE_ID = #{logTypeId,jdbcType=VARCHAR},
       USER_ID = #{userId,jdbcType=VARCHAR},
+      IP = #{ip,jdbcType=VARCHAR},
       OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP},
       REQUEST_URL = #{requestUrl,jdbcType=VARCHAR},
       RESPONSE_CODE = #{responseCode,jdbcType=VARCHAR},
@@ -181,6 +192,31 @@
       ]]>
     </if>
     ORDER BY l.OPERATE_TIME DESC
+  </select>
+
+  <select id="getCountByFilter" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM t_log l
+    LEFT JOIN t_log_type t
+    ON l.LOG_TYPE_ID = t.LOG_TYPE_ID
+    WHERE l.LOG_TYPE_ID = '808953751040688128l'
+    <if test="_parameter != null and _parameter != ''">
+      <![CDATA[
+          AND DATE_FORMAT(OPERATE_TIME, '%Y-%m-%d %H:%T:%s') >= DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
+      ]]>
+    </if>
+  </select>
+
+  <select id="getMessageByRecent" resultMap="BaseResultMap">
+    SELECT
+    l.*,t.TYPE_NAME,u.USER_NAME
+    FROM
+    t_log l LEFT JOIN
+    t_log_type t ON l.LOG_TYPE_ID=t.LOG_TYPE_ID
+    LEFT JOIN
+    t_user u ON l.USER_ID=u.USER_ID
+    WHERE l.LOG_TYPE_ID = '808953751040688128l'
+    ORDER BY l.OPERATE_TIME DESC
+    LIMIT 1
   </select>
   
 </mapper>

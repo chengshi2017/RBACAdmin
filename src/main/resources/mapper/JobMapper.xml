@@ -133,5 +133,15 @@
       AND STATUS = #{status}
     </if>
   </select>
+  
+  <select id="getCountByFilter" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM  t_job
+    WHERE 1=1
+    <if test="_parameter != null and _parameter != ''">
+      <![CDATA[
+          AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%T:%s') <= DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
+      ]]>
+    </if>
+  </select>
 
 </mapper>

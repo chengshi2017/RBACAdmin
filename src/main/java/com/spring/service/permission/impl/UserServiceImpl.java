@@ -129,5 +129,18 @@ public class UserServiceImpl implements UserService{
         return userMapper.getMessageByCondition(rowBounds,filter);
     }
 
+    @Override
+    public Integer getCountByFilter(Integer filter) {
+        String startTime = null;
+        Integer count;
+        if (filter == null){
+            count=userMapper.getCountByFilter(startTime);
+        }else {
+            startTime=DateUtils.getDateTime(filter);
+            count=userMapper.getCountByFilter(startTime);
+        }
+        return count;
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.spring.service.permission.impl;
 
 import com.spring.common.exceptions.MyException;
 import com.spring.dao.UserRoleMapper;
+import com.spring.model.permission.RoleMenu;
 import com.spring.model.permission.UserRole;
 import com.spring.service.permission.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class UserRoleServiceImpl implements UserRoleService{
         }else {
             throw new MyException("该用户角色信息不存在");
         }
+    }
+
+    @Override
+    public List<UserRole> getUserRoleMessageByRoleId(String roleId) {
+        return userRoleMapper.getUserRoleByRoleId(roleId);
     }
 }

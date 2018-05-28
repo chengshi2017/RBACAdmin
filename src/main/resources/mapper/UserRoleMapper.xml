@@ -101,4 +101,14 @@
     </if>
   </select>
 
+  <select id="getUserRoleByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_user_role
+    WHERE ROLE_ID = #{roleId}
+  </select>
+
+  <delete id="deleteByRoleId" parameterType="java.lang.String">
+    DELETE FROM t_user_role
+    WHERE ROLE_ID = #{roleId}
+  </delete>
+
 </mapper>

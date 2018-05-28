@@ -36,7 +36,13 @@ public class PRoleController extends SuperController {
     private static final Logger Log= LoggerFactory.getLogger(PRoleController.class);
 
     @Autowired
+    private UserRoleService userRoleService;
+
+    @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private RoleMenuService roleMenuService;
 
     //加载page页面
     @RequiresPermissions(value = "permission:role:page")
@@ -52,7 +58,7 @@ public class PRoleController extends SuperController {
     //加载角色信息编辑页面
     @RequestMapping(value = "/toUpdate",method = RequestMethod.GET)
     public String toAdd(){
-        return "permission/role/update";
+        return "permission/role/role-add";
     }
 
     //加载角色信息修改页面
@@ -60,11 +66,11 @@ public class PRoleController extends SuperController {
     public String toUpdate(@PathVariable("roleId") String roleId, Model model){
         Role role=roleService.getRoleById(roleId);
         model.addAttribute("role",role);
-        return "permission/role/update";
+        return "permission/role/role-add";
     }
 
     //数据的操作
-    @RequestMapping(value = "update",method = RequestMethod.POST)
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public void update(Role role){
 
         if(role.getRoleId()==null){

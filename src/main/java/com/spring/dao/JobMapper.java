@@ -29,4 +29,6 @@ public interface JobMapper {
     int batchDelete(List<String> list);
 
     Page<Job> getMessageByCondition(RowBounds rowBounds, JobFilter filter);
+
+    Integer getCountByFilter(String startTime);
 }

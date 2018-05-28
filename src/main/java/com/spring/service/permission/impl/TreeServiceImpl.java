@@ -1,5 +1,6 @@
 package com.spring.service.permission.impl;
 
+import com.spring.common.Enums.SysTagEnums;
 import com.spring.dao.MenuMapper;
 import com.spring.dao.RoleMapper;
 import com.spring.model.permission.Menu;
@@ -47,6 +48,9 @@ public class TreeServiceImpl implements TreeService{
                 if(role.getRoleId().equals(item.getRoleId())){
                     tree.setChecked(true);
                 }
+                if (role.getRoleId().equals(SysTagEnums.ROLEID.getValue())){
+                    tree.setChkDisabled(true);
+                }
             }
             list.add(tree);
         }
@@ -70,8 +74,11 @@ public class TreeServiceImpl implements TreeService{
                 if(menu.getMenuId().equals(item.getMenuId())){
                     tree.setChecked(true);
                 }
+                if (roleId.equals(SysTagEnums.ROLEID.getValue())){
+                    tree.setChkDisabled(true);
+
+                }
             }
-            tree.setChkDisabled(!checked);
             list.add(tree);
         }
         return list;

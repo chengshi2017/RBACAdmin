@@ -51,6 +51,9 @@ spring:
     content-type: text/html;charset=UTF-8
     encoding: UTF-8
 
+    # 配置velocity
+
+
   devtools:
     restart:
       enabled: true

@@ -2,6 +2,7 @@ package com.spring.service.permission;
 
 import com.github.pagehelper.Page;
 import com.spring.model.permission.Menu;
+import com.spring.param.MenuFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -33,4 +34,12 @@ public interface MenuService {
 
     //删除菜单信息
     void delete(String menuId);
+
+    void batchDelete(List<String> checkList);
+
+    List<Menu> getAllMenus();
+
+    Page<Menu> getMessageByCondition(RowBounds rowBounds, MenuFilter filter);
+
+    List<Menu> getSecondLevelMenusByUserId(String userId);
 }

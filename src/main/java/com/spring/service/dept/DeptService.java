@@ -29,4 +29,6 @@ public interface DeptService {
     Page<Dept> getMessageByCondition(RowBounds rowBounds, DeptFilter filter);
 
     void batchDelete(List<String> list);
+
+    Integer getCountByFilter(Integer i);
 }

@@ -42,10 +42,19 @@ function layerOpen(msg) {
         content: msg,
         btn: ['确定'],
         shade: 0.4,
-        shadeClose: false,
+        shadeClose: true,
         title: ['错误信息', 'text-align:center; color: red'],
         yes: function () {
             layer.close(index);
+        }
+    })
+}
+
+function distinct() {
+    $("select option").each(function () {
+        text=$(this).text();
+        if ($("select option:contains("+text+")").length>1){
+            $("select option:contains("+text+"):gt(0)").remove()
         }
     })
 }

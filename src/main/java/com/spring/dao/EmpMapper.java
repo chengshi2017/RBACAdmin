@@ -33,4 +33,6 @@ public interface EmpMapper {
     int batchDelete(List<String> list);
 
     Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter);
+
+    Integer getCountByFilter(String startTime);
 }

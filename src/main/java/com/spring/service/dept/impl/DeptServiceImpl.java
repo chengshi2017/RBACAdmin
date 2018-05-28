@@ -2,6 +2,7 @@ package com.spring.service.dept.impl;
 
 import com.github.pagehelper.Page;
 import com.spring.common.exceptions.MyException;
+import com.spring.common.utils.Constants;
 import com.spring.common.utils.DateUtils;
 import com.spring.common.utils.UUID;
 import com.spring.dao.DeptMapper;
@@ -10,11 +11,13 @@ import com.spring.model.Dept;
 import com.spring.model.EmpParam;
 import com.spring.param.DeptFilter;
 import com.spring.service.dept.DeptService;
+import net.sf.ehcache.search.aggregator.Count;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -86,5 +89,18 @@ public class DeptServiceImpl implements DeptService{
         if (deptMapper.batchDelete(list)<1){
             throw new MyException("批量删除部门信息失败");
         }
+    }
+
+    @Override
+    public Integer getCountByFilter(Integer filter) {
+        String startTime = null;
+        Integer count;
+        if (filter == null){
+            count=deptMapper.getCountByFilter(startTime);
+        }else {
+            startTime=DateUtils.getDateTime(filter);
+            count=deptMapper.getCountByFilter(startTime);
+        }
+        return count;
     }
 }

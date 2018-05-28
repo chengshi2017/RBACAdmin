@@ -162,4 +162,14 @@
     </foreach>
   </delete>
   
+  <select id="getCountByFilter" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT COUNT(*) FROM  t_dept
+    WHERE 1=1
+    <if test="_parameter != null and _parameter != ''">
+      <![CDATA[
+          AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%T:%s') <= DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
+      ]]>
+    </if>
+  </select>
+  
 </mapper>

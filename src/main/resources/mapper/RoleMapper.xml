@@ -24,8 +24,8 @@
     where ROLE_ID = #{roleId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.spring.model.permission.Role" >
-    insert into t_role (ROLE_ID, ROLE_NAME, CREATE_TIME, UPDATE_TIME, REMARK
-      STATUS, FLAG
+    insert into t_role (ROLE_ID, ROLE_NAME, CREATE_TIME, UPDATE_TIME,
+    REMARK, STATUS, FLAG
       )
     values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}
@@ -117,12 +117,13 @@
   </update>
 
   <select id="getAllRoleMessage" resultMap="BaseResultMap">
-    SELECT * FROM t_role
+    SELECT * FROM t_role ORDER BY CREATE_TIME ASC
   </select>
 
   <select id="getAllVaildRoles" resultMap="BaseResultMap">
     SELECT * FROM t_role
     WHERE STATUS=1
+    ORDER BY CREATE_TIME ASC
   </select>
 
   <select id="getRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -131,11 +132,13 @@
     t_user_role u ON r.ROLE_ID=u.ROLE_ID
     WHERE
     u.USER_ID = #{userId}
+    ORDER BY CREATE_TIME ASC
   </select>
 
   <select id="getAllRoles" resultMap="BaseResultMap">
     SELECT * FROM t_role
     WHERE STATUS=1
+    ORDER BY CREATE_TIME ASC
   </select>
 
   <select id="getAllRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -144,6 +147,7 @@
     t_user_role u ON
     r.ROLE_ID=u.ROLE_ID
     WHERE u.USER_ID = #{userId}
+    ORDER BY CREATE_TIME ASC
   </select>
 
   <delete id="batchDelete" parameterType="java.util.List">
@@ -163,6 +167,7 @@
     <if test="status != null">
       AND STATUS = #{status}
     </if>
+    ORDER BY CREATE_TIME ASC
   </select>
   
 </mapper>

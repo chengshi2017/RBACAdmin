@@ -1,5 +1,11 @@
 
 $(function () {
+
+    /**
+     * 下拉框去重
+     */
+    distinct();
+
     $('.skin-minimal input').iCheck({
         checkboxClass: 'icheckbox-blue',
         radioClass: 'iradio-blue',

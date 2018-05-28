@@ -29,4 +29,6 @@ public interface JobService {
     void batchDelete(List<String> list);
 
     Page<Job> getMessageByCondition(RowBounds rowBounds, JobFilter filter);
+
+    Integer getCountByFilter(Integer filter);
 }

@@ -7,6 +7,7 @@ import com.spring.dao.MenuMapper;
 import com.spring.dao.RoleMenuMapper;
 import com.spring.model.permission.Menu;
 import com.spring.model.permission.RoleMenu;
+import com.spring.param.MenuFilter;
 import com.spring.service.permission.MenuService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -104,7 +105,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void delete(String menuId) {
         List<String> list=new ArrayList<>();
-        List<RoleMenu> list1=roleMenuMapper.selectAllByMenuId(menuId);
+        List<RoleMenu> list1=roleMenuMapper.getRoleMenuByMenuId(menuId);
         //先删除关联表中的信息
         if(list1!=null&&list1.size()>0){
               //迭代器写法
@@ -129,5 +130,34 @@ public class MenuServiceImpl implements MenuService {
             throw new MyException("删除菜单信息失败");
         }
 
+    }
+
+    @Override
+    public void batchDelete(List<String> checkList) {
+        if (menuMapper.batchDelete(checkList)<1){
+            throw new MyException("批量删除菜单信息失败");
+        }
+    }
+
+    @Override
+    public List<Menu> getAllMenus() {
+        return menuMapper.getAllMenus();
+    }
+
+    @Override
+    public Page<Menu> getMessageByCondition(RowBounds rowBounds, MenuFilter filter) {
+        Page<Menu> list=menuMapper.getMessageByCondition(rowBounds,filter);
+        for (Menu menu: list){
+            if (menu.getParentId()!=null&&!"".equals(menu.getParentId())){
+                Menu parentMenu=menuMapper.getMenusById(menu.getParentId());
+                menu.setParentName(parentMenu.getMenuName());
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Menu> getSecondLevelMenusByUserId(String userId) {
+        return menuMapper.getSecondLevelMenusByUserId(userId);
     }
 }

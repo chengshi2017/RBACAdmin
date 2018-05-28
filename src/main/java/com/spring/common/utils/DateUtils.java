@@ -250,4 +250,17 @@ public class DateUtils {
         String StringDate=sdf.format(date);
         return StringDate;
     }
-}
+
+    /**
+     * 计算天数
+     */
+    public static String getDateTime(Integer day){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar calendar =Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, day);
+        Date date=calendar.getTime();
+        String current=sdf.format(date);
+        return current;
+
+    }}

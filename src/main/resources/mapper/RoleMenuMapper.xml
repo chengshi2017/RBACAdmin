@@ -10,13 +10,13 @@
   <sql id="Base_Column_List" >
     ROLE_MENU_ID, ROLE_ID, MENU_ID, REMARK
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_role_menu
     where ROLE_MENU_ID = #{roleMenuId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_role_menu
     where ROLE_MENU_ID = #{roleMenuId,jdbcType=VARCHAR}
   </delete>
@@ -121,4 +121,14 @@
     DELETE FROM t_role_menu
     WHERE ROLE_ID = #{roleId}
   </delete>
+
+  <select id="getRoleMenuByMenuId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * FROM t_role_menu
+    WHERE MENU_ID = #{menuId}
+  </select>
+  
+  <select id="getRoleMenuByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_role_menu
+    WHERE ROLE_ID = #{roleId}
+  </select>
 </mapper>

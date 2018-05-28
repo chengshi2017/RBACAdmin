@@ -77,41 +77,46 @@ function batch_delete() {
 }
 
 function job_stop(obj,id) {
-    $.ajax({
-        type: 'post',
-        url: '/job/start',
-        data: {jobId: id},
-        dataType: 'json',
-        success: function (result) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a onClick="job_start(this,id)" href="javascript:;" title="组建" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label radius">空缺</span>');
-            $(obj).remove();
-            reload()
-            layer.msg('该职位已空缺!',{icon: 5,time:2000});
-        },
-        error: function () {
-            layer.msg('系统故障，请与系统管理员联系' ,{icon: 5, time: 2000})
-        }
+    layer.confirm('确定将职位状态修改为空缺吗？', function (index) {
+        $.ajax({
+            type: 'post',
+            url: '/job/start',
+            data: {jobId: id},
+            dataType: 'json',
+            success: function (result) {
+                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="job_start(this,id)" href="javascript:;" title="组建" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="label radius">空缺</span>');
+                $(obj).remove();
+                reload()
+                layer.msg('该职位已空缺!',{icon: 5,time:2000});
+            },
+            error: function () {
+                layer.msg('系统故障，请与系统管理员联系' ,{icon: 5, time: 2000})
+            }
+        })
     })
 }
 
 function job_start(obj,id) {
-    $.ajax({
-        type: 'post',
-        url: '/job/start',
-        data: {jobId: id},
-        dataType: 'json',
-        success: function (result) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a onClick="job_stop(this,id)" href="javascript:;" title="解散" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">在职</span>');
-            $(obj).remove();
-            reload()
-            layer.msg('职位已在职!', {icon: 6,time:2000});
-        },
-        error: function () {
-            layer.msg('系统故障，请与系统管理员联系', {icon: 5,time: 2000})
-        }
+    layer.confirm('确定将职位状态修改为正常吗？',function (index) {
+        $.ajax({
+            type: 'post',
+            url: '/job/start',
+            data: {jobId: id},
+            dataType: 'json',
+            success: function (result) {
+                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="job_stop(this,id)" href="javascript:;" title="解散" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">在职</span>');
+                $(obj).remove();
+                reload();
+                layer.msg('职位已在职!', {icon: 6,time:2000});
+            },
+            error: function () {
+                layer.msg('系统故障，请与系统管理员联系', {icon: 5,time: 2000})
+            }
+        })
     })
+
 }
 
 function job_del(id) {
@@ -167,4 +172,17 @@ $(function () {
     $("#search").click(function () {
         retrieve();
     })
+});
+
+$('.table-sort').dataTable({
+    "lengthMenu":false,//显示数量选择
+    "bFilter": false,//过滤功能
+    "bPaginate": false,//翻页信息
+    "bInfo": false,//数量信息
+    "aaSorting": [[ 1, "asc" ]],//默认第几个排序
+    "bStateSave": true,//状态保存
+    "aoColumnDefs": [
+        //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+        {"orderable":false,"aTargets":[0,2,4,5,6]}// 制定列不参与排序
+    ]
 });

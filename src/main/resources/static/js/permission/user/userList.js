@@ -1,3 +1,4 @@
+
 /***
  * ajax 异步请求刷新页面
  */
@@ -21,6 +22,10 @@ function layer_update(userId){
     if (url == null || url == '') {
         url="404.html";
     };
+    if (userId == '12370I6SDEA93003'){
+        layerOpen("无法修改系统管理员信息");
+        return;
+    }
     layer.open({
         type: 2,
         area: ['800px', '95%'],
@@ -48,12 +53,32 @@ function admin_del(id) {
         shade: 0.4,
         shadeClose: false,
         yes: function () {
-            $.post(url, {}, function (result) {
-                layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                    parent.retrieve();
-                    layer.close(index);
-                })
-            },'json')
+            $.ajax({
+                type: 'post',
+                data: {},
+                dataType: 'json',
+                url: url,
+                success: function (result) {
+                    if (result.code == 0){
+                        layer.msg(result.data, {icon: 6, time: 2000}, function () {
+                            parent.retrieve();
+                            layer.close(index);
+                        })
+                    }else{
+                        layer.msg(result.data, {icon: 5,time: 2000});
+                    }
+                },
+                error: function () {
+                    layer.msg("系统异常，请与系统管理员联系", {icon: 5, time: 2000});
+                }
+            })
+
+            // $.post(url, {}, function (result) {
+            //     layer.msg(result.data, {icon: 6, time: 2000}, function () {
+            //         parent.retrieve();
+            //         layer.close(index);
+            //     })
+            // },'json')
         },
         no: function () {
             layer.close(index);
@@ -93,9 +118,13 @@ function datadel() {
             dataType: "json",
             data: {"checkedId":checkedId},
             success: function (result) {
-                layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                    retrieve();
-                })
+                if (result.code == 0){
+                    layer.msg(result.data, {icon: 6, time: 2000}, function () {
+                        retrieve();
+                    })
+                }else{
+                    layer.msg(result.data, {icon: 5,time: 2000});
+                }
             },
             error: function (reslut) {
                 layer.msg(reslut.data, {icon: 5, time: 2000});
@@ -106,6 +135,11 @@ function datadel() {
 
 /*管理员-停用*/
 function admin_stop(obj,id){
+    if (id == '12370I6SDEA93003'){
+        layerOpen("无法禁用系统管理员");
+        return;
+    }
+
     layer.confirm('确认要停用吗？',function(index){
         //此处请求后台程序，下方是成功后的前台处理……
         var url='/permission/user/'+id+'/update';
@@ -114,11 +148,11 @@ function admin_stop(obj,id){
             dateType: 'json',
             url: url,
             success: function (result) {
-                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="label radius">已禁用</span>');
-                $(obj).remove();
-                reload();
-                layer.msg('已停用!',{icon: 5,time:1000});
+                    $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
+                    $(obj).parents("tr").find(".td-status").html('<span class="label radius">已禁用</span>');
+                    $(obj).remove();
+                    reload();
+                    layer.msg('已停用!',{icon: 5,time:1000});
             },
             error: function () {
                 layer.msg('系统故障，请联系管理员', {icon: 5, time: 1000});
@@ -131,6 +165,11 @@ function admin_stop(obj,id){
 
 /*管理员-启用*/
 function admin_start(obj,id){
+    if (id == '12370I6SDEA93003'){
+        layerOpen("无法禁用系统管理员");
+        return;
+    }
+
     layer.confirm('确认要启用吗？',function(index){
         //此处请求后台程序，下方是成功后的前台处理……
         var url='/permission/user/'+id+'/update';
@@ -139,11 +178,11 @@ function admin_start(obj,id){
             dataType: 'json',
             url: url,
             success: function (result) {
-                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-                $(obj).remove();
-                reload();
-                layer.msg('已启用!', {icon: 6,time:1000});
+                    $(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+                    $(obj).remove();
+                    reload();
+                    layer.msg('已启用!', {icon: 6,time:1000});
             },
             error: function () {
                 layer.msg('程序出现错误', {icon: 5, time: 1000});
@@ -179,6 +218,19 @@ function retrieve() {
         }
     })
 }
+
+$('.table-sort').dataTable({
+    "lengthMenu":false,//显示数量选择
+    "bFilter": false,//过滤功能
+    "bPaginate": false,//翻页信息
+    "bInfo": false,//数量信息
+    "aaSorting": [[ 1, "asc" ]],//默认第几个排序
+    "bStateSave": true,//状态保存
+    "aoColumnDefs": [
+        //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+        {"orderable":false,"aTargets":[0,2,3,4,6,7,8]}// 制定列不参与排序
+    ]
+});
 
 
 

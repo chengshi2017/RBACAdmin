@@ -2,6 +2,7 @@ package com.spring.service.permission.impl;
 
 import com.github.pagehelper.Page;
 import com.spring.common.exceptions.MyException;
+import com.spring.common.utils.Constants;
 import com.spring.common.utils.DateUtils;
 import com.spring.common.utils.UUID;
 import com.spring.dao.RoleMapper;
@@ -58,6 +59,7 @@ public class RoleServiceImpl implements RoleService {
     public void save(Role role) {
         role.setRoleId(UUID.getUUID());
         role.setCreateTime(DateUtils.today());
+        role.setFlag(Constants.isAdmin.notRolwAdmin);
         if (roleMapper.insert(role)<1){
             throw new MyException("新增角色信息失败");
         }

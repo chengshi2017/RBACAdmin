@@ -27,4 +27,8 @@ public interface LogMapper {
     Log getLogsById(String logId);
 
     Page<Log> getLogsByCondition(RowBounds rowBounds,LogFilter filter);
+
+    Integer getCountByFilter(String startTime);
+
+    Log getMessageByRecent();
 }

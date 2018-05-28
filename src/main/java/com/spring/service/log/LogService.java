@@ -27,4 +27,8 @@ public interface LogService {
     Log getLogsById(String logId);
 
     Page<Log> getLogsByCondition(RowBounds rowBounds,LogFilter filter);
+
+    Integer getCountByFilter(Integer today);
+
+    Log getMessageByRecent();
 }

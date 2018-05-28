@@ -1,6 +1,8 @@
 package com.spring.controller.permission;
 
 import com.github.pagehelper.Page;
+import com.spring.common.Enums.SysTagEnums;
+import com.spring.common.exceptions.MyException;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
 import com.spring.model.permission.User;
@@ -66,8 +68,12 @@ public class PUserController extends SuperController {
         }
         else {
             //修改操作
-            userService.update(user);
-            ResponseUtils.writeSuccessReponse(request,response,"修改用户信息成功");
+            if (user.getUserId().equals(SysTagEnums.USERID.getValue())){
+                ResponseUtils.writeErrorResponse(request,response,"无法修改系统管理员信息");
+            }else {
+                userService.update(user);
+                ResponseUtils.writeSuccessReponse(request,response,"修改用户信息成功");
+            }
         }
 
     }
@@ -75,15 +81,25 @@ public class PUserController extends SuperController {
     //删除用户信息
     @RequestMapping(value = "/{userId}/delete",method = RequestMethod.POST)
     public void delete(@PathVariable("userId") String userId){
-        userService.delete(userId);
-        ResponseUtils.writeSuccessReponse(request,response,"删除用户信息成功");
+        if (userId.equals(SysTagEnums.USERID.getValue())){
+            ResponseUtils.writeErrorResponse(request,response,"无法删除系统管理员信息");
+        }else {
+            userService.delete(userId);
+            ResponseUtils.writeSuccessReponse(request,response,"删除用户信息成功");
+        }
     }
 
     //批量删除所选用户
     @PostMapping(value = "/batchDelete")
     public void batchDelete(String checkedId){
-        String[] userId=checkedId.split(",");
-        List<String> list=Arrays.asList(userId);
+        String[] record=checkedId.split(",");
+        List<String> list=Arrays.asList(record);
+        for (String userId: list){
+            if (userId.equals(SysTagEnums.USERID.getValue())){
+                ResponseUtils.writeErrorResponse(request,response,"所选信息包括系统管理员信息，无法删除，请重选");
+                throw new MyException("系统管理员信息无法删除");
+            }
+        }
         userService.batchDelete(list);
         ResponseUtils.writeSuccessReponse(request,response,"批量删除用户信息成功");
     }
@@ -91,9 +107,13 @@ public class PUserController extends SuperController {
     @PostMapping(value = "/{userId}/update")
     public void update(@PathVariable("userId")String userId){
         User user=userService.getUserMessageById(userId);
-        user.setStatus(user.getStatus()^1);
-        userService.update(user);
-        ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
+        if (user.getUserId().equals(SysTagEnums.USERID.getValue())){
+            ResponseUtils.writeErrorResponse(request,response,"系统管理员无法禁用");
+        }else {
+            user.setStatus(user.getStatus()^1);
+            userService.update(user);
+            ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
+        }
     }
 
     @PostMapping(value = "/retrieve")

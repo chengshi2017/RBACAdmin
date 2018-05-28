@@ -1,6 +1,7 @@
 package com.spring.common.aop;
 
 import com.spring.common.utils.Constants;
+import com.spring.common.utils.SysInfo;
 import com.spring.model.Log;
 import com.spring.model.permission.User;
 import com.spring.service.log.LogService;
@@ -66,6 +67,7 @@ public class OperateLogAspect {
         if(user != null){
             log.setUserId(user.getUserId());                    //设置操作人
             log.setRequestUrl(uri);                             //设置请求路径
+            log.setIp(SysInfo.getDefaultIpAddress());
             logService.addOperateLog(log);
         }
         logger.info("=======>记录操作记录结束");

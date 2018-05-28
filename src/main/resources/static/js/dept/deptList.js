@@ -118,40 +118,44 @@ function dept_del(id) {
 }
 
 function dept_stop(obj,id) {
-    $.ajax({
-        type: 'post',
-        url: '/dept/start',
-        dateType: 'json',
-        data: {"deptId": id},
-        success: function (result) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a onClick="dept_start(this,id)" href="javascript:;" title="组建" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label radius">已解散</span>');
-            $(obj).remove();
-            reload();
-            layer.msg('部门已解散!',{icon: 5,time:2000});
-        },
-        error: function () {
-            layer.msg('系统故障，请联系管理员', {icon: 5, time: 2000});
-        }
+    layer.confirm('确定将部门解散吗？' ,function (index) {
+        $.ajax({
+            type: 'post',
+            url: '/dept/start',
+            dateType: 'json',
+            data: {"deptId": id},
+            success: function (result) {
+                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="dept_start(this,id)" href="javascript:;" title="组建" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="label radius">已解散</span>');
+                $(obj).remove();
+                reload();
+                layer.msg('部门已解散!',{icon: 5,time:2000});
+            },
+            error: function () {
+                layer.msg('系统故障，请联系管理员', {icon: 5, time: 2000});
+            }
+        })
     })
 }
 
 function dept_start(obj,id) {
-    $.ajax({
-        type: 'POST',
-        url: '/dept/start',
-        dateType: 'json',
-        data: {"deptId": id},
-        success: function (result) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a onClick="dept_stop(this,id)" href="javascript:;" title="解散" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">正常</span>');
-            $(obj).remove();
-            reload();
-            layer.msg('部门组建成功!', {icon: 6,time:2000});
-        },
-        error: function () {
-            layer.msg('程序出现错误', {icon: 5, time: 2000});
-        }
+    layer.confirm('确定重新组建此部门吗？', function (index) {
+        $.ajax({
+            type: 'POST',
+            url: '/dept/start',
+            dateType: 'json',
+            data: {"deptId": id},
+            success: function (result) {
+                $(obj).parents("tr").find(".td-manage").prepend('<a onClick="dept_stop(this,id)" href="javascript:;" title="解散" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">正常</span>');
+                $(obj).remove();
+                reload();
+                layer.msg('部门组建成功!', {icon: 6,time:2000});
+            },
+            error: function () {
+                layer.msg('程序出现错误', {icon: 5, time: 2000});
+            }
+        })
     })
 }
 
@@ -183,6 +187,19 @@ function retrieve() {
         }
     })
 }
+
+$('.table-sort').dataTable({
+    "lengthMenu":false,//显示数量选择
+    "bFilter": false,//过滤功能
+    "bPaginate": false,//翻页信息
+    "bInfo": false,//数量信息
+    "aaSorting": [[ 1, "asc" ]],//默认第几个排序
+    "bStateSave": true,//状态保存
+    "aoColumnDefs": [
+        //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+        {"orderable":false,"aTargets":[0,2,3,5,6]}// 制定列不参与排序
+    ]
+});
 
 
 

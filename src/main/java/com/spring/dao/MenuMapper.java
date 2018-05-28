@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.github.pagehelper.Page;
 import com.spring.model.permission.Menu;
+import com.spring.param.MenuFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -35,4 +36,10 @@ public interface MenuMapper {
 
     //根据用户id查询用户所有菜单
     List<Menu> getAllMenusByUserId(String userId);
+
+    int batchDelete(List<String> checkList);
+
+    Page<Menu> getMessageByCondition(RowBounds rowBounds, MenuFilter filter);
+
+    List<Menu> getSecondLevelMenusByUserId(String userId);
 }

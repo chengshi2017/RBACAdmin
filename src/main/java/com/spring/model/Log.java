@@ -9,6 +9,8 @@ public class Log {
 
     private String userId;
 
+    private String ip;
+
     private Date operateTime;
 
     private String requestUrl;
@@ -61,6 +63,14 @@ public class Log {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public Date getOperateTime() {

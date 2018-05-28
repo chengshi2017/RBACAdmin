@@ -21,13 +21,11 @@
                     , hash: true
                     //curr: $(".laypage_curr").text() || 1, //当前页
                     , jump: function(obj, first){ //触发分页后的回调
-                        console.log(obj.curr);
+                        //console.log(obj.curr);
                         if(!first){ //一定要加此判断，否则初始时会无限刷新
                             //console.log(e.curr);
                             laypage_curr=obj.curr;
-                            console.log(laypage_curr);
                             laypage_limit=obj.limit;
-                            console.log(laypage_limit);
                             reload();
                         }
                     }

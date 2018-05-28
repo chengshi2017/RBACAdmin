@@ -5,6 +5,7 @@ import com.spring.model.Dept;
 import com.spring.param.DeptFilter;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DeptMapper {
@@ -29,4 +30,6 @@ public interface DeptMapper {
     Page<Dept> getMessageByCondition(RowBounds rowBounds, DeptFilter filter);
 
     int batchDelete(List<String> list);
+
+    int getCountByFilter(String startTime);
 }

@@ -29,7 +29,7 @@
             <span class="r">共有数据：<strong th:text="${lists.total}">54</strong> 条</span>
         </div>
         <div class="mt-20" id="page_data">
-            <table class="table table-border table-bordered table-bg">
+            <table class="table table-border table-bordered table-bg table-hover table-sort">
                 <thead>
                 <tr class="text-c">
                     <th width="25"><input type="checkbox" name="subCheck" id="subCheck"/></th>
@@ -56,13 +56,13 @@
                     </th:block>
                     <td class="td-manage" th:switch="${item.status}">
 							<span th:case="1">
-								<a style="text-decoration:none" th:onClick="'javascript:admin_stop(this,\''+${item.roleId}+'\')'" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
+								<a style="text-decoration:none" th:onClick="'javascript:role_stop(this,\''+${item.roleId}+'\')'" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>
 							</span>
                         <span th:case="0">
-								<a style="text-decoration:none" th:onClick="'javascript:admin_start(this,\''+${item.roleId}+'\')'" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a>
+								<a style="text-decoration:none" th:onClick="'javascript:role_start(this,\''+${item.roleId}+'\')'" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a>
 							</span>
                         <a title="编辑" href="javascript:;" th:onclick="'javascript:layer_update(\''+${item.roleId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> </a>
-                        <a title="删除" href="javascript:;" th:onclick="'javascript:admin_del(\''+${item.roleId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                        <a title="删除" href="javascript:;" th:onclick="'javascript:role_del(\''+${item.roleId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -72,6 +72,6 @@
     </div>
 </div>
 <footer th:replace="common/footer::footer"></footer>
-<script th:src="@{/js/permission/user/userList.js}" th:inline="javascript"></script>
+<script th:src="@{/js/permission/role/roleList.js}" th:inline="javascript"></script>
 </body>
 </html>

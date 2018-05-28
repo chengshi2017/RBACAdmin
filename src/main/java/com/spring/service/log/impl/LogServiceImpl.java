@@ -91,4 +91,22 @@ public class LogServiceImpl implements LogService{
     public Page<Log> getLogsByCondition(RowBounds rowBounds,LogFilter filter) {
         return logMapper.getLogsByCondition(rowBounds,filter);
     }
+
+    @Override
+    public Integer getCountByFilter(Integer filter) {
+        String startTime = null;
+        Integer count;
+        if (filter == null){
+            count=logMapper.getCountByFilter(startTime);
+        }else {
+            startTime=DateUtils.getDateTime(filter);
+            count=logMapper.getCountByFilter(startTime);
+        }
+        return count;
+    }
+
+    @Override
+    public Log getMessageByRecent() {
+        return logMapper.getMessageByRecent();
+    }
 }

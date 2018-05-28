@@ -1,3 +1,18 @@
 @charset "utf-8";
 /* 你自己的样式 */
+.panel-site{
+@min-width:300px;
+    width: 32%;
+    float: left;
+}
+.panel-user{
+    margin-left: 50px;
+    width: auto;
+    float: left;
+}
+tr:nth-of-type(odd){ background:#F5F5F5} /* odd 标识奇数行，even标识偶数行 */
+tr:hover{ background: #F5F5F5;} /*鼠标悬停后表格背景颜色*/
+
+
+
 

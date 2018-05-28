@@ -17,15 +17,17 @@ public interface RoleMenuMapper {
 
     int updateByPrimaryKey(RoleMenu record);
 
-    RoleMenu getRoleMenuByRoleMenu(RoleMenu roleMenu);
+    List<RoleMenu> getRoleMenuByRoleMenu(RoleMenu roleMenu);
 
     List<RoleMenu> getMenusByRoleId(String roleId);
 
     int deleteRoleMenusByRoleId(String roleId);
 
-    List<RoleMenu> selectAllByMenuId(String menuId);
-
     int batchDelete(List<String> list);
 
     int batchDeleteByRoleId(String roleId);
+
+    List<RoleMenu> getRoleMenuByMenuId(String menuId);
+
+    List<RoleMenu> getRoleMenuByRoleId(String roleId);
 }

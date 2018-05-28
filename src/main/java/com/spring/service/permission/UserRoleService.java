@@ -1,5 +1,6 @@
 package com.spring.service.permission;
 
+import com.spring.model.permission.RoleMenu;
 import com.spring.model.permission.UserRole;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface UserRoleService {
 
     void remove(UserRole userRole);
 
+    List<UserRole> getUserRoleMessageByRoleId(String roleId);
 }
