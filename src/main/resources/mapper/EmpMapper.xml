@@ -284,4 +284,16 @@
     </if>
   </select>
   
+  
+  <select id="getMessage" resultMap="BaseResultMap">
+    SELECT e.*, d.DEPT_NAME, j.JOB_NAME
+    FROM t_emp e
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
+  </select>
+  
 </mapper>

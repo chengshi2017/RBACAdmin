@@ -231,7 +231,7 @@ public class DateUtils {
     }
 
     public static String getCurrentTime(){
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
         Date date=new Date();
         String current=sdf.format(date);
         return current;

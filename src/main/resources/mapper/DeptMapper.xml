@@ -172,4 +172,35 @@
     </if>
   </select>
   
+  
+  <resultMap id="BaseResultMap1" type="com.spring.model.poi.DeptEntity">
+    <id column="DEPT_ID" property="deptId" jdbcType="VARCHAR"/>
+    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
+    <collection property="list" column="DEPT_ID" ofType="com.spring.model.poi.EmpEntity">
+      <id column="EMP_ID" property="empId" jdbcType="VARCHAR"/>
+      <result column="EMP_NUM" property="empNum" jdbcType="VARCHAR"/>
+      <result column="EMP_NAME" property="empName" jdbcType="VARCHAR"/>
+      <result column="SEX" property="sex" jdbcType="VARCHAR"/>
+      <result column="AGE" property="age" jdbcType="INTEGER"/>
+      <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+      <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+      <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+      <result column="PACE" property="pace" jdbcType="VARCHAR"/>
+      <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR"/>
+      <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+      <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR"/>
+    </collection>
+  </resultMap>
+
+
+  <select id="getMessage" resultMap="BaseResultMap1">
+    SELECT d.DEPT_ID,d.DEPT_NAME,e.*,j.JOB_NAME FROM t_dept d
+    LEFT JOIN t_emp_param ep
+    ON d.DEPT_ID = ep.DEPT_ID
+    LEFT JOIN t_job j
+    ON ep.JOB_ID = j.JOB_ID
+    LEFT JOIN t_emp e
+    ON ep.EMP_ID = e.EMP_ID
+  </select>
+  
 </mapper>

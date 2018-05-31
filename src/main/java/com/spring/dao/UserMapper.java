@@ -35,4 +35,6 @@ public interface UserMapper {
     Page<User> getMessageByCondition(RowBounds rowBounds, UserFilter filter);
 
     Integer getCountByFilter(String startTime);
+
+    List<User> getAllMessage();
 }

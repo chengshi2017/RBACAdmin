@@ -35,4 +35,6 @@ public interface EmpMapper {
     Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter);
 
     Integer getCountByFilter(String startTime);
+
+    List<Emp> getMessage();
 }

@@ -2,6 +2,7 @@ package com.spring.service.dept;
 
 import com.github.pagehelper.Page;
 import com.spring.model.Dept;
+import com.spring.model.poi.DeptEntity;
 import com.spring.param.DeptFilter;
 import org.apache.ibatis.session.RowBounds;
 
@@ -31,4 +32,7 @@ public interface DeptService {
     void batchDelete(List<String> list);
 
     Integer getCountByFilter(Integer i);
+
+
+    List<DeptEntity> getMessage();
 }

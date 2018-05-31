@@ -32,4 +32,6 @@ public interface EmpService {
     Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter);
 
     Integer getCountByFilter(Integer count);
+
+    List<Emp> getMessage();
 }

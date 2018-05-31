@@ -9,6 +9,7 @@ import com.spring.dao.DeptMapper;
 import com.spring.dao.EmpParamMapper;
 import com.spring.model.Dept;
 import com.spring.model.EmpParam;
+import com.spring.model.poi.DeptEntity;
 import com.spring.param.DeptFilter;
 import com.spring.service.dept.DeptService;
 import net.sf.ehcache.search.aggregator.Count;
@@ -102,5 +103,10 @@ public class DeptServiceImpl implements DeptService{
             count=deptMapper.getCountByFilter(startTime);
         }
         return count;
+    }
+
+    @Override
+    public List<DeptEntity> getMessage() {
+        return deptMapper.getMessage();
     }
 }

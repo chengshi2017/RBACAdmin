@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.github.pagehelper.Page;
 import com.spring.model.Dept;
+import com.spring.model.poi.DeptEntity;
 import com.spring.param.DeptFilter;
 import org.apache.ibatis.session.RowBounds;
 
@@ -32,4 +33,6 @@ public interface DeptMapper {
     int batchDelete(List<String> list);
 
     int getCountByFilter(String startTime);
+
+    List<DeptEntity> getMessage();
 }

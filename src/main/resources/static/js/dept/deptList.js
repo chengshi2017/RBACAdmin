@@ -201,5 +201,14 @@ $('.table-sort').dataTable({
     ]
 });
 
+function download_excel() {
+    setTimeout("export_excel()",1000);
+}
+
+function export_excel() {
+
+    location.href='http://localhost:9000/excel/deptExcel';
+}
+
 
 

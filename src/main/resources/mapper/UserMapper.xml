@@ -198,4 +198,8 @@
     </if>
   </select>
 
+  <select id="getAllMessage" resultMap="BaseResultMap">
+    SELECT * FROM t_user
+  </select>
+
 </mapper>

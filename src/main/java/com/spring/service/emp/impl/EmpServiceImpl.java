@@ -151,4 +151,9 @@ public class EmpServiceImpl implements EmpService{
         }
         return count;
     }
+
+    @Override
+    public List<Emp> getMessage() {
+        return empMapper.getMessage();
+    }
 }
