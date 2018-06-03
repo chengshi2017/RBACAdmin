@@ -87,13 +87,13 @@
                     <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></td>
                     <td th:text="${item.deptName}"></td>
                     <td th:text="${item.jobName}"></td>
-                    <th:block th:if="${item.status}==1">
+                    <th:block th:if="${item.eStatus}==1">
                         <td class="td-status"><span class="label label-success radius">正常</span></td>
                     </th:block>
-                    <th:block th:if="${item.status}==0">
+                    <th:block th:if="${item.eStatus}==0">
                         <td class="td-status"><span class="label radius">异常</span></td>
                     </th:block>
-                    <td class="td-manage" th:switch="${item.status}">
+                    <td class="td-manage" th:switch="${item.eStatus}">
                         <span th:case="1">
                             <a style="text-decoration:none" th:onClick="'javascript:emp_stop(this,\''+${item.empId}+'\')'" href="javascript:;" title="异常"><i class="Hui-iconfont">&#xe631;</i></a>
                         </span>

@@ -33,4 +33,6 @@ public interface JobService {
     Integer getCountByFilter(Integer filter);
 
     List<Job> getAllJobByDeptId(String deptHrId);
+
+    List<Job> getJobMessageByJobName(String jobName);
 }

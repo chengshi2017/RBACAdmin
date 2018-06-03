@@ -53,6 +53,9 @@ public class JobController extends SuperController {
         //获取所有职位信息
         List<Job> jobList=jobService.getAllJob();
         model.addAttribute("jobList",jobList);
+        //获取所有部门信息
+        List<Dept> deptList=deptService.getAllDept();
+        model.addAttribute("deptList",deptList);
         Page<Job> lists=jobService.getAllJobMessage(new RowBounds((pageNo-1)*pageSize,pageSize));
         model.addAttribute("lists",lists);
         return "job/jobList";
@@ -78,11 +81,25 @@ public class JobController extends SuperController {
 
     @RequestMapping(value = "/toUpdate", method = RequestMethod.POST)
     public void toUpdate(Job info){
+        //根据传来的jobName查询数据库中存在的信息
+        List<Job> jobList=jobService.getJobMessageByJobName(info.getJobName());
         //根据传入的信息判断进行的操作
-        if(null==info.getJobId()){
+        if(info.getJobId()==null){
+            for (Job job:jobList){
+                if (job.getAttachDeptId().equals(info.getAttachDeptId())){
+                    ResponseUtils.writeErrorResponse(request,response,"信息重复，无法进行编辑");
+                    throw new MyException("信息重复，无法编辑");
+                }
+            }
             jobService.insert(info);
-            ResponseUtils.writeSuccessReponse(request,response,"新增职位信息成功");
+            ResponseUtils.writeSuccessReponse(request, response, "新增职位信息成功");
         }else {
+            for (Job job:jobList){
+                if (!job.getJobId().equals(info.getJobId())&&job.getAttachDeptId().equals(info.getAttachDeptId())){
+                    ResponseUtils.writeErrorResponse(request,response,"信息重复，无法修改");
+                    throw new MyException("信息重复，无法修改");
+                }
+            }
             jobService.update(info);
             ResponseUtils.writeSuccessReponse(request,response,"修改职位信息成功");
         }

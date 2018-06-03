@@ -15,7 +15,7 @@ public class JobFilter {
 
     private String jobName;
 
-    private Integer status;
+    private String deptId;
 
     public Integer getPageNo() {
         return pageNo;
@@ -41,11 +41,11 @@ public class JobFilter {
         this.jobName = jobName;
     }
 
-    public Integer getStatus() {
-        return status;
+    public String getDeptId() {
+        return deptId;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 }

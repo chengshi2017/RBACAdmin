@@ -12,6 +12,9 @@ public class Job {
 
     private String deptName;
 
+    //职位拟招人数
+    private Integer volume;
+
     private Date createTime;
 
     private Date updateTime;
@@ -50,6 +53,14 @@ public class Job {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
+    }
+
+    public Integer getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Integer volume) {
+        this.volume = volume;
     }
 
     public String getRemark() {

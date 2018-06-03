@@ -17,6 +17,8 @@ public class Staff {
 
     private String empParamId;
 
+    private String userRoleId;
+
     private String userName;
 
     private String empName;
@@ -57,6 +59,12 @@ public class Staff {
 
     private boolean flag;
 
+    private String roleId;
+
+    private String roleName;
+
+    private String userRoleRemark;
+
     public Staff() {
     }
 
@@ -74,6 +82,14 @@ public class Staff {
 
     public void setEmpId(String empId) {
         this.empId = empId;
+    }
+
+    public String getUserRoleId() {
+        return userRoleId;
+    }
+
+    public void setUserRoleId(String userRoleId) {
+        this.userRoleId = userRoleId;
     }
 
     public String getUserName() {
@@ -242,5 +258,29 @@ public class Staff {
 
     public void setFlag(boolean flag) {
         this.flag = flag;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getUserRoleRemark() {
+        return userRoleRemark;
+    }
+
+    public void setUserRoleRemark(String userRoleRemark) {
+        this.userRoleRemark = userRoleRemark;
     }
 }

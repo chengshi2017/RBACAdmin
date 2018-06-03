@@ -6,9 +6,10 @@ package com.spring.common.exceptions;
  * @time 1:20
  * @Describe: 自定义异常类
  */
-public class MyException extends RuntimeException{
+public class MyException extends AbstractException {
 
     public MyException(String message) {
         super(message);
     }
+
 }

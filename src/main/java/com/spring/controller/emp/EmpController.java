@@ -3,9 +3,11 @@ package com.spring.controller.emp;
 import com.github.pagehelper.Page;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
+import com.spring.dao.JobMapper;
 import com.spring.model.Dept;
 import com.spring.model.Emp;
 import com.spring.model.Job;
+import com.spring.model.Staff;
 import com.spring.param.EmpFilter;
 import com.spring.service.dept.DeptService;
 import com.spring.service.emp.EmpService;
@@ -49,7 +51,7 @@ public class EmpController extends SuperController {
         model.addAttribute("deptList",deptList);
         List<Job> jobList=jobService.getAllJob();
         model.addAttribute("jobList",jobList);
-        Page<Emp> lists=empService.getAllEmp(new RowBounds((pageNo-1)*pageSize,pageSize));
+        Page<Staff> lists=empService.getAllEmp(new RowBounds((pageNo-1)*pageSize,pageSize));
         model.addAttribute("lists",lists);
         return "emp/empList";
     }
@@ -58,37 +60,39 @@ public class EmpController extends SuperController {
     @RequestMapping(value = "/toUpdate",method = RequestMethod.GET)
     public String toAdd(Model model){
         List<Dept> deptList=deptService.getAllDept();
-        List<Job> jobList=jobService.getAllJob();
         model.addAttribute("deptList",deptList);
-        model.addAttribute("jobList",jobList);
         return "emp/emp_add";
     }
 
     //加载员工信息修改页面
     @RequestMapping(value = "/{empId}/toUpdate",method = RequestMethod.GET)
     public String toUpdate(@PathVariable("empId")String empId, Model model){
-        Emp emp=empService.getEmpByEmpId(empId);
+        Staff staff=empService.getEmpByEmpId(empId);
         List<Dept> deptList=deptService.getAllDept();
-        List<Job> jobList=jobService.getAllJob();
-        model.addAttribute("emp",emp);
+        model.addAttribute("staff",staff);
         model.addAttribute("deptList",deptList);
-        model.addAttribute("jobList",jobList);
         return "emp/emp_add";
     }
 
     //对员工信息数据进行修改
     @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public void update(Emp emp){
+    public void update(Staff staff){
+        List<Staff> staffList=empService.getEmpMessageByEmpName(staff.getEmpName());
+        Integer count=staffList.size();
         //新增操作
-        if(emp.getEmpId()==null){
-            empService.insert(emp);
-            ResponseUtils.writeSuccessReponse(request,response,"新增员工信息成功");
+        if(staff.getEmpId()==null){
+            if (count==0){
+                empService.insert(staff);
+                ResponseUtils.writeSuccessReponse(request,response,"新增员工信息成功");
+            }else {
+                ResponseUtils.writeErrorResponse(request,response,"员工名重复，请使用别名或更正员工信息");
+            }
         }
         //修改操作
-        else{
-            empService.update(emp);
-            ResponseUtils.writeSuccessReponse(request,response,"修改员工信息成功");
-        }
+//        else{
+//            empService.update(emp);
+//            ResponseUtils.writeSuccessReponse(request,response,"修改员工信息成功");
+//        }
 
     }
 
@@ -120,17 +124,23 @@ public class EmpController extends SuperController {
 
     @PostMapping(value = "/start")
     public void start(String empId){
-        Emp emp=empService.getEmpByEmpId(empId);
-        emp.setStatus(emp.getStatus()^1);
-        empService.update(emp);
+        Staff staff=empService.getEmpByEmpId(empId);
+        staff.seteStatus(staff.geteStatus()^1);
+        //empService.update(staff);
         ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
     }
 
     @RequestMapping(value = "/{empId}/check")
     public String check(@PathVariable(value = "empId")String empId,Model model){
-        Emp emp=empService.getEmpByEmpId(empId);
-        model.addAttribute("emp",emp);
+        Staff staff=empService.getEmpByEmpId(empId);
+        model.addAttribute("staff",staff);
         return "emp/emp_show";
+    }
+
+    @PostMapping(value = "/getJobList")
+    public void getJobList(String deptId){
+        List<Job> jobList=jobService.getAllJobByDeptId(deptId);
+        ResponseUtils.writeSuccessReponse(request,response,jobList);
     }
 
 

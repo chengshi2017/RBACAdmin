@@ -31,6 +31,8 @@
     <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
     <result column="JOB_ID" property="jobId" jdbcType="VARCHAR"/>
     <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR"/>
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR"/>
     <result column="FLAG" property="flag" jdbcType="BOOLEAN"/>
   </resultMap>
 
@@ -39,10 +41,15 @@
     ADDRESS, PHONE, EMAIL, PACE, CREATE_TIME, UPDATE_TIME, REMARK, FLAG
   </sql>
   <select id="selectByPrimaryKey" resultMap="ResultMap" parameterType="java.lang.String" >
-    select u.*, e.*, d.DEPT_ID, d.DEPT_NAME, j.JOB_ID, j.JOB_NAME
+    select u.*, e.*, d.DEPT_ID, d.DEPT_NAME,
+    j.JOB_ID, j.JOB_NAME, r.ROLE_ID, r.ROLE_NAME
     from t_user u
     LEFT JOIN t_emp e
     ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
     LEFT JOIN t_emp_param em
     ON e.EMP_ID = em.EMP_ID
     LEFT JOIN t_dept d
@@ -52,10 +59,12 @@
     where u.USER_ID = #{userId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    DELETE u, e, em
+    DELETE u, e, em, ur
     FROM t_user u
     LEFT JOIN t_emp e
     ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
     LEFT JOIN t_emp_param em
     ON e.EMP_ID = em.EMP_ID
     WHERE u.USER_ID = #{userId,jdbcType=VARCHAR}
@@ -127,6 +136,16 @@
     t_user u
     LEFT JOIN t_emp e
     ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
     WHERE 1 = 1
     <if test="userName != null and userName != ''">
       AND u.USER_NAME LIKE concat(concat('%', #{userName}),'%')
@@ -141,6 +160,16 @@
     t_user u
     LEFT JOIN t_emp e
     ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
     WHERE u.STATUS = 1
   </select>
 
@@ -161,6 +190,8 @@
     FROM t_user u
     LEFT JOIN t_emp e
     ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
     LEFT JOIN t_emp_param em
     ON e.EMP_ID = em.EMP_ID
     WHERE u.USER_ID IN
@@ -174,6 +205,10 @@
     FROM t_user u
     LEFT JOIN t_emp e
     ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
     LEFT JOIN t_emp_param em
     ON e.EMP_ID = em.EMP_ID
     LEFT JOIN t_dept d
@@ -202,7 +237,8 @@
   </select>
 
   <select id="getAllMessage" resultMap="ResultMap">
-    SELECT * FROM t_user u LEFT JOIN t_emp e
+    SELECT * FROM t_user u
+    LEFT JOIN t_emp e
     ON u.USER_ID = e.EMP_ID
   </select>
 

@@ -5,6 +5,7 @@
     <id column="JOB_ID" property="jobId" jdbcType="VARCHAR" />
     <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR" />
     <result column="ATTACH_DEPT_ID" property="attachDeptId" jdbcType="VARCHAR"/>
+    <result column="VOLUME" property="volume" jdbcType="INTEGER"/>
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
     <result column="STATUS" property="status" jdbcType="INTEGER"/>
@@ -26,10 +27,10 @@
     where JOB_ID = #{jobId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.spring.model.Job" >
-    insert into t_job (JOB_ID, JOB_NAME, ATTACH_DEPT_ID, REMARK , CREATE_TIME , UPDATE_TIME , STATUS
+    insert into t_job (JOB_ID, JOB_NAME, ATTACH_DEPT_ID, VOLUME, REMARK , CREATE_TIME , UPDATE_TIME , STATUS
       )
     values (#{jobId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR},
-        #{attachDeptId,jdbcType=VARCHAR}  ,#{remark,jdbcType=VARCHAR}
+        #{attachDeptId,jdbcType=VARCHAR}, #{volume,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
         #{createTime} , #{updateTime}, #{status}
       )
   </insert>
@@ -44,6 +45,9 @@
       </if>
       <if test="attachDeptId != null">
         ATTACH_DEPT_ID,
+      </if>
+      <if test="volume != null">
+        VOLUME,
       </if>
       <if test="createTime != null">
         CREATE_TIME,
@@ -68,6 +72,9 @@
       <if test="attachDeptId != null">
         #{attachDeptId,jdbcType=VARCHAR},
       </if>
+      <if test="volume != null">
+        #{volume, jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         #{createTime},
       </if>
@@ -90,6 +97,9 @@
       </if>
       <if test="attachDeptId != null">
         ATTACH_DEPT_ID = #{attachDeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        VOLUME = #{volume,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         CREATE_TIME = #{createTime},
@@ -146,10 +156,10 @@
     ON j.ATTACH_DEPT_ID = d.DEPT_ID
     WHERE 1=1
     <if test="jobName != null and jobName != ''">
-      AND JOB_NAME = #{jobName}
+      AND j.JOB_NAME = #{jobName}
     </if>
-    <if test="status != null">
-      AND j.STATUS = #{status}
+    <if test="deptId != null">
+      AND j.ATTACH_DEPT_ID = #{deptId}
     </if>
   </select>
   
@@ -166,6 +176,11 @@
   <select id="getAllJobByDeptId" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT * FROM t_job
     WHERE ATTACH_DEPT_ID = #{deptHrId}
+  </select>
+  
+  <select id="getJobMessageByJobName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_job
+    WHERE JOB_NAME = #{jobName,jdbcType=VARCHAR}
   </select>
 
 </mapper>

@@ -14,7 +14,7 @@ function retrieve() {
     var data={
         pageNo: laypage_curr || 1,
         pageSize: laypage_limit || 10,
-        status: $("#status").val(),
+        deptId: $("#deptId").val(),
         jobName: $("#jobName").val()
     };
     $.ajax({

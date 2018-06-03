@@ -168,7 +168,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Page<User> getMessageByCondition(RowBounds rowBounds, UserFilter filter) {
+    public Page<Staff> getMessageByCondition(RowBounds rowBounds, UserFilter filter) {
         return userMapper.getMessageByCondition(rowBounds,filter);
     }
 

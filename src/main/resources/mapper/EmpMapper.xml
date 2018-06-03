@@ -19,18 +19,65 @@
     <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
     <result column="FLAG" jdbcType="INTEGER" property="flag"/>
   </resultMap>
+
+  <resultMap id="ResultMap" type="com.spring.model.Staff">
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR"/>
+    <result column="U_STATUS" property="uStatus" jdbcType="INTEGER"/>
+    <result column="EMP_ID" property="empId" jdbcType="VARCHAR"/>
+    <result column="EMP_PARAM_ID" property="empParamId" jdbcType="VARCHAR"/>
+    <result column="EMP_NUM" property="empNum" jdbcType="VARCHAR"/>
+    <result column="EMP_NAME" property="empName" jdbcType="VARCHAR"/>
+    <result column="SEX" property="sex" jdbcType="VARCHAR"/>
+    <result column="AGE" property="age" jdbcType="INTEGER"/>
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+    <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+    <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+    <result column="PACE" property="pace" jdbcType="VARCHAR"/>
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+    <result column="STATUS" property="eStatus" jdbcType="INTEGER"/>
+    <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR"/>
+    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
+    <result column="JOB_ID" property="jobId" jdbcType="VARCHAR"/>
+    <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR"/>
+    <result column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR"/>
+    <result column="FLAG" property="flag" jdbcType="BOOLEAN"/>
+  </resultMap>
+
   <sql id="Base_Column_List">
     EMP_ID, EMP_NUM, EMP_NAME, SEX, AGE, ADDRESS, PHONE, EMAIL, PACE, REMARK, STATUS, CREATE_TIME,
     UPDATE_TIME, FLAG
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_emp
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMap">
+    select *
+    from t_emp e
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
     where EMP_ID = #{empId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from t_emp
+    delete e, u, em, ur
+    from t_emp e
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
     where EMP_ID = #{empId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.spring.model.Emp">
@@ -201,24 +248,39 @@
     where EMP_ID = #{empId,jdbcType=VARCHAR}
   </update>
 
-  <select id="getAllEmp" resultMap="BaseResultMap">
-    SELECT e.*,d.DEPT_NAME,j.JOB_NAME FROM
-    t_emp e LEFT JOIN t_emp_param em
+  <select id="getAllEmp" resultMap="ResultMap">
+    SELECT *
+    FROM t_emp e
+    LEFT JOIN t_emp_param em
     ON  e.EMP_ID=em.EMP_ID
     LEFT JOIN t_dept d
     ON em.DEPT_ID=d.DEPT_ID
     LEFT JOIN t_job j
     ON em.JOB_ID=j.JOB_ID
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
+    ORDER BY e.CREATE_TIME ASC
   </select>
 
-  <select id="getEmpByEmpId" parameterType="java.lang.String" resultMap="BaseResultMap">
-    SELECT e.*,d.DEPT_NAME,j.JOB_NAME FROM
-    t_emp e LEFT JOIN t_emp_param em
+  <select id="getEmpByEmpId" parameterType="java.lang.String" resultMap="ResultMap">
+    SELECT *, e.STATUS STATUS, u.STATUS U_STATUS
+    FROM t_emp e
+    LEFT JOIN t_emp_param em
     ON  e.EMP_ID=em.EMP_ID
     LEFT JOIN t_dept d
     ON em.DEPT_ID=d.DEPT_ID
     LEFT JOIN t_job j
     ON em.JOB_ID=j.JOB_ID
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
     WHERE
     e.EMP_ID = #{empId}
   </select>
@@ -236,10 +298,21 @@
     SELECT max(EMP_NUM) FROM t_emp
   </select>
 
-  <select id="getEmpMessageByEmpName" resultMap="BaseResultMap" parameterType="java.lang.String">
-    SELECT * FROM t_emp
-    WHERE 1=1
-    AND EMP_NAME = #{empName}
+  <select id="getEmpMessageByEmpName" resultMap="ResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_emp e
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID =r.ROLE_ID
+    WHERE EMP_NAME = #{empName}
   </select>
   
   <delete id="batchDelete" parameterType="java.util.List">
@@ -253,8 +326,8 @@
     </foreach>
   </delete>
   
-  <select id="getMessageByCondition" resultMap="BaseResultMap" parameterType="com.spring.param.EmpFilter">
-    SELECT e.*, d.DEPT_NAME, j.JOB_NAME
+  <select id="getMessageByCondition" resultMap="ResultMap" parameterType="com.spring.param.EmpFilter">
+    SELECT *
     FROM t_emp e
     LEFT JOIN t_emp_param em
     ON e.EMP_ID = em.EMP_ID
@@ -262,6 +335,12 @@
     ON em.DEPT_ID = d.DEPT_ID
     LEFT JOIN t_job j
     ON em.JOB_ID = j.JOB_ID
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
     WHERE 1=1
     <if test="empName != null and empName != ''">
       AND e.EMP_NAME LIKE concat(concat('%', #{empName},'%'))
@@ -282,6 +361,7 @@
           AND DATE_FORMAT(e.CREATE_TIME, '%Y-%m-%d %H:%T:%s') >= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%T:%s')
         ]]>
     </if>
+    ORDER BY e.CREATE_TIME ASC
   </select>
   
   <select id="getCountByFilter" resultType="java.lang.Integer" parameterType="java.lang.String">

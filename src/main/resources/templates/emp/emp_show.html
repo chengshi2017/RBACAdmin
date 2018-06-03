@@ -8,74 +8,80 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">员工工号：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" name="empNum" id="empNum" th:value="${emp.empNum}" disabled="disabled" style="width: 410px"/>
+                <input type="text" class="input-text" name="empNum" id="empNum" th:value="${staff.empNum}" disabled="disabled" style="width: 410px"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">员工姓名：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="empName" name="empName" th:value="${emp.empName}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" placeholder="" id="empName" name="empName" th:value="${staff.empName}" style="width: 410px" disabled="disabled"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">性别：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="sex" name="sex" th:value="${emp.sex}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" placeholder="" id="sex" name="sex" th:value="${staff.sex}" style="width: 410px" disabled="disabled"/>
             </div>
         </div>
 
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">年龄：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" value="" placeholder="" id="age" name="age" th:value="${emp.age}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" value="" placeholder="" id="age" name="age" th:value="${staff.age}" style="width: 410px" disabled="disabled"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">家庭住址：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="address" name="address" th:value="${emp.address}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" placeholder="" id="address" name="address" th:value="${staff.address}" style="width: 410px" disabled="disabled"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">邮箱：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="email" name="email" th:value="${emp.email}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" placeholder="" id="email" name="email" th:value="${staff.email}" style="width: 410px" disabled="disabled"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">电话号码：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" name="phone" id="phone" th:value="${emp.phone}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" name="phone" id="phone" th:value="${staff.phone}" style="width: 410px" disabled="disabled"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">民族：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="pace" name="pace" th:value="${emp.pace}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" placeholder="" id="pace" name="pace" th:value="${staff.pace}" style="width: 410px" disabled="disabled"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">部门名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="deptName" name="deptName" th:value="${emp.deptName}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" placeholder="" id="deptName" name="deptName" th:value="${staff.deptName}" style="width: 410px" disabled="disabled"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">职位名称：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="jobName" name="jobName" th:value="${emp.jobName}" style="width: 410px" disabled="disabled"/>
+                <input type="text" class="input-text" placeholder="" id="jobName" name="jobName" th:value="${staff.jobName}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">系统可用：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="uStatus" name="uStatus" th:value="${staff.uStatus}==0?'不可用':'可用'" disabled="disabled" style="width: 410px"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">工作状态：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="status" name="status" th:value="${emp.status}==0?'请假':'正常'" disabled="disabled" style="width: 410px"/>
+                <input type="text" class="input-text" placeholder="" id="eStatus" name="eStatus" th:value="${staff.eStatus}==0?'请假':'正常'" disabled="disabled" style="width: 410px"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">备注：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${emp.remark}" style="width: 410px" disabled="disabled"></textarea>
+                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${staff.remark}" style="width: 410px" disabled="disabled"></textarea>
             </div>
         </div>
     </form>

@@ -2,15 +2,14 @@ package com.spring.service.emp.impl;
 
 import com.github.pagehelper.Page;
 import com.spring.common.exceptions.MyException;
+import com.spring.common.utils.Constants;
 import com.spring.common.utils.DateUtils;
 import com.spring.common.utils.UUID;
-import com.spring.dao.DeptMapper;
-import com.spring.dao.EmpMapper;
-import com.spring.dao.EmpParamMapper;
-import com.spring.dao.JobMapper;
+import com.spring.dao.*;
 import com.spring.model.Dept;
 import com.spring.model.Emp;
 import com.spring.model.Job;
+import com.spring.model.Staff;
 import com.spring.param.EmpFilter;
 import com.spring.service.emp.EmpService;
 import org.apache.ibatis.session.RowBounds;
@@ -23,6 +22,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,36 +49,68 @@ public class EmpServiceImpl implements EmpService{
     @Autowired
     private JobMapper jobMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private UserRoleMapper userRoleMapper;
+
     @Override
-    public Page<Emp> getAllEmp(RowBounds rowBounds) {
+    public Page<Staff> getAllEmp(RowBounds rowBounds) {
         return empMapper.getAllEmp(rowBounds);
     }
 
     @Override
-    public Emp getEmpByEmpId(String empId) {
+    public Staff getEmpByEmpId(String empId) {
         return empMapper.getEmpByEmpId(empId);
     }
 
     @Override
-    public void insert(Emp emp) {
-        Integer count=empMapper.getCount();
+    public void insert(Staff staff) {
+        //设置员工ID
+        staff.setEmpId(UUID.getUUID());
+        staff.setUserId(staff.getEmpId());
+        //设置关联表ID
+        staff.setEmpParamId(UUID.getUUID());
+        //设置用户关联表ID
+        staff.setUserRoleId(UUID.getUUID());
+        staff.setUserName(staff.getEmpName());
+        //为员工分配员工编号
+        String empNum=empMapper.getEmpNum();
+        String record=empNum.substring(empNum.length()-5,empNum.length());
+        int count=Integer.parseInt(record);
         ++count;
-        emp.setEmpId(UUID.getUUID());
-        emp.setEmpNum(new DecimalFormat("000000").format(count));
-        emp.setEmpParamId(UUID.getUUID());
-        emp.setCreateTime(DateUtils.today());
-        String deptName=emp.getDeptName();
-        //根据部门名称查询部门信息
-        List<Dept> deptList=deptMapper.getDeptMessageByDeptName(deptName);
-        emp.setDeptId(deptList.get(0).getDeptId());
-        //根据前台传递的jobName查询jobId
-        String jobName=emp.getJobName();
-        List<Job> jobList=jobMapper.getAllJobByJobName(jobName);
-        emp.setJobId(jobList.get(0).getJobId());
-        //先增加参数表内的数据
-        empParamMapper.save(emp);
-        //向主表中添加数据
-        empMapper.insert(emp);
+        String empNumString=new DecimalFormat("00000").format(count);
+        staff.setEmpNum("A"+empNumString);
+        //设置用户状态
+        //初步设想是插入员工信息，员工表中的状态由员工管理员设置
+        //比如：员工状态设置为1，eStatus状态正常，但是员工不能登录系统，等到权限管理员或者
+        //系统管理员将用户状态设为正常才允许登录，涉及到流程
+        staff.setuStatus(Constants.NOT_STATUS);
+        //设置插入系统时间
+        staff.setCreateTime(new Date());
+        //设置插入的用户为非管理员状态
+        staff.setFlag(Constants.NOT_USER_ADMIN);
+        //设置插入的用户默认的系统角色为员工角色
+        staff.setRoleId(Constants.ROLE_STAFF);
+        //设置插入员工角色表中的备注信息
+        staff.setUserRoleRemark("用户员工关联信息");
+        //向表中插入数据
+        //先向员工表中插入数据
+        if (empMapper.insertStaff(staff)<1){
+            throw new MyException("插入员工信息失败");
+        }
+        //再向用户表中插入数据
+        if (userMapper.insert(staff)<1){
+            throw new MyException("插入用户信息失败");
+        }        //再向员工信息关联表中插入数据
+        if (empParamMapper.saveStaff(staff)<1){
+            throw new MyException("插入员工关联信息失败");
+        }
+        //最后想用户角色关联表中插入数据
+        if (userRoleMapper.save(staff)<1){
+            throw new MyException("插入用户角色关联信息失败");
+        }
     }
 
     @Override
@@ -108,7 +140,7 @@ public class EmpServiceImpl implements EmpService{
     }
 
     @Override
-    public List<Emp> getEmpMessageByEmpName(String empName) {
+    public List<Staff> getEmpMessageByEmpName(String empName) {
         return empMapper.getEmpMessageByEmpName(empName);
     }
 

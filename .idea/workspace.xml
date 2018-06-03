@@ -1,0 +1,1687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4e642631-061d-4af2-aac2-c5e99bb08415" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_0_25.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_1_41.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_0_9_5.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_4_2_1.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_41.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_core_2_5_0.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ognl_ognl_3_0_8.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_7.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_core_1_2_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_ehcache_1_2_4.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_quartz_1_2_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_spring_1_2_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_web_1_2_2.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_1_10_19.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_4_0.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_3_0.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_1_1_1.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_1_1_1.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_1.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opensymphony_quartz_quartz_1_6_1.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_unbescape_unbescape_1_1_0_RELEASE.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/HRM.iml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/AbstractException.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/GlobalExceptionHandler.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/MyException.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/MyException.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/common/utils/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/common/utils/Constants.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/controller/emp/EmpController.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/controller/emp/EmpController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/controller/job/JobController.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/controller/job/JobController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/controller/permission/PUserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/controller/permission/PUserController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/dao/EmpMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/dao/EmpMapper.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/dao/JobMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/dao/JobMapper.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/dao/UserMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/dao/UserMapper.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/dao/UserRoleMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/dao/UserRoleMapper.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/model/Job.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/model/Job.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/model/Staff.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/model/Staff.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/param/JobFilter.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/param/JobFilter.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/service/emp/EmpService.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/service/emp/EmpService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/service/emp/impl/EmpServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/service/emp/impl/EmpServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/service/job/JobService.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/service/job/JobService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/service/job/impl/JobServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/service/job/impl/JobServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/service/permission/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/service/permission/UserService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spring/service/permission/impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/spring/service/permission/impl/UserServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/EmpMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/EmpMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/JobMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/JobMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserRoleMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserRoleMapper.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/emp/empAdd.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/emp/empAdd.js" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/job/jobAdd.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/job/jobAdd.js" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/job/jobList.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/job/jobList.js" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/emp/empList.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/emp/empList.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/emp/emp_add.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/emp/emp_add.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/emp/emp_show.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/emp/emp_show.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/job/jobList.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/job/jobList.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/job/job_add.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/job/job_add.html" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/permission/user/userList.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/permission/user/userList.html" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/HRM$Application.coverage" NAME="Application Coverage Results" MODIFIED="1527437710364" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file leaf-file-name="EmpController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/controller/emp/EmpController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="emp_show.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/emp/emp_show.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="71" column="136" lean-forward="false" selection-start-line="71" selection-start-column="136" selection-end-line="71" selection-end-column="136" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmpMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/EmpMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="269" column="23" lean-forward="false" selection-start-line="269" selection-start-column="23" selection-end-line="269" selection-end-column="23" />
+              <folding>
+                <marker date="1528023126413" expanded="true" signature="3413:3806" ph="select from t_emp" />
+                <marker date="1528023126413" expanded="true" signature="3891:4139" ph="delete from t_emp... " />
+                <marker date="1528023126413" expanded="true" signature="4216:4811" ph="insert into t_emp... " />
+                <marker date="1528023126413" expanded="true" signature="7134:8383" ph="update t_emp... " />
+                <marker date="1528023126413" expanded="true" signature="8472:9098" ph="update t_emp... " />
+                <marker date="1528023126413" expanded="true" signature="9164:9344" ph="SELECT e.*,d... t_emp" />
+                <marker date="1528023126413" expanded="true" signature="9164:9507" ph="SELECT e.*, t_emp" />
+                <marker date="1528023126413" expanded="true" signature="9164:9538" ph="SELECT * FRO... t_emp" />
+                <marker date="1528023126413" expanded="true" signature="9641:10054" ph="SELECT e.*,d... t_emp" />
+                <marker date="1528023126413" expanded="true" signature="10323:10348" ph="SELECT max(E... t_emp" />
+                <marker date="1528023126413" expanded="true" signature="10323:10353" ph="SELECT max(E... t_emp" />
+                <marker date="1528023126413" expanded="true" signature="10465:10840" ph="SELECT * FRO... t_emp" />
+                <marker date="1528023126413" expanded="true" signature="11257:12364" ph="SELECT * FRO... t_emp" />
+                <marker date="1528023126413" expanded="true" signature="12856:13068" ph="SELECT e.*, t_emp" />
+                <marker date="1528023126413" expanded="true" signature="13068:13079" ph="..." />
+                <marker date="1528023126413" expanded="true" signature="15300:16551" ph="update t_emp... " />
+                <marker date="1528023126413" expanded="true" signature="16625:16645" ph="SELECT EMP_N... *" />
+                <marker date="1528023126413" expanded="true" signature="16625:16692" ph="SELECT EMP_N... t_emp" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmpServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/service/emp/impl/EmpServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="169" column="55" lean-forward="false" selection-start-line="169" selection-start-column="34" selection-end-line="169" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="empAdd.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/emp/empAdd.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="478">
+              <caret line="101" column="10" lean-forward="true" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="empList.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/emp/empList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1527470696528" expanded="true" signature="2726:2746" ph="..." />
+                <marker date="1527470696528" expanded="true" signature="2772:2780" ph="&amp;##xe615;" />
+                <marker date="1527470696528" expanded="true" signature="3591:3611" ph="..." />
+                <marker date="1527470696528" expanded="true" signature="3637:3645" ph="&amp;##xe631;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="emp_add.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/emp/emp_add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="133" column="37" lean-forward="false" selection-start-line="133" selection-start-column="32" selection-end-line="133" selection-end-column="37" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#8;n#form#0;n#article#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserRoleMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserRoleMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="515">
+              <caret line="118" column="11" lean-forward="true" selection-start-line="118" selection-start-column="11" selection-end-line="118" selection-end-column="11" />
+              <folding>
+                <marker date="1528020608985" expanded="true" signature="756:881" ph="select from t_user_role" />
+                <marker date="1528020608985" expanded="true" signature="967:1046" ph="delete from t_user_role... " />
+                <marker date="1528020608985" expanded="true" signature="1140:1345" ph="insert into t_user_role... " />
+                <marker date="1528020608985" expanded="true" signature="2321:2692" ph="update t_user_role... " />
+                <marker date="1528020608985" expanded="true" signature="2798:3004" ph="update t_user_role... " />
+                <marker date="1528020608985" expanded="true" signature="3118:3172" ph="SELECT * FRO... t_user_role" />
+                <marker date="1528020608985" expanded="true" signature="3254:3307" ph="DELETE FROM t_user_role... " />
+                <marker date="1528020608985" expanded="true" signature="3736:3791" ph="SELECT * FRO... t_user_role" />
+                <marker date="1528020608985" expanded="true" signature="3873:3926" ph="DELETE FROM t_user_role... " />
+                <marker date="1528020608985" expanded="true" signature="4004:4216" ph="insert into t_user_role... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Staff.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/model/Staff.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="523">
+              <caret line="278" column="39" lean-forward="false" selection-start-line="278" selection-start-column="39" selection-end-line="278" selection-end-column="39" />
+              <folding>
+                <element signature="e#1288#1289#0" expanded="true" />
+                <element signature="e#1321#1322#0" expanded="true" />
+                <element signature="e#1373#1374#0" expanded="true" />
+                <element signature="e#1417#1418#0" expanded="true" />
+                <element signature="e#4515#4516#0" expanded="true" />
+                <element signature="e#4544#4545#0" expanded="true" />
+                <element signature="e#4588#4589#0" expanded="true" />
+                <element signature="e#4624#4625#0" expanded="true" />
+                <element signature="e#4659#4660#0" expanded="true" />
+                <element signature="e#4690#4691#0" expanded="true" />
+                <element signature="e#4738#4739#0" expanded="true" />
+                <element signature="e#4778#4779#0" expanded="true" />
+                <element signature="e#4856#4857#0" expanded="true" />
+                <element signature="e#4916#4917#0" expanded="true" />
+                <element signature="e#4968#4969#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1089">
+              <caret line="36" column="14" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="36" selection-end-column="14" />
+              <folding>
+                <marker date="1528011907122" expanded="true" signature="2653:3131" ph="select from t_user" />
+                <marker date="1528011907122" expanded="true" signature="3549:3770" ph="insert into t_user... " />
+                <marker date="1528011907122" expanded="true" signature="4748:5129" ph="update t_user... " />
+                <marker date="1528011907122" expanded="true" signature="5231:5439" ph="update t_user... " />
+                <marker date="1528011907122" expanded="true" signature="6173:6544" ph="SELECT * FRO... t_user" />
+                <marker date="1528011907122" expanded="true" signature="6651:6730" ph="SELECT * FRO... t_user" />
+                <marker date="1528011907122" expanded="true" signature="6847:6925" ph="SELECT count... t_user" />
+                <marker date="1528011907122" expanded="true" signature="8547:8567" ph="SELECT * FRO... t_user" />
+                <marker date="1528011907122" expanded="true" signature="8547:8619" ph="SELECT * FRO... t_user" />
+                <marker date="1528011907122" expanded="true" signature="8728:8795" ph="SELECT * FRO... t_user" />
+                <marker date="1528011907122" expanded="true" signature="8882:10414" ph="update t_user... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>btn-danger</find>
+      <find>btn-primary</find>
+      <find>importService</find>
+      <find>update</find>
+      <find>updateByPrimaryKeySelective</find>
+      <find>getAllJobMessage</find>
+      <find>getAllJob</find>
+      <find>getJobMessageById</find>
+      <find>user</find>
+      <find>insert</find>
+      <find>insertStaff</find>
+      <find>getCount</find>
+      <find>cascadeUpdate</find>
+      <find>deleteByPrimaryKey</find>
+      <find>delete</find>
+      <find>search</find>
+      <find>item</find>
+      <find>getAllUserMessage</find>
+      <find>getUserMessageById</find>
+      <find>getAll</find>
+      <find>selectByPrimaryKey</find>
+      <find>getUserByName</find>
+      <find>getAllUsers</find>
+      <find>status</find>
+      <find>getEmpMessageByEmpName</find>
+      <find>getAllEmp</find>
+      <find>getMessageByCondition</find>
+      <find>ORDER BY</find>
+      <find>emp</find>
+      <find>getEmpByEmpId</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>VARCHAR</replace>
+      <replace>retrieve</replace>
+      <replace>remark</replace>
+      <replace>fileService</replace>
+      <replace>eStatus</replace>
+      <replace>staff</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>F:\IDEAWorkspace\HRM\src\main\resources\static\HUI\h-ui\images</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/service/emp/impl/EmpServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/service/poi/FileServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/service/job/impl/JobServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/controller/base/WelcomeController.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/service/permission/impl/RoleServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/service/log/impl/LogServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/controller/dept/DeptController.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/service/permission/impl/MenuServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/service/permission/impl/UserServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/service/dept/impl/DeptServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/spring/controller/poi/ExcelExportController.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/static/HUI/h-ui/css/H-ui.min.css" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/controller/poi/ExcelExportController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/common/shiro/MyRealm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/controller/base/IndexController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/model/permission/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/model/Emp.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/dept/deptList.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/controller/user/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/service/poi/FileServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/service/emp/EmpParamService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/dao/EmpParamMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/permission/user/user-add.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/Application.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/EmpParamMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/permission/user/userAdd.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/HUI/h-ui.admin/css/style.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/permission/user/userList.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/permission/role/roleList.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/model/Job.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/job/job_add.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/service/job/JobService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/service/job/impl/JobServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/dao/JobMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/job/jobAdd.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/controller/job/JobController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/param/JobFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/JobMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/job/jobList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/job/jobList.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/controller/permission/PUserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/service/permission/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/service/permission/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/dao/UserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/permission/user/userList.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/emp/empList.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/dao/EmpMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/service/emp/EmpService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/common/utils/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/GlobalExceptionHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/AbstractException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/MyException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/dao/UserRoleMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/model/Staff.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/UserRoleMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/controller/emp/EmpController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/spring/service/emp/impl/EmpServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/emp/emp_add.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/emp/empAdd.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/emp/emp_show.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/EmpMapper.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="E:/Maven/apache-maven-3.3.9" />
+        <option name="userSettingsFile" value="E:\Maven\apache-maven-3.3.9\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Correctness</id>
+          </State>
+          <State>
+            <id>Gradle</id>
+          </State>
+          <State>
+            <id>Kotlin</id>
+          </State>
+          <State>
+            <id>Maven</id>
+          </State>
+          <State>
+            <id>OSGi</id>
+          </State>
+          <State>
+            <id>Probable bugsGradle</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages ProjectPane="false" />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="permission" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="permission" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="permission" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="HUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="HUI" type="462c0819:PsiDirectoryNode" />
+              <item name="h-ui.admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="HUI" type="462c0819:PsiDirectoryNode" />
+              <item name="h-ui.admin" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="emp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="permission" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="permission" type="462c0819:PsiDirectoryNode" />
+              <item name="grant" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="emp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="permission" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HRM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="permission" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="F:/预加载项目/mgadmin" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="btn-danger&#9;null&#9;null&#10;layui-nav-tree&#9;null&#9;null" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\IDEAWorkspace\HRM\src\main\resources\templates\permission\grant" />
+      <recent name="F:\IDEAWorkspace\HRM\src\main\resources\static\ztree\js" />
+      <recent name="F:\IDEAWorkspace\HRM\src\main\resources\static\js\permission\role" />
+      <recent name="F:\IDEAWorkspace\HRM\src\main\resources\templates\log" />
+      <recent name="F:\IDEAWorkspace\HRM\src\main\resources\static\js\permission\user" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\IDEAWorkspace\HRM\src\main\java\com\spring\common\redis" />
+      <recent name="F:\IDEAWorkspace\HRM\src\main\java\com\spring\common\result" />
+      <recent name="F:\IDEAWorkspace\HRM\src\main\resources\static\ztree" />
+      <recent name="F:\IDEAWorkspace\HRM\src\main\resources\static\ztree\js" />
+      <recent name="F:\IDEAWorkspace\HRM\src\main\resources\static\ztree\css" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.spring.service.poi" />
+      <recent name="com.spring.service.emp" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration name="SysInfo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.spring.common.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="com.spring.common.utils.SysInfo" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="HRM" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.spring.Application" />
+      <module name="HRM" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Spring Boot.Application" />
+      <item index="1" class="java.lang.String" itemvalue="Application.SysInfo" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.SysInfo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4e642631-061d-4af2-aac2-c5e99bb08415" name="Default" comment="" />
+      <created>1525013468275</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1525013468275</updated>
+      <workItem from="1525013472071" duration="834000" />
+      <workItem from="1525060660705" duration="13701000" />
+      <workItem from="1525138100021" duration="25137000" />
+      <workItem from="1525224697610" duration="24921000" />
+      <workItem from="1525268642291" duration="5203000" />
+      <workItem from="1525310926231" duration="10586000" />
+      <workItem from="1525399617795" duration="2702000" />
+      <workItem from="1525419296771" duration="10761000" />
+      <workItem from="1525487063655" duration="29582000" />
+      <workItem from="1525568090378" duration="14619000" />
+      <workItem from="1525655268968" duration="1661000" />
+      <workItem from="1525741465652" duration="10508000" />
+      <workItem from="1525782384987" duration="4169000" />
+      <workItem from="1525827941958" duration="25319000" />
+      <workItem from="1525869127207" duration="7997000" />
+      <workItem from="1525915525796" duration="21187000" />
+      <workItem from="1525953210457" duration="6139000" />
+      <workItem from="1526000454040" duration="23678000" />
+      <workItem from="1526041943585" duration="10958000" />
+      <workItem from="1526087479344" duration="135000" />
+      <workItem from="1526087639174" duration="25364000" />
+      <workItem from="1526174473587" duration="23014000" />
+      <workItem from="1526259733052" duration="1241000" />
+      <workItem from="1526277016346" duration="22946000" />
+      <workItem from="1526355545980" duration="6064000" />
+      <workItem from="1526430781887" duration="18705000" />
+      <workItem from="1526514514738" duration="11336000" />
+      <workItem from="1526603444475" duration="1866000" />
+      <workItem from="1526605361299" duration="5111000" />
+      <workItem from="1526632231444" duration="11977000" />
+      <workItem from="1526646822284" duration="5305000" />
+      <workItem from="1526691318816" duration="28601000" />
+      <workItem from="1526760368882" duration="3624000" />
+      <workItem from="1526799601261" duration="1115000" />
+      <workItem from="1526829438061" duration="2096000" />
+      <workItem from="1526863838961" duration="9629000" />
+      <workItem from="1526880499985" duration="955000" />
+      <workItem from="1526888270893" duration="9196000" />
+      <workItem from="1526913113730" duration="6133000" />
+      <workItem from="1526949835799" duration="8706000" />
+      <workItem from="1526961269961" duration="6858000" />
+      <workItem from="1526984461898" duration="11583000" />
+      <workItem from="1526999036660" duration="4048000" />
+      <workItem from="1527065375878" duration="4083000" />
+      <workItem from="1527086341431" duration="1503000" />
+      <workItem from="1527121463017" duration="10257000" />
+      <workItem from="1527173302442" duration="6384000" />
+      <workItem from="1527209126057" duration="4731000" />
+      <workItem from="1527227157681" duration="8148000" />
+      <workItem from="1527239534563" duration="6020000" />
+      <workItem from="1527250062160" duration="8013000" />
+      <workItem from="1527297489211" duration="11237000" />
+      <workItem from="1527324421560" duration="14901000" />
+      <workItem from="1527346147771" duration="1690000" />
+      <workItem from="1527380581900" duration="14213000" />
+      <workItem from="1527408049949" duration="10595000" />
+      <workItem from="1527430790088" duration="6919000" />
+      <workItem from="1527469073310" duration="3228000" />
+      <workItem from="1527494200751" duration="3996000" />
+      <workItem from="1527510841523" duration="2094000" />
+      <workItem from="1527550245751" duration="7465000" />
+      <workItem from="1527558883649" duration="359000" />
+      <workItem from="1527575933255" duration="19673000" />
+      <workItem from="1527601799091" duration="711000" />
+      <workItem from="1527644663844" duration="8261000" />
+      <workItem from="1527667655008" duration="11773000" />
+      <workItem from="1527682050501" duration="400000" />
+      <workItem from="1527726505221" duration="2906000" />
+      <workItem from="1527747159375" duration="8111000" />
+      <workItem from="1527815215398" duration="10126000" />
+      <workItem from="1527842860896" duration="8966000" />
+      <workItem from="1527899521364" duration="14970000" />
+      <workItem from="1527926957282" duration="15601000" />
+      <workItem from="1527988774709" duration="29201000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="731805000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48090693" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32559395" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Problems" active="false" anchor="top" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.3293556" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="BPMNPalette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991362" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/spring/controller/emp/EmpController.java</url>
+          <line>135</line>
+          <properties />
+          <option name="timeStamp" value="296" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="297" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/common/result/CodeMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/service/emp/EmpParamService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/dao/EmpParamMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/LogMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6770">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1527432622620" expanded="true" signature="1293:1401" ph="select from t_log" />
+            <marker date="1527432622620" expanded="true" signature="1487:1549" ph="delete from t_log... " />
+            <marker date="1527432622620" expanded="true" signature="1627:2042" ph="insert into t_log... " />
+            <marker date="1527432622620" expanded="true" signature="3741:4597" ph="update t_log... " />
+            <marker date="1527432622620" expanded="true" signature="4687:5125" ph="update t_log... " />
+            <marker date="1527432622620" expanded="true" signature="5198:5398" ph="SELECT l.*,t... t_log" />
+            <marker date="1527432622620" expanded="true" signature="5741:5955" ph="SELECT l.*,t... t_log" />
+            <marker date="1527432622620" expanded="true" signature="6081:6796" ph="SELECT l.*,t... t_log" />
+            <marker date="1527432622620" expanded="true" signature="7333:7593" ph="SELECT l.*,t... t_log" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="16" column="28" lean-forward="false" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/EmpParamMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2607">
+          <caret line="124" column="14" lean-forward="false" selection-start-line="124" selection-start-column="14" selection-end-line="124" selection-end-column="14" />
+          <folding>
+            <marker date="1527932253661" expanded="true" signature="893:1018" ph="select from t_emp_param" />
+            <marker date="1527932253661" expanded="true" signature="1104:1183" ph="delete from t_emp_param... " />
+            <marker date="1527932253661" expanded="true" signature="1266:1555" ph="insert into t_emp_param... " />
+            <marker date="1527932253661" expanded="true" signature="2785:3233" ph="update t_emp_param... " />
+            <marker date="1527932253661" expanded="true" signature="3323:3612" ph="update t_emp_param... " />
+            <marker date="1527932253661" expanded="true" signature="3688:3970" ph="INSERT INTO t_emp_param... " />
+            <marker date="1527932253661" expanded="true" signature="4080:4135" ph="SELECT * FRO... t_emp_param" />
+            <marker date="1527932253661" expanded="true" signature="4244:4297" ph="SELECT * FRO... t_emp_param" />
+            <marker date="1527932253661" expanded="true" signature="4380:4668" ph="insert into t_emp_param... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.12.RELEASE/spring-aop-4.3.12.RELEASE.jar!/org/springframework/aop/framework/CglibAopProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="476" column="0" lean-forward="false" selection-start-line="476" selection-start-column="0" selection-end-line="476" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/permission/user/userAdd.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="52" column="9" lean-forward="false" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/HUI/h-ui.admin/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/permission/user/userList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="210" column="32" lean-forward="true" selection-start-line="210" selection-start-column="32" selection-end-line="210" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/permission/role/roleList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="26" column="182" lean-forward="false" selection-start-line="26" selection-start-column="182" selection-end-line="26" selection-end-column="182" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/model/Job.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1452">
+          <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <element signature="e#1029#1030#0" expanded="true" />
+            <element signature="e#1058#1059#0" expanded="true" />
+            <element signature="e#1103#1104#0" expanded="true" />
+            <element signature="e#1139#1140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/job/job_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="19" column="140" lean-forward="false" selection-start-line="19" selection-start-column="140" selection-end-line="19" selection-end-column="140" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/service/job/JobService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="36" lean-forward="false" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/dao/JobMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="36" column="36" lean-forward="false" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/job/jobAdd.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="51" column="61" lean-forward="true" selection-start-line="51" selection-start-column="61" selection-end-line="51" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/param/JobFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1023">
+          <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+          <folding>
+            <element signature="e#771#772#0" expanded="true" />
+            <element signature="e#815#816#0" expanded="true" />
+            <element signature="e#851#852#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/service/job/impl/JobServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="107" column="36" lean-forward="true" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="36" />
+          <folding>
+            <element signature="e#2839#2840#0" expanded="true" />
+            <element signature="e#2903#2904#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/JobMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="161" column="37" lean-forward="false" selection-start-line="161" selection-start-column="37" selection-end-line="161" selection-end-column="37" />
+          <folding>
+            <marker date="1527998017660" expanded="true" signature="1014:1162" ph="select * fro... t_job" />
+            <marker date="1527998017660" expanded="true" signature="1248:1310" ph="delete from t_job... " />
+            <marker date="1527998017660" expanded="true" signature="1388:1722" ph="insert into t_job... " />
+            <marker date="1527998017660" expanded="true" signature="3218:3928" ph="update t_job... " />
+            <marker date="1527998017660" expanded="true" signature="4018:4165" ph="update t_job... " />
+            <marker date="1527998017660" expanded="true" signature="4242:4276" ph="SELECT * FRO... t_job" />
+            <marker date="1527998017660" expanded="true" signature="4242:4337" ph="SELECT j.* ,... t_job" />
+            <marker date="1527998017660" expanded="true" signature="4407:4502" ph="SELECT * FRO... t_job" />
+            <marker date="1527998017660" expanded="true" signature="4614:4673" ph="SELECT * FRO... t_job" />
+            <marker date="1527998017660" expanded="true" signature="5774:5832" ph="SELECT * FRO... t_job" />
+            <marker date="1527998017660" expanded="true" signature="5950:6018" ph="SELECT * FRO... t_job" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/job/jobList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="16" column="14" lean-forward="false" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+          <folding>
+            <marker date="1527998171436" expanded="true" signature="2486:2506" ph="..." />
+            <marker date="1527998171436" expanded="true" signature="2532:2540" ph="&amp;##xe615;" />
+            <marker date="1527998171436" expanded="true" signature="3313:3333" ph="..." />
+            <marker date="1527998171436" expanded="true" signature="3359:3367" ph="&amp;##xe631;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/controller/job/JobController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2107">
+          <caret line="121" column="42" lean-forward="false" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/job/jobList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/permission/grant/grant.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.12.RELEASE/spring-core-4.3.12.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/service/permission/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/permission/user/userList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="52" column="44" lean-forward="false" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="44" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#span#0;n#td#8;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#a#0;n#span#1;n#td#8;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#a#0;n#td#8;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/dao/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="35" column="14" lean-forward="false" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/emp/empList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-324">
+          <caret line="80" column="58" lean-forward="false" selection-start-line="80" selection-start-column="58" selection-end-line="80" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/permission/user/user-add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="29" column="18" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="29" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/dao/EmpMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/controller/permission/PUserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/service/permission/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="81" column="42" lean-forward="true" selection-start-line="75" selection-start-column="8" selection-end-line="81" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/common/utils/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="45" column="57" lean-forward="false" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/common/config/DruidDBConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2414">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/MyException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/AbstractException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/common/exceptions/GlobalExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="29" column="14" lean-forward="false" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/dao/UserRoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="30" column="12" lean-forward="false" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1089">
+          <caret line="36" column="14" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="36" selection-end-column="14" />
+          <folding>
+            <marker date="1528011907122" expanded="true" signature="2653:3131" ph="select from t_user" />
+            <marker date="1528011907122" expanded="true" signature="3549:3770" ph="insert into t_user... " />
+            <marker date="1528011907122" expanded="true" signature="4748:5129" ph="update t_user... " />
+            <marker date="1528011907122" expanded="true" signature="5231:5439" ph="update t_user... " />
+            <marker date="1528011907122" expanded="true" signature="6173:6544" ph="SELECT * FRO... t_user" />
+            <marker date="1528011907122" expanded="true" signature="6651:6730" ph="SELECT * FRO... t_user" />
+            <marker date="1528011907122" expanded="true" signature="6847:6925" ph="SELECT count... t_user" />
+            <marker date="1528011907122" expanded="true" signature="8547:8567" ph="SELECT * FRO... t_user" />
+            <marker date="1528011907122" expanded="true" signature="8547:8619" ph="SELECT * FRO... t_user" />
+            <marker date="1528011907122" expanded="true" signature="8728:8795" ph="SELECT * FRO... t_user" />
+            <marker date="1528011907122" expanded="true" signature="8882:10414" ph="update t_user... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/model/Staff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="278" column="39" lean-forward="false" selection-start-line="278" selection-start-column="39" selection-end-line="278" selection-end-column="39" />
+          <folding>
+            <element signature="e#1288#1289#0" expanded="true" />
+            <element signature="e#1321#1322#0" expanded="true" />
+            <element signature="e#1373#1374#0" expanded="true" />
+            <element signature="e#1417#1418#0" expanded="true" />
+            <element signature="e#4515#4516#0" expanded="true" />
+            <element signature="e#4544#4545#0" expanded="true" />
+            <element signature="e#4588#4589#0" expanded="true" />
+            <element signature="e#4624#4625#0" expanded="true" />
+            <element signature="e#4659#4660#0" expanded="true" />
+            <element signature="e#4690#4691#0" expanded="true" />
+            <element signature="e#4738#4739#0" expanded="true" />
+            <element signature="e#4778#4779#0" expanded="true" />
+            <element signature="e#4856#4857#0" expanded="true" />
+            <element signature="e#4916#4917#0" expanded="true" />
+            <element signature="e#4968#4969#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserRoleMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="118" column="11" lean-forward="true" selection-start-line="118" selection-start-column="11" selection-end-line="118" selection-end-column="11" />
+          <folding>
+            <marker date="1528020608985" expanded="true" signature="756:881" ph="select from t_user_role" />
+            <marker date="1528020608985" expanded="true" signature="967:1046" ph="delete from t_user_role... " />
+            <marker date="1528020608985" expanded="true" signature="1140:1345" ph="insert into t_user_role... " />
+            <marker date="1528020608985" expanded="true" signature="2321:2692" ph="update t_user_role... " />
+            <marker date="1528020608985" expanded="true" signature="2798:3004" ph="update t_user_role... " />
+            <marker date="1528020608985" expanded="true" signature="3118:3172" ph="SELECT * FRO... t_user_role" />
+            <marker date="1528020608985" expanded="true" signature="3254:3307" ph="DELETE FROM t_user_role... " />
+            <marker date="1528020608985" expanded="true" signature="3736:3791" ph="SELECT * FRO... t_user_role" />
+            <marker date="1528020608985" expanded="true" signature="3873:3926" ph="DELETE FROM t_user_role... " />
+            <marker date="1528020608985" expanded="true" signature="4004:4216" ph="insert into t_user_role... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.12.RELEASE/spring-aop-4.3.12.RELEASE.jar!/org/springframework/aop/support/AopUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="180" column="0" lean-forward="false" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/emp/empList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1527470696528" expanded="true" signature="2726:2746" ph="..." />
+            <marker date="1527470696528" expanded="true" signature="2772:2780" ph="&amp;##xe615;" />
+            <marker date="1527470696528" expanded="true" signature="3591:3611" ph="..." />
+            <marker date="1527470696528" expanded="true" signature="3637:3645" ph="&amp;##xe631;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/emp/emp_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="133" column="37" lean-forward="false" selection-start-line="133" selection-start-column="32" selection-end-line="133" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#8;n#form#0;n#article#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/emp/empAdd.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="101" column="10" lean-forward="true" selection-start-line="101" selection-start-column="10" selection-end-line="101" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/service/emp/EmpService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="32" column="14" lean-forward="false" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/service/emp/impl/EmpServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="169" column="55" lean-forward="false" selection-start-line="169" selection-start-column="34" selection-end-line="169" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/emp/emp_show.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="71" column="136" lean-forward="false" selection-start-line="71" selection-start-column="136" selection-end-line="71" selection-end-column="136" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/EmpMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="269" column="23" lean-forward="false" selection-start-line="269" selection-start-column="23" selection-end-line="269" selection-end-column="23" />
+          <folding>
+            <marker date="1528023126413" expanded="true" signature="3413:3806" ph="select from t_emp" />
+            <marker date="1528023126413" expanded="true" signature="3891:4139" ph="delete from t_emp... " />
+            <marker date="1528023126413" expanded="true" signature="4216:4811" ph="insert into t_emp... " />
+            <marker date="1528023126413" expanded="true" signature="7134:8383" ph="update t_emp... " />
+            <marker date="1528023126413" expanded="true" signature="8472:9098" ph="update t_emp... " />
+            <marker date="1528023126413" expanded="true" signature="9164:9344" ph="SELECT e.*,d... t_emp" />
+            <marker date="1528023126413" expanded="true" signature="9164:9507" ph="SELECT e.*, t_emp" />
+            <marker date="1528023126413" expanded="true" signature="9164:9538" ph="SELECT * FRO... t_emp" />
+            <marker date="1528023126413" expanded="true" signature="9641:10054" ph="SELECT e.*,d... t_emp" />
+            <marker date="1528023126413" expanded="true" signature="10323:10348" ph="SELECT max(E... t_emp" />
+            <marker date="1528023126413" expanded="true" signature="10323:10353" ph="SELECT max(E... t_emp" />
+            <marker date="1528023126413" expanded="true" signature="10465:10840" ph="SELECT * FRO... t_emp" />
+            <marker date="1528023126413" expanded="true" signature="11257:12364" ph="SELECT * FRO... t_emp" />
+            <marker date="1528023126413" expanded="true" signature="12856:13068" ph="SELECT e.*, t_emp" />
+            <marker date="1528023126413" expanded="true" signature="13068:13079" ph="..." />
+            <marker date="1528023126413" expanded="true" signature="15300:16551" ph="update t_emp... " />
+            <marker date="1528023126413" expanded="true" signature="16625:16645" ph="SELECT EMP_N... *" />
+            <marker date="1528023126413" expanded="true" signature="16625:16692" ph="SELECT EMP_N... t_emp" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/spring/controller/emp/EmpController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Web (HRM)|Web</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>jQuery</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>HRM</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: ch.qos.logback:logback-classic:1.1.11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

@@ -37,12 +37,21 @@ $(function () {
                 data: $("#form-job-add").serialize(),
                 dataType: 'json',
                 success: function (result) {
-                    layer.msg(result.data,{icon: 6, time: 2000},function () {
-                        var index=parent.layer.getFrameIndex(window.name);
-                        //parent.$('.btn-refresh').click();
-                        parent.retrieve();//刷新父页面
-                        parent.layer.close(index);//关闭弹出层
-                    })
+                    if (result.code ==0){
+                        layer.msg(result.data,{icon: 6, time: 2000}, function () {
+                            var index=parent.layer.getFrameIndex(window.name);
+                            //parent.$('.btn-refresh').click();
+                            parent.retrieve();//刷新父页面
+                            parent.layer.close(index);//关闭弹出层
+                        })
+                    }else {
+                        layer.msg(result.data, {icon:5, time: 2000}, function () {
+                            var index=parent.layer.getFrameIndex(window.name);
+                            //parent.$('.btn-refresh').click();
+                            parent.retrieve();//刷新父页面
+                            parent.layer.close(index);//关闭弹出层
+                        })
+                    }
                 },
                 error: function(result){
                     layer.msg(result.data,{icon:5, time:2000});

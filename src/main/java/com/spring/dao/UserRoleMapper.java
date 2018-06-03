@@ -1,5 +1,6 @@
 package com.spring.dao;
 
+import com.spring.model.Staff;
 import com.spring.model.permission.UserRole;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface UserRoleMapper {
     List<UserRole> getUserRoleByRoleId(String roleId);
 
     int deleteByRoleId(String roleId);
+
+    int save(Staff staff);
 }

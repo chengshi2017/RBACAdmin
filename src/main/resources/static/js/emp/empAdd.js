@@ -78,3 +78,30 @@ $(function () {
         }
     })
 });
+
+function changeJobName(deptId) {
+    if (deptId == ""){
+        layerOpen("请先选择部门信息");
+        return;
+    }
+    $("#jobId").empty();
+    $("#jobId").append('<option value="">---请选择所属职位---</option>');
+    $.ajax({
+        type: 'post',
+        data: {deptId: deptId},
+        dataType: 'json',
+        url: '/emp/getJobList',
+        success: function (result) {
+            var data = result.data;
+            console.log(data);
+            for (var i=0,length=data.length; i<length; i++){
+                console.log(data[i].jobName);
+                var jobName = data[i].jobName;
+                $("#jobId").append("<option value="+data[i].jobId+">"+jobName+"</option>");
+            }
+        },
+        error: function () {
+            layer.msg('系统错误，请与系统管理员联系',{icon: 5, time: 2000});
+        }
+    })
+}

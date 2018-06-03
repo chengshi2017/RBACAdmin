@@ -33,7 +33,7 @@ public interface UserMapper {
 
     int batchDelete(List<String> list);
 
-    Page<User> getMessageByCondition(RowBounds rowBounds, UserFilter filter);
+    Page<Staff> getMessageByCondition(RowBounds rowBounds, UserFilter filter);
 
     Integer getCountByFilter(String startTime);
 

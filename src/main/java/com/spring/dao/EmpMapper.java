@@ -21,15 +21,15 @@ public interface EmpMapper {
 
     int updateByPrimaryKey(Emp record);
 
-    Page<Emp> getAllEmp(RowBounds rowBounds);
+    Page<Staff> getAllEmp(RowBounds rowBounds);
 
-    Emp getEmpByEmpId(String empId);
+    Staff getEmpByEmpId(String empId);
 
     int delete(String empId);
 
     int getCount();
 
-    List<Emp> getEmpMessageByEmpName(String empName);
+    List<Staff> getEmpMessageByEmpName(String empName);
 
     int batchDelete(List<String> list);
 

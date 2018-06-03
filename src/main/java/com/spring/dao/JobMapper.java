@@ -33,4 +33,6 @@ public interface JobMapper {
     Integer getCountByFilter(String startTime);
 
     List<Job> getAllJobByDeptId(String deptHrId);
+
+    List<Job> getJobMessageByJobName(String jobName);
 }

@@ -2,6 +2,7 @@ package com.spring.service.emp;
 
 import com.github.pagehelper.Page;
 import com.spring.model.Emp;
+import com.spring.model.Staff;
 import com.spring.param.EmpFilter;
 import org.apache.ibatis.session.RowBounds;
 
@@ -15,17 +16,17 @@ import java.util.List;
  */
 public interface EmpService {
 
-    Page<Emp> getAllEmp(RowBounds rowBounds);
+    Page<Staff> getAllEmp(RowBounds rowBounds);
 
-    Emp getEmpByEmpId(String empId);
+    Staff getEmpByEmpId(String empId);
 
-    void insert(Emp emp);
+    void insert(Staff staff);
 
     void update(Emp emp);
 
     void delete(String empId);
 
-    List<Emp> getEmpMessageByEmpName(String empName);
+    List<Staff> getEmpMessageByEmpName(String empName);
 
     void batchDelete(List<String> list);
 

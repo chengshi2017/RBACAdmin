@@ -137,7 +137,7 @@ public class PUserController extends SuperController {
     public String getMessages(UserFilter filter,Model model){
         int pageNo=filter.getPageNo();
         int pageSize=filter.getPageSize();
-        Page<User> lists=userService.getMessageByCondition(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
+        Page<Staff> lists=userService.getMessageByCondition(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
         model.addAttribute("lists",lists);
         return "permission/user/userList";
 

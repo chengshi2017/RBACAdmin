@@ -111,4 +111,11 @@
     WHERE ROLE_ID = #{roleId}
   </delete>
 
+  <insert id="save" parameterType="com.spring.model.Staff">
+    insert into t_user_role (USER_ROLE_ID, USER_ID, ROLE_ID,
+      REMARK)
+    values (#{userRoleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR},
+      #{userRoleRemark,jdbcType=VARCHAR})
+  </insert>
+
 </mapper>

@@ -8,10 +8,9 @@
 <div class="page-container" id="form_data">
     <section class="text-c"> 职位状态:
         <span class="select-box inline">
-			<select id="status" name="status" class="select" style="width: 170px">
-				<option value="">请选择状态</option>
-				<option value="1">在职</option>
-                <option value="0">空缺</option>
+			<select id="deptId" name="deptId" class="select" style="width: 170px">
+				<option value="">请选择部门名称</option>
+				<option th:each="dept:${deptList}" th:text="${dept.deptName}" th:value="${dept.deptId}"></option>
 			</select>
 		</span>
         &emsp;&emsp;职位名称:
@@ -39,6 +38,7 @@
                     <th width="40">序号</th>
                     <th width="">职位名称</th>
                     <th width="">所属部门</th>
+                    <th width="">拟招人数</th>
                     <th width="">创建时间</th>
                     <th width="">职位描述</th>
                     <th width="">是否空缺</th>
@@ -51,6 +51,7 @@
                     <td th:text="${itemStat.count}"></td>
                     <td th:text="${item.jobName}"></td>
                     <td th:text="${item.deptName}"></td>
+                    <td th:text="${item.volume}"></td>
                     <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td th:text="${item.remark}"></td>
                     <th:block th:if="${item.status}==1">

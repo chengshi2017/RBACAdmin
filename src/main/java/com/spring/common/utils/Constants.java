@@ -38,4 +38,11 @@ public class Constants {
     public static boolean IS_USER_ADMIN = true;
     public static boolean NOT_USER_ADMIN = false;
 
+    //设置信息的状态 0-异常 1-正常
+    public static Integer IS_STATUS = 1;
+    public static Integer NOT_STATUS = 0;
+
+    //设置普通员工的UUID常量
+    public static String ROLE_STAFF = "126304SL3U29700A";
+
 }
