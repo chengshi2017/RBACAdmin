@@ -119,5 +119,14 @@
     SELECT * FROM t_emp_param
     WHERE JOB_ID = #{jobId}
   </select>
+
+  <insert id="saveStaff" parameterType="com.spring.model.Staff">
+    insert into t_emp_param (EMP_PARAM_ID, EMP_ID, DEPT_ID,
+      JOB_ID, STATUS, REMARK
+      )
+    values (#{empParamId,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR},
+      #{jobId,jdbcType=VARCHAR}, #{eStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
   
 </mapper>

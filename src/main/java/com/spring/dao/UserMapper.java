@@ -1,6 +1,7 @@
 package com.spring.dao;
 
 import com.github.pagehelper.Page;
+import com.spring.model.Staff;
 import com.spring.model.permission.User;
 import com.spring.param.UserFilter;
 import org.apache.ibatis.annotations.Param;
@@ -9,19 +10,19 @@ import org.apache.ibatis.session.RowBounds;
 import java.util.List;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(@Param("userId") String userId);
+    int deleteByPrimaryKey(String userId);
 
-    int insert(User record);
+    int insert(Staff staff);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(String userId);
+    Staff selectByPrimaryKey(String userId);
 
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(Staff record);
 
     int updateByPrimaryKey(User record);
 
-    Page<User> getAll(RowBounds rowBounds,UserFilter filter);
+    Page<Staff> getAll(RowBounds rowBounds, UserFilter filter);
 
     List<User> getAllUsers();
 
@@ -37,4 +38,8 @@ public interface UserMapper {
     Integer getCountByFilter(String startTime);
 
     List<User> getAllMessage();
+
+    User getUserByUserId(String userId);
+
+    void cascadeUpdate(Staff staff);
 }

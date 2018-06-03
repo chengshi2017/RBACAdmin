@@ -1,4 +1,6 @@
-
+$(function () {
+    distinct();
+});
 
 $(function () {
     $('.skin-minimal input').iCheck({

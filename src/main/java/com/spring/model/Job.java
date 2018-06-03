@@ -3,9 +3,14 @@ package com.spring.model;
 import java.util.Date;
 
 public class Job {
+
     private String jobId;
 
     private String jobName;
+
+    private String attachDeptId;
+
+    private String deptName;
 
     private Date createTime;
 
@@ -29,6 +34,22 @@ public class Job {
 
     public void setJobName(String jobName) {
         this.jobName = jobName == null ? null : jobName.trim();
+    }
+
+    public String getAttachDeptId() {
+        return attachDeptId;
+    }
+
+    public void setAttachDeptId(String attachDeptId) {
+        this.attachDeptId = attachDeptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     public String getRemark() {

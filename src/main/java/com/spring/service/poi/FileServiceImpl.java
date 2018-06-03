@@ -94,7 +94,7 @@ public class FileServiceImpl implements FileService{
             if (result.getList().size()==0 || result.getList().get(0)==null){
                 return CodeMsg.Excel_FORMAT_ERROR;
             }
-            saveToDataBase(result);
+            //saveToDataBase(result);
             int succSize=result.getList().size();
             int failSize=result.getFailList().size();
             String msg = "在Excel数据格式校验环节中，共获得有效数据" + (succSize + failSize) + "条</br>其中," + succSize
@@ -107,20 +107,19 @@ public class FileServiceImpl implements FileService{
         return CodeMsg.SERVER_ERROR;
     }
 
-    @Transactional
-    private void saveToDataBase(ExcelImportResult<User> result) {
-        List<User> succList=result.getList();
-        List<User> failList=result.getFailList();
-        //将成功的数据存入mysql数据库
-        for (User user:succList){
-            user.setUserId(UUID.getUUID());
-            user.setCreateTime(new Date());
-            user.setUserPassword(EncodeMD5.GetMD5Code(user.getUserPassword()));
-            if (userMapper.insert(user)<1){
-                throw new MyException("新增用户信息失败");
-            }
-        }
-        //将失败的数据存入redis数据库,待续
-    }
+//    @Transactional
+//    private void saveToDataBase(ExcelImportResult<User> result) {
+//        List<User> succList=result.getList();
+//        List<User> failList=result.getFailList();
+//        //将成功的数据存入mysql数据库
+//        for (User user:succList){
+//            user.setUserId(UUID.getUUID());
+//            user.setUserPassword(EncodeMD5.GetMD5Code(user.getUserPassword()));
+//            if (userMapper.insert(user)<1){
+//                throw new MyException("新增用户信息失败");
+//            }
+//        }
+//        //将失败的数据存入redis数据库,待续
+//    }
 }
 

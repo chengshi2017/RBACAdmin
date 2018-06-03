@@ -5,7 +5,7 @@
 </head>
 <body>
 <nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 权限管理 <span class="c-gray en">&gt;</span> 菜单信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" onclick="refresh()" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 权限管理 <span class="c-gray en">&gt;</span> 角色信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" onclick="refresh()" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container" id="form_data">
     <section class="text-c"> 角色名称：
         <input type="text" class="input-text" style="width:250px" placeholder="角色名称" id="roleName" name="roleName"/>
@@ -18,13 +18,13 @@
                 <option value="1">有效</option>
             </select>
         </span>
-        <button type="submit" class="btn btn-success" id="search" ><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+        <button type="submit" class="btn btn-success" id="search" ><i class="Hui-iconfont">&#xe665;</i> 搜角色</button>
     </section>
     <div id="search_data">
         <div class="cl pd-5 bg-1 bk-gray mt-20">
 			<span class="l">
 				<a href="javascript:;" onclick="role_batchDelete()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-				<a href="javascript:;" onclick="layer_show('添加用户信息','/permission/role/toUpdate','76%','95%')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a>
+				<a href="javascript:;" onclick="layer_show('添加角色信息','/permission/role/toUpdate','76%','95%')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a>
 			</span>
             <span class="r">共有数据：<strong th:text="${lists.total}">54</strong> 条</span>
         </div>

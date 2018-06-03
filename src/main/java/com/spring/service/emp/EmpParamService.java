@@ -2,6 +2,7 @@ package com.spring.service.emp;
 
 import com.spring.model.EmpParam;
 import com.spring.model.Job;
+import com.spring.model.Staff;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface EmpParamService {
     List<EmpParam> getAllByDeptId(String deptId);
 
     List<EmpParam> getJobMessageById(String jobId);
+
 }

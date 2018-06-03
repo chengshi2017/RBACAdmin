@@ -2,15 +2,30 @@ package com.spring.model;
 
 import java.util.Date;
 
-public class Emp {
+/**
+ * @Author: Jeremy
+ * @Date: 2018/6/1
+ * @Time: 9:39
+ * @Version: 1.0
+ * @Describe:
+ */
+public class Staff {
+
+    private String userId;
 
     private String empId;
 
     private String empParamId;
 
-    private String empNum;
+    private String userName;
 
     private String empName;
+
+    private String userPassword;
+
+    private String empNum;
+
+    private Integer uStatus;
 
     private String sex;
 
@@ -24,13 +39,13 @@ public class Emp {
 
     private String pace;
 
-    private String remark;
-
-    private Integer status;
-
     private Date createTime;
 
     private Date updateTime;
+
+    private Integer eStatus;
+
+    private String remark;
 
     private String deptId;
 
@@ -40,7 +55,18 @@ public class Emp {
 
     private String jobName;
 
-    private Integer flag;
+    private boolean flag;
+
+    public Staff() {
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getEmpId() {
         return empId;
@@ -50,12 +76,12 @@ public class Emp {
         this.empId = empId;
     }
 
-    public String getEmpParamId() {
-        return empParamId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmpParamId(String empParamId) {
-        this.empParamId = empParamId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmpName() {
@@ -63,7 +89,31 @@ public class Emp {
     }
 
     public void setEmpName(String empName) {
-        this.empName = empName == null ? null : empName.trim();
+        this.empName = empName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getEmpNum() {
+        return empNum;
+    }
+
+    public void setEmpNum(String empNum) {
+        this.empNum = empNum;
+    }
+
+    public Integer getuStatus() {
+        return uStatus;
+    }
+
+    public void setuStatus(Integer uStatus) {
+        this.uStatus = uStatus;
     }
 
     public String getSex() {
@@ -87,7 +137,7 @@ public class Emp {
     }
 
     public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+        this.address = address;
     }
 
     public String getPhone() {
@@ -95,7 +145,7 @@ public class Emp {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -103,7 +153,7 @@ public class Emp {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getPace() {
@@ -111,17 +161,7 @@ public class Emp {
     }
 
     public void setPace(String pace) {
-        this.pace = pace == null ? null : pace.trim();
-    }
-
-
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
+        this.pace = pace;
     }
 
     public Date getCreateTime() {
@@ -140,12 +180,12 @@ public class Emp {
         this.updateTime = updateTime;
     }
 
-    public String getEmpNum() {
-        return empNum;
+    public Integer geteStatus() {
+        return eStatus;
     }
 
-    public void setEmpNum(String empNum) {
-        this.empNum = empNum;
+    public void seteStatus(Integer eStatus) {
+        this.eStatus = eStatus;
     }
 
     public String getRemark() {
@@ -154,6 +194,14 @@ public class Emp {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getEmpParamId() {
+        return empParamId;
+    }
+
+    public void setEmpParamId(String empParamId) {
+        this.empParamId = empParamId;
     }
 
     public String getDeptId() {
@@ -188,11 +236,11 @@ public class Emp {
         this.jobName = jobName;
     }
 
-    public Integer getFlag() {
+    public boolean isFlag() {
         return flag;
     }
 
-    public void setFlag(Integer flag) {
+    public void setFlag(boolean flag) {
         this.flag = flag;
     }
 }

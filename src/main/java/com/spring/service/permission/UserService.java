@@ -1,6 +1,7 @@
 package com.spring.service.permission;
 
 import com.github.pagehelper.Page;
+import com.spring.model.Staff;
 import com.spring.model.permission.User;
 import com.spring.param.UserFilter;
 import org.apache.ibatis.session.RowBounds;
@@ -15,13 +16,13 @@ import java.util.logging.Filter;
  * @Describe:
  */
 public interface UserService {
-    Page<User> getAllUserMessage(RowBounds rowBounds,UserFilter filter);
+    Page<Staff> getAllUserMessage(RowBounds rowBounds, UserFilter filter);
 
-    User getUserMessageById(String userId);
+    Staff getUserMessageById(String userId);
 
-    void insert(User user);
+    void insert(Staff staff);
 
-    void update(User user);
+    void update(Staff staff);
 
     void delete(String userId);
 
@@ -36,4 +37,8 @@ public interface UserService {
     Page<User> getMessageByCondition(RowBounds rowBounds, UserFilter filter);
 
     Integer getCountByFilter(Integer count);
+
+    User getUserByUserId(String userId);
+
+    void cascadeUpdate(Staff staff);
 }

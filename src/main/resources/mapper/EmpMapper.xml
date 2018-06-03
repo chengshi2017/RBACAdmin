@@ -17,10 +17,11 @@
     <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName" />
     <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+    <result column="FLAG" jdbcType="INTEGER" property="flag"/>
   </resultMap>
   <sql id="Base_Column_List">
     EMP_ID, EMP_NUM, EMP_NAME, SEX, AGE, ADDRESS, PHONE, EMAIL, PACE, REMARK, STATUS, CREATE_TIME,
-    UPDATE_TIME
+    UPDATE_TIME, FLAG
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -36,12 +37,13 @@
     insert into t_emp (EMP_ID, EMP_NUM, EMP_NAME, SEX,
       AGE, ADDRESS, PHONE, 
       EMAIL, PACE, REMARK, 
-      STATUS, CREATE_TIME, UPDATE_TIME
+      STATUS, CREATE_TIME, UPDATE_TIME, FLAG
       )
     values (#{empId,jdbcType=VARCHAR}, #{empNum,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
       #{age,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{pace,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
       #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      #{flag,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.spring.model.Emp">
@@ -86,6 +88,9 @@
       <if test="updateTime != null">
         UPDATE_TIME,
       </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="empId != null">
@@ -126,6 +131,9 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -168,6 +176,9 @@
       <if test="updateTime != null">
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=INTEGER}
+      </if>
     </set>
     where EMP_ID = #{empId,jdbcType=VARCHAR}
   </update>
@@ -185,7 +196,8 @@
       REMARK = #{remark,jdbcType=VARCHAR},
       STATUS = #{status,jdbcType=INTEGER},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      FLAG = #{flag,jdbcType=INTEGER}
     where EMP_ID = #{empId,jdbcType=VARCHAR}
   </update>
 
@@ -294,6 +306,150 @@
     ON em.DEPT_ID = d.DEPT_ID
     LEFT JOIN t_job j
     ON em.JOB_ID = j.JOB_ID
+  </select>
+  
+  <insert id="insertStaff" parameterType="com.spring.model.Staff">
+    insert into t_emp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empId != null">
+        EMP_ID,
+      </if>
+      <if test="empNum != null">
+        EMP_NUM,
+      </if>
+      <if test="empName != null">
+        EMP_NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="pace != null">
+        PACE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="eStatus != null">
+        STATUS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    <if test="empId != null">
+      #{empId,jdbcType=VARCHAR},
+    </if>
+    <if test="empNum != null">
+      #{empNum,jdbcType=VARCHAR},
+    </if>
+    <if test="empName != null">
+      #{empName,jdbcType=VARCHAR},
+    </if>
+    <if test="sex != null">
+      #{sex,jdbcType=VARCHAR},
+    </if>
+    <if test="age != null">
+      #{age,jdbcType=INTEGER},
+    </if>
+    <if test="address != null">
+      #{address,jdbcType=VARCHAR},
+    </if>
+    <if test="phone != null">
+      #{phone,jdbcType=VARCHAR},
+    </if>
+    <if test="email != null">
+      #{email,jdbcType=VARCHAR},
+    </if>
+    <if test="pace != null">
+      #{pace,jdbcType=VARCHAR},
+    </if>
+    <if test="remark != null">
+      #{remark,jdbcType=VARCHAR},
+    </if>
+    <if test="eStatus != null">
+      #{eStatus,jdbcType=INTEGER},
+    </if>
+    <if test="createTime != null">
+      #{createTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updateTime != null">
+      #{updateTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="flag != null">
+      #{flag,jdbcType=BOOLEAN},
+    </if>
+    </trim>
+  </insert>
+
+  <update id="cascadeUpdate" parameterType="com.spring.model.Staff">
+    update t_emp
+    <set>
+      <if test="empNum != null">
+        EMP_NUM = #{empNum,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null">
+        EMP_NAME = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pace != null">
+        PACE = #{pace,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="eStatus != null">
+        STATUS = #{eStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=BOOLEAN}
+      </if>
+    </set>
+    where EMP_ID = #{empId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getEmpNum" resultType="java.lang.String">
+    SELECT EMP_NUM FROM t_emp
+    ORDER BY CREATE_TIME DESC
+    LIMIT 1
   </select>
   
 </mapper>

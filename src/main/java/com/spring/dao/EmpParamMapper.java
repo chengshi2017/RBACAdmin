@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.spring.model.Emp;
 import com.spring.model.EmpParam;
+import com.spring.model.Staff;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface EmpParamMapper {
     List<EmpParam> getAllByDeptId(String deptId);
 
     List<EmpParam> getAllByJobId(String jobId);
+
+    int saveStaff(Staff staff);
 }

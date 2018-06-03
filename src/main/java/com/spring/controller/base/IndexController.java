@@ -156,9 +156,4 @@ public class IndexController extends SuperController {
         session.setAttribute(Constants.Regular.onlineUser, null);
         return "redirect:login.html";
     }
-
-
-
-
-
 }

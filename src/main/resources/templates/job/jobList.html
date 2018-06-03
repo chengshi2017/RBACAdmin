@@ -38,6 +38,7 @@
                     <th width="25"><input type="checkbox" name="subCheck" id="subCheck"/></th>
                     <th width="40">序号</th>
                     <th width="">职位名称</th>
+                    <th width="">所属部门</th>
                     <th width="">创建时间</th>
                     <th width="">职位描述</th>
                     <th width="">是否空缺</th>
@@ -49,6 +50,7 @@
                     <td><input type="checkbox" th:attr="value=${item.jobId}" name="subCheck" /></td>
                     <td th:text="${itemStat.count}"></td>
                     <td th:text="${item.jobName}"></td>
+                    <td th:text="${item.deptName}"></td>
                     <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td th:text="${item.remark}"></td>
                     <th:block th:if="${item.status}==1">

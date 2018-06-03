@@ -30,4 +30,12 @@ public class Constants {
         public static final Integer sixMonth = -180;
         public static final Integer year = -365;
     }
+
+    //设置HR部门ID常量
+    public static String DEPT_HR_ID = "126108720Q29700F";
+
+    //判断新插入的用户信息是否为管理员账户
+    public static boolean IS_USER_ADMIN = true;
+    public static boolean NOT_USER_ADMIN = false;
+
 }

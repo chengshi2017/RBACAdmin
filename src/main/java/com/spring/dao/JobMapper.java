@@ -31,4 +31,6 @@ public interface JobMapper {
     Page<Job> getMessageByCondition(RowBounds rowBounds, JobFilter filter);
 
     Integer getCountByFilter(String startTime);
+
+    List<Job> getAllJobByDeptId(String deptHrId);
 }

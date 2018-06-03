@@ -3,6 +3,7 @@ package com.spring.controller.user;
 import com.spring.common.utils.EncodeMD5;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
+import com.spring.model.Staff;
 import com.spring.model.permission.User;
 import com.spring.service.permission.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -38,14 +39,14 @@ public class UserController extends SuperController {
 
     //修改用户密码
     @RequestMapping(value = "updatePassword",method = RequestMethod.POST)
-    public void updatePassword(String oldPassword,String userId,User info){
+    public void updatePassword(String oldPassword,String userId,Staff info){
 
-        User user=userService.getUserMessageById(userId);
-        if(user!=null){
-            if(EncodeMD5.GetMD5Code(oldPassword).equals(user.getUserPassword())){
+        Staff staff=userService.getUserMessageById(userId);
+        if(staff!=null){
+            if(EncodeMD5.GetMD5Code(oldPassword).equals(staff.getUserPassword())){
                 //加密密码
                 info.setUserPassword(EncodeMD5.GetMD5Code(info.getUserPassword()));
-                userService.update(info);
+                userService.cascadeUpdate(info);
                 ResponseUtils.writeSuccessReponse(request,response,"用户登录密码修改成功");
             }
             ResponseUtils.writeErrorResponse(request,response,"原密码输入错误");

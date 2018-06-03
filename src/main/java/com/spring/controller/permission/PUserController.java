@@ -3,11 +3,16 @@ package com.spring.controller.permission;
 import com.github.pagehelper.Page;
 import com.spring.common.Enums.SysTagEnums;
 import com.spring.common.exceptions.MyException;
+import com.spring.common.utils.Constants;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
+import com.spring.model.Job;
+import com.spring.model.Staff;
 import com.spring.model.permission.User;
 import com.spring.param.UserFilter;
+import com.spring.service.job.JobService;
 import com.spring.service.permission.UserService;
+import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,37 +35,44 @@ public class PUserController extends SuperController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JobService jobService;
     
     //加载用户权限相关页面
     @RequiresPermissions(value = "permission:user:page")
     @RequestMapping(value = "/page")
     public String page(@RequestParam(defaultValue = "1")Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize, UserFilter filter, Model model){
-        Page<User> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
+        Page<Staff> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
         model.addAttribute("lists",lists);
         return "permission/user/userList";
     }
 
     //加载用户编辑信息页面
     @RequestMapping(value = "/toUpdate",method = RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String toAdd(){
+    public String toAdd(Model model){
+        List<Job> jobList=jobService.getAllJobByDeptId(Constants.DEPT_HR_ID);
+        model.addAttribute("jobList",jobList);
         return "permission/user/user-add";
     }
 
     //加载用户信息修改页面
     @RequestMapping(value = "{userId}/toUpdate",method = RequestMethod.GET)
     public String toUpdate(@PathVariable("userId") String userId, Model model){
-        User user=userService.getUserMessageById(userId);
-        model.addAttribute("user",user);
+        List<Job> jobList =jobService.getAllJobByDeptId(Constants.DEPT_HR_ID);
+        model.addAttribute("jobList", jobList);
+        Staff staff=userService.getUserMessageById(userId);
+        model.addAttribute("staff",staff);
         return "permission/user/user-add";
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public void update(User user){
-        if(user.getUserId()==null){
+    public void update(Staff staff){
+        Integer count=userService.getCountByUserName(staff.getUserName());
+        if(staff.getUserId()==null){
             //新增操作
-            Integer count=userService.getCountByUserName(user.getUserName());
             if(count==0){
-                userService.insert(user);
+                userService.insert(staff);
                 ResponseUtils.writeSuccessReponse(request,response,"用户信息添加成功");
             }else {
                 ResponseUtils.writeErrorResponse(request,response,"用户名重复，请重新输入");
@@ -68,12 +80,17 @@ public class PUserController extends SuperController {
         }
         else {
             //修改操作
-            if (user.getUserId().equals(SysTagEnums.USERID.getValue())){
-                ResponseUtils.writeErrorResponse(request,response,"无法修改系统管理员信息");
+            if (count<=1){
+                if (staff.getUserId().equals(SysTagEnums.USERID.getValue())){
+                    ResponseUtils.writeErrorResponse(request,response,"无法修改系统管理员信息");
+                }else {
+                    userService.cascadeUpdate(staff);
+                    ResponseUtils.writeSuccessReponse(request,response,"修改用户信息成功");
+                }
             }else {
-                userService.update(user);
-                ResponseUtils.writeSuccessReponse(request,response,"修改用户信息成功");
+                ResponseUtils.writeErrorResponse(request,response,"用户名重复，请重新输入");
             }
+
         }
 
     }
@@ -106,12 +123,12 @@ public class PUserController extends SuperController {
 
     @PostMapping(value = "/{userId}/update")
     public void update(@PathVariable("userId")String userId){
-        User user=userService.getUserMessageById(userId);
-        if (user.getUserId().equals(SysTagEnums.USERID.getValue())){
+        Staff staff=userService.getUserMessageById(userId);
+        if (staff.getUserId().equals(SysTagEnums.USERID.getValue())){
             ResponseUtils.writeErrorResponse(request,response,"系统管理员无法禁用");
         }else {
-            user.setStatus(user.getStatus()^1);
-            userService.update(user);
+            staff.setuStatus(staff.getuStatus()^1);
+            userService.cascadeUpdate(staff);
             ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
         }
     }

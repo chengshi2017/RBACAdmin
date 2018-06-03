@@ -4,6 +4,10 @@
  * 包括数据的校验
  */
 $(function(){
+
+    //下拉框去重
+    distinct();
+
     $('.skin-minimal input').iCheck({
         checkboxClass: 'icheckbox-blue',
         radioClass: 'iradio-blue',
@@ -28,14 +32,15 @@ $(function(){
                 maxlength: 18,
                 equalTo: "#userPassword"
             },
-            phone:{
-                required:true,
-                isPhone:true
-            },
             email:{
                 required:true,
                 email:true
+            },
+            phone:{
+                required:true,
+                isPhone:true
             }
+
         },
         onkeyup:false,
         focusCleanup:true,

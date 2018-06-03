@@ -1,3 +1,6 @@
+$(function () {
+    $("#upload_excel").hide();
+});
 
 /***
  * ajax 异步请求刷新页面
@@ -61,7 +64,7 @@ function admin_del(id) {
                 success: function (result) {
                     if (result.code == 0){
                         layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                            parent.retrieve();
+                            retrieve();
                             layer.close(index);
                         })
                     }else{
@@ -204,8 +207,8 @@ function retrieve() {
     var data={
         pageNo: laypage_curr || 1,
         pageSize: laypage_limit || 10,
-        userName: $("userName").val(),
-        phone: $("phone").val()
+        userName: $("#userName").val(),
+        phone: $("#phone").val()
     };
     $.ajax({
         type: 'post',

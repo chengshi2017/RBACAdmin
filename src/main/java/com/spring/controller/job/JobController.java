@@ -4,9 +4,11 @@ import com.github.pagehelper.Page;
 import com.spring.common.exceptions.MyException;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
+import com.spring.model.Dept;
 import com.spring.model.EmpParam;
 import com.spring.model.Job;
 import com.spring.param.JobFilter;
+import com.spring.service.dept.DeptService;
 import com.spring.service.emp.EmpParamService;
 import com.spring.service.job.JobService;
 import org.apache.ibatis.session.RowBounds;
@@ -39,6 +41,9 @@ public class JobController extends SuperController {
     @Autowired
     private EmpParamService empParamService;
 
+    @Autowired
+    private DeptService deptService;
+
     //加载page页面
     @RequiresPermissions(value = "job:page")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
@@ -56,12 +61,16 @@ public class JobController extends SuperController {
     //添加职位信息
     @RequestMapping(value = "/toUpdate", method = RequestMethod.GET)
     public String toAdd(Model model){
+        List<Dept> deptList=deptService.getAllDept();
+        model.addAttribute("deptList",deptList);
         return "job/job_add";
     }
 
     //修改职位相关信息
     @RequestMapping(value = "/{jobId}/toUpdate", method = RequestMethod.GET)
     public String toUpdate(@PathVariable("jobId") String jobId, Model model){
+        List<Dept> deptList=deptService.getAllDept();
+        model.addAttribute("deptList",deptList);
         Job job=jobService.getJobMessageById(jobId);
         model.addAttribute("job",job);
         return "job/job_add";
@@ -114,7 +123,7 @@ public class JobController extends SuperController {
         ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
     }
 
-    @PostMapping(value = "retrieve")
+    @PostMapping(value = "/retrieve")
     public String getMessageByCondition(JobFilter filter, Model model){
         Integer pageNo=filter.getPageNo();
         Integer pageSize=filter.getPageSize();

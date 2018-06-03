@@ -1,24 +1,33 @@
 package com.spring.service.permission.impl;
 
+import com.alibaba.druid.sql.visitor.functions.Substring;
 import com.github.pagehelper.Page;
 import com.spring.common.exceptions.MyException;
+import com.spring.common.utils.Constants;
 import com.spring.common.utils.DateUtils;
 import com.spring.common.utils.EncodeMD5;
 import com.spring.common.utils.UUID;
+import com.spring.dao.EmpMapper;
+import com.spring.dao.EmpParamMapper;
 import com.spring.dao.UserMapper;
 import com.spring.dao.UserRoleMapper;
+import com.spring.model.Staff;
 import com.spring.model.permission.User;
 import com.spring.model.permission.UserRole;
 import com.spring.param.UserFilter;
+import com.spring.service.emp.EmpParamService;
 import com.spring.service.permission.UserService;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +37,6 @@ import java.util.List;
  * @Describe:
  */
 @Service
-@Transactional
 public class UserServiceImpl implements UserService{
 
     private static final Logger Log= LoggerFactory.getLogger(UserServiceImpl.class);
@@ -39,36 +47,71 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRoleMapper userRoleMapper;
 
+    @Autowired
+    private EmpMapper empMapper;
+
+    @Autowired
+    private EmpParamMapper empParamMapper;
+
     @Override
-    public Page<User> getAllUserMessage(RowBounds rowBounds,UserFilter filter) {
+    public Page<Staff> getAllUserMessage(RowBounds rowBounds, UserFilter filter) {
         return userMapper.getAll(rowBounds,filter);
     }
 
     @Override
-    public User getUserMessageById(String userId) {
+    public Staff getUserMessageById(String userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
 
     @Override
-    public void insert(User user) {
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+    public void insert(Staff staff) {
         //设置用户UUID
-        user.setUserId(UUID.getUUID());
+        staff.setUserId(UUID.getUUID());
+        staff.setEmpId(staff.getUserId());
+        //设置关联表uuid
+        staff.setEmpParamId(UUID.getUUID());
+        //设置员工名
+        staff.setEmpName(staff.getUserName());
+        //为员工分配员工编号
+        String empNum=empMapper.getEmpNum();
+        String record=empNum.substring(empNum.length()-5,empNum.length());
+        int count=Integer.parseInt(record);
+        ++count;
+        String empNumString=new DecimalFormat("00000").format(count);
+        staff.setEmpNum("A"+empNumString);
+        //设置员工状态
+        staff.seteStatus(staff.getuStatus());
         //获取当前时间
-        user.setCreateTime(DateUtils.today());
+        staff.setCreateTime(new Date());
         //密码加密
-        user.setUserPassword(EncodeMD5.GetMD5Code(user.getUserPassword()));
-
-        if(userMapper.insert(user)<1){
+        staff.setUserPassword(EncodeMD5.GetMD5Code(staff.getUserPassword()));
+        //设置部门ID，从用户处添加的员工自动添加到HR部门，角色动态分配
+        //从员工处添加的信息可以选择多个部门，但是角色为员工角色
+        staff.setDeptId(Constants.DEPT_HR_ID);
+        //设置flag,当从用户管理处添加时设置为是管理员账户
+        //从员工管理处添加设置为普通用户
+        staff.setFlag(Constants.IS_USER_ADMIN);
+        //先向用户表中插入数据
+        if(userMapper.insert(staff)<1){
             throw new MyException("新增用户信息失败！");
+        }
+        //再向员工表中插入数据
+        if (empMapper.insertStaff(staff)<1){
+            throw new MyException("新增员工信息失败！");
+        }
+        //
+        if (empParamMapper.saveStaff(staff)<1) {
+            throw new MyException("插入员工部门职位关系失败");
         }
     }
 
     @Override
-    public void update(User user) {
+    public void update(Staff staff) {
         //获取当前时间
-        user.setUpdateTime(DateUtils.today());
-
-        if(userMapper.updateByPrimaryKeySelective(user)<1){
+        //user.setUpdateTime(DateUtils.today());
+        staff.setUpdateTime(new Date());
+        if(userMapper.updateByPrimaryKeySelective(staff)<1){
             throw new MyException("修改用户信息失败");
         }
     }
@@ -140,6 +183,18 @@ public class UserServiceImpl implements UserService{
             count=userMapper.getCountByFilter(startTime);
         }
         return count;
+    }
+
+    @Override
+    public User getUserByUserId(String userId) {
+        return userMapper.getUserByUserId(userId);
+    }
+
+    @Override
+    public void cascadeUpdate(Staff staff) {
+        staff.setUpdateTime(new Date());
+        //级联更新数据库信息
+        userMapper.cascadeUpdate(staff);
     }
 
 

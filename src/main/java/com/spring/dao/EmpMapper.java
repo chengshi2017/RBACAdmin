@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.github.pagehelper.Page;
 import com.spring.model.Emp;
+import com.spring.model.Staff;
 import com.spring.param.EmpFilter;
 import org.apache.ibatis.session.RowBounds;
 
@@ -26,7 +27,7 @@ public interface EmpMapper {
 
     int delete(String empId);
 
-    Integer getCount();
+    int getCount();
 
     List<Emp> getEmpMessageByEmpName(String empName);
 
@@ -37,4 +38,10 @@ public interface EmpMapper {
     Integer getCountByFilter(String startTime);
 
     List<Emp> getMessage();
+
+    int insertStaff(Staff staff);
+
+    void cascadeUpdate(Staff staff);
+
+    String getEmpNum();
 }

@@ -5,36 +5,68 @@
     <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
     <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
     <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
-    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
-    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="STATUS" property="status" jdbcType="INTEGER" />
-    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
   </resultMap>
+
+  <resultMap id="ResultMap" type="com.spring.model.Staff">
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR"/>
+    <result column="STATUS" property="uStatus" jdbcType="INTEGER"/>
+    <result column="EMP_ID" property="empId" jdbcType="VARCHAR"/>
+    <result column="EMP_PARAM_ID" property="empParamId" jdbcType="VARCHAR"/>
+    <result column="EMP_NUM" property="empNum" jdbcType="VARCHAR"/>
+    <result column="EMP_NAME" property="empName" jdbcType="VARCHAR"/>
+    <result column="SEX" property="sex" jdbcType="VARCHAR"/>
+    <result column="AGE" property="age" jdbcType="INTEGER"/>
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+    <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+    <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+    <result column="PACE" property="pace" jdbcType="VARCHAR"/>
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+    <result column="E_STATUS" property="eStatus" jdbcType="INTEGER"/>
+    <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR"/>
+    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR"/>
+    <result column="JOB_ID" property="jobId" jdbcType="VARCHAR"/>
+    <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR"/>
+    <result column="FLAG" property="flag" jdbcType="BOOLEAN"/>
+  </resultMap>
+
   <sql id="Base_Column_List" >
-    USER_ID, USER_NAME, USER_PASSWORD, EMAIL, PHONE, CREATE_TIME, UPDATE_TIME,
-    STATUS, REMARK
+    USER_ID, USER_NAME, USER_PASSWORD, u.STATUS, EMP_ID, EMP_NUM, SEX, AGE,
+    ADDRESS, PHONE, EMAIL, PACE, CREATE_TIME, UPDATE_TIME, REMARK, FLAG
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_user
-    where USER_ID = #{userId,jdbcType=VARCHAR}
+  <select id="selectByPrimaryKey" resultMap="ResultMap" parameterType="java.lang.String" >
+    select u.*, e.*, d.DEPT_ID, d.DEPT_NAME, j.JOB_ID, j.JOB_NAME
+    from t_user u
+    LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
+    where u.USER_ID = #{userId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_user
-    where USER_ID = #{userId,jdbcType=VARCHAR}
+    DELETE u, e, em
+    FROM t_user u
+    LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    WHERE u.USER_ID = #{userId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.spring.model.permission.User" >
+  <insert id="insert" parameterType="com.spring.model.Staff" >
     insert into t_user (USER_ID, USER_NAME,
-      USER_PASSWORD, EMAIL, PHONE, 
-      CREATE_TIME, UPDATE_TIME, STATUS, 
-      REMARK)
+      USER_PASSWORD, STATUS
+      )
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
-      #{userPassword,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR})
+      #{userPassword,jdbcType=VARCHAR}, #{uStatus,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.spring.model.permission.User" >
     insert into t_user
@@ -48,23 +80,8 @@
       <if test="userPassword != null" >
         USER_PASSWORD,
       </if>
-      <if test="email != null" >
-        EMAIL,
-      </if>
-      <if test="phone != null" >
-        PHONE,
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME,
-      </if>
-      <if test="updateTime != null" >
-        UPDATE_TIME,
-      </if>
       <if test="status != null" >
         STATUS,
-      </if>
-      <if test="remark != null" >
-        REMARK,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -77,23 +94,8 @@
       <if test="userPassword != null" >
         #{userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -106,23 +108,8 @@
       <if test="userPassword != null" >
         USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
-        EMAIL = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        PHONE = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="status != null" >
         STATUS = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="remark != null" >
-        REMARK = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
     where USER_ID = #{userId,jdbcType=VARCHAR}
@@ -131,30 +118,30 @@
     update t_user
     set USER_NAME = #{userName,jdbcType=VARCHAR},
       USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
-      EMAIL = #{email,jdbcType=VARCHAR},
-      PHONE = #{phone,jdbcType=VARCHAR},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      STATUS = #{status,jdbcType=INTEGER},
-      REMARK = #{remark,jdbcType=VARCHAR}
+      STATUS = #{status,jdbcType=INTEGER}
     where USER_ID = #{userId,jdbcType=VARCHAR}
   </update>
 
-  <select id="getAll" resultMap="BaseResultMap">
+  <select id="getAll" resultMap="ResultMap">
     SELECT * FROM
-    t_user WHERE 1 = 1
+    t_user u
+    LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
+    WHERE 1 = 1
     <if test="userName != null and userName != ''">
-      AND USER_NAME LIKE concat(concat('%', #{userName}),'%')
+      AND u.USER_NAME LIKE concat(concat('%', #{userName}),'%')
     </if>
     <if test="phone != null and phone != ''">
-      AND PHONE LIKE concat(concat('%', #{phone}),'%')
+      AND e.PHONE LIKE concat(concat('%', #{phone}),'%')
     </if>
   </select>
 
-  <select id="getAllUsers" resultMap="BaseResultMap">
+  <select id="getAllUsers" resultMap="ResultMap">
     SELECT * FROM
-    t_user
-    WHERE STATUS = 1
+    t_user u
+    LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
+    WHERE u.STATUS = 1
   </select>
 
   <select id="getUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -170,36 +157,112 @@
   </select>
   
   <delete id="batchDelete" parameterType="java.util.List">
-    DELETE FROM t_user
-    WHERE USER_ID IN 
+    DELETE u.*, e.*, em.*
+    FROM t_user u
+    LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    WHERE u.USER_ID IN
     <foreach collection="list" item="item" separator="," open="(" close=")">
       #{item}
     </foreach>
   </delete>
   
-  <select id="getMessageByCondition" parameterType="com.spring.param.UserFilter" resultMap="BaseResultMap">
-    SELECT * FROM
-    t_user WHERE 1 = 1
+  <select id="getMessageByCondition" parameterType="com.spring.param.UserFilter" resultMap="ResultMap">
+    SELECT *
+    FROM t_user u
+    LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
+    WHERE 1 = 1
     <if test="userName != null and userName != ''">
-      AND USER_NAME LIKE concat(concat('%', #{userName}),'%')
+      AND u.USER_NAME LIKE concat(concat('%', #{userName}),'%')
     </if>
     <if test="phone != null and phone != ''">
-      AND PHONE LIKE concat(concat('%', #{phone}),'%')
+      AND e.PHONE LIKE concat(concat('%', #{phone}),'%')
     </if>
   </select>
 
   <select id="getCountByFilter" resultType="java.lang.Integer" parameterType="java.lang.String">
-    SELECT COUNT(*) FROM t_user
+    SELECT COUNT(*) FROM t_user u
+    LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
     WHERE 1=1
     <if test="_parameter != null and _parameter != ''">
       <![CDATA[
-          AND DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%T:%s') <= DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
+          AND DATE_FORMAT(e.CREATE_TIME, '%Y-%m-%d %H:%T:%s') <= DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%T:%s')
       ]]>
     </if>
   </select>
 
-  <select id="getAllMessage" resultMap="BaseResultMap">
-    SELECT * FROM t_user
+  <select id="getAllMessage" resultMap="ResultMap">
+    SELECT * FROM t_user u LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
   </select>
+
+  <select id="getUserByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_user
+    WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+
+  <update id="cascadeUpdate" parameterType="com.spring.model.Staff">
+    update t_user u
+    LEFT JOIN t_emp e
+    ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
+    <set >
+      <if test="userName != null" >
+        u.USER_NAME = #{userName,jdbcType=VARCHAR},
+        e.EMP_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        u.USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uStatus != null" >
+        u.STATUS = #{uStatus,jdbcType=INTEGER},
+        e.STATUS = #{uStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        e.sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        e.AGE = #{age,jdbcType=INTEGER },
+      </if>
+      <if test="address != null">
+        e.ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        e.PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        e.EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pace != null">
+        e.PACE = #{pace,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        e.CREATE_TIME = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        e.UPDATE_TIME = #{updateTime},
+      </if>
+      <if test="jobId != null">
+        em.JOB_ID = #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        e.REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
 
 </mapper>

@@ -16,19 +16,40 @@
         </span>
         <div th:if="${job}">
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">所属部门：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <span class="select-box" style="width:410px;">
+                        <select class="select" name="attachDeptId" size="1">
+                            <option th:text="${job.deptName}" th:value="${job.attachDeptId}"></option>
+                            <option th:each="dept:${deptList}" th:text="${dept.deptName}" th:value="${dept.deptId}"></option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">是否空缺：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                 <span class="select-box" style="width:410px;">
                     <select class="select" name="status" size="1" th:switch="${job.status}">
                         <option th:text="${job.status}==1?'在职':'空缺'" th:attr="value=${job.status}"></option>
                         <option th:text="${job.status}==0?'在职':'空缺'" th:attr="value=(${job.status}==1?'0':'1')"></option>
-
                     </select>
 			    </span>
                 </div>
             </div>
         </div>
         <div th:unless="${job}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">所属部门：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="attachDeptId" size="1">
+                        <option>---请选择所属部门---</option>
+                        <option th:each="dept:${deptList}" th:text="${dept.deptName}" th:value="${dept.deptId}"></option>
+                    </select>
+                </span>
+                </div>
+            </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">是否空缺：</label>
                 <div class="formControls col-xs-8 col-sm-8">

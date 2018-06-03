@@ -31,4 +31,6 @@ public interface JobService {
     Page<Job> getMessageByCondition(RowBounds rowBounds, JobFilter filter);
 
     Integer getCountByFilter(Integer filter);
+
+    List<Job> getAllJobByDeptId(String deptHrId);
 }

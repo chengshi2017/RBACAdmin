@@ -97,4 +97,9 @@ public class JobServiceImpl implements JobService {
         }
         return count;
     }
+
+    @Override
+    public List<Job> getAllJobByDeptId(String deptHrId) {
+        return jobMapper.getAllJobByDeptId(deptHrId);
+    }
 }

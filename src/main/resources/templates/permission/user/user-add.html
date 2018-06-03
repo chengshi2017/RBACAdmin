@@ -6,18 +6,18 @@
 <article class="page-container">
     <form class="form form-horizontal" id="form-admin-add">
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" value="" placeholder="" id="userName" name="userName" th:attr="value=(${user}?(${user.userName}):'')" style="width: 410px"/>
+                <input type="text" class="input-text" value="" placeholder="" id="userName" name="userName" th:attr="value=(${staff}?(${staff.userName}):'')" style="width: 410px"/>
             </div>
         </div>
-        <span th:if="${user}">
-            <input type="hidden" name="userId" id="userId" th:value="${user.userId}"/>
-            <input type="hidden" name="userPassword" id="userPassword1" th:value="${user.userPassword}"/>
+        <span th:if="${staff}">
+            <input type="hidden" name="userId" id="userId" th:value="${staff.userId}"/>
+            <input type="hidden" name="userPassword" id="userPassword1" th:value="${staff.userPassword}"/>
         </span>
-        <div th:unless="${user}">
+        <div th:unless="${staff}">
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>初始密码：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="password" class="input-text" autocomplete="off" placeholder="密码" id="userPassword" name="userPassword" style="width: 410px"/>
                 </div>
@@ -30,37 +30,87 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">性别：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="sex" size="1">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+			    </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">年龄：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" name="age" id="age" th:attr="value=(${staff}?(${staff.age}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">家庭住址：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" name="address" id="address" th:attr="value=(${staff}?(${staff.address}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" name="email" id="email" th:attr="value=(${user}?(${user.email}):'')" style="width: 410px"/>
+                <input type="text" class="input-text" name="email" id="email" th:attr="value=(${staff}?(${staff.email}):'')" style="width: 410px"/>
             </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <input type="text" class="input-text" placeholder="" id="phone" name="phone" th:attr="value=(${user}?(${user.phone}):'')" style="width: 410px"/>
+                <input type="text" class="input-text" placeholder="" id="phone" name="phone" th:attr="value=(${staff}?(${staff.phone}):'')" style="width: 410px"/>
             </div>
         </div>
-        <div th:if="${user}">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">民族：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="pace" name="pace" th:attr="value=(${staff}?(${staff.pace}):'')" style="width: 410px"/>
+            </div>
+        </div>
+        <div th:if="${staff}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">所属职位：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="jobId" size="1">
+                        <option th:text="${staff.jobName}" th:value="${staff.jobId}"></option>
+                        <option th:each="job:${jobList}" th:value="${job.jobId}" th:text="${job.jobName}"></option>
+                    </select>
+			    </span>
+                </div>
+            </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">是否启用：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                 <span class="select-box" style="width:410px;">
-                    <select class="select" name="status" size="1" th:switch="${user.status}">
-                        <option th:text="${user.status}==1?'已启用':'已停用'" th:attr="value=${user.status}"></option>
-                        <option th:text="${user.status}==0?'已启用':'已停用'" th:attr="value=(${user.status}==1?'0':'1')"></option>
-
+                    <select class="select" name="uStatus" size="1" th:switch="${staff.uStatus}">
+                        <option th:text="${staff.uStatus}==1?'已启用':'已停用'" th:attr="value=${staff.uStatus}"></option>
+                        <option th:text="${staff.uStatus}==0?'已启用':'已停用'" th:attr="value=(${staff.uStatus}==1?'0':'1')"></option>
                     </select>
 			    </span>
                 </div>
             </div>
         </div>
-        <div th:unless="${user}">
+        <div th:unless="${staff}">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">所属职位：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                <span class="select-box" style="width:410px;">
+                    <select class="select" name="jobId" size="1">
+                        <option>---请选择用户所属职位---</option>
+                        <option th:each="job:${jobList}" th:value="${job.jobId}" th:text="${job.jobName}"></option>
+                    </select>
+			    </span>
+                </div>
+            </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">是否启用：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <span class="select-box" style="width:410px;">
-                        <select class="select" name="status" size="1">
+                        <select class="select" name="uStatus" size="1">
                             <option value="0">禁用</option>
                             <option value="1">启用</option>
                         </select>
@@ -71,7 +121,7 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">备注：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${user}?(${user.remark}):''" style="width: 410px"></textarea>
+                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${staff}?(${staff.remark}):''" style="width: 410px"></textarea>
             </div>
         </div>
         <div class="row cl">
