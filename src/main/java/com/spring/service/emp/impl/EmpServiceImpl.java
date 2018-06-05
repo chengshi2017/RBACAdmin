@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.spring.common.exceptions.MyException;
 import com.spring.common.utils.Constants;
 import com.spring.common.utils.DateUtils;
+import com.spring.common.utils.EncodeMD5;
 import com.spring.common.utils.UUID;
 import com.spring.dao.*;
 import com.spring.model.Dept;
@@ -87,6 +88,8 @@ public class EmpServiceImpl implements EmpService{
         //比如：员工状态设置为1，eStatus状态正常，但是员工不能登录系统，等到权限管理员或者
         //系统管理员将用户状态设为正常才允许登录，涉及到流程
         staff.setuStatus(Constants.NOT_STATUS);
+        //密码加密
+        staff.setUserPassword(EncodeMD5.GetMD5Code(staff.getUserPassword()));
         //设置插入系统时间
         staff.setCreateTime(new Date());
         //设置插入的用户为非管理员状态
@@ -156,7 +159,7 @@ public class EmpServiceImpl implements EmpService{
     }
 
     @Override
-    public Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter) {
+    public Page<Staff> getMessageByCondition(RowBounds rowBounds, EmpFilter filter) {
         Integer startYear=filter.getStartYear();
         Integer endYear=filter.getEndYear();
         if (startYear!=null) {
@@ -167,7 +170,7 @@ public class EmpServiceImpl implements EmpService{
             String endTime = DateUtils.getLimitTime(endYear);
             filter.setEndTime(endTime);
         }
-        Page<Emp> lists=empMapper.getMessageByCondition(rowBounds,filter);
+        Page<Staff> lists=empMapper.getMessageByCondition(rowBounds,filter);
         return lists;
     }
 
@@ -187,5 +190,11 @@ public class EmpServiceImpl implements EmpService{
     @Override
     public List<Emp> getMessage() {
         return empMapper.getMessage();
+    }
+
+    @Override
+    public void cascadeUpdate(Staff staff) {
+        staff.setUpdateTime(new Date());
+        empMapper.cascadeUpdate(staff);
     }
 }

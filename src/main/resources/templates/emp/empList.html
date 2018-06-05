@@ -73,6 +73,7 @@
                     <th width="">加入时间</th>
                     <th width="">所属部门</th>
                     <th width="">所属职位</th>
+                    <th width="">是否为管理员</th>
                     <th width="">工作状态</th>
                     <th width="">操作</th>
                 </tr>
@@ -87,6 +88,7 @@
                     <td th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></td>
                     <td th:text="${item.deptName}"></td>
                     <td th:text="${item.jobName}"></td>
+                    <td class="flag" th:attr="value=${item.flag}" th:text="${item.roleName}==null?'暂未分配':${item.roleName}"></td>
                     <th:block th:if="${item.eStatus}==1">
                         <td class="td-status"><span class="label label-success radius">正常</span></td>
                     </th:block>
@@ -101,8 +103,8 @@
 								<a style="text-decoration:none" th:onClick="'javascript:emp_start(this,\''+${item.empId}+'\')'" href="javascript:;" title="正常"><i class="Hui-iconfont">&#xe615;</i></a>
                         </span>
                         <a title="详情" href="javascript:;" th:onclick="'javascript:emp_show(\''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>
-                        <a title="编辑" href="javascript:;" th:onclick="'javascript:layer_update(\''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> </a>
-                        <a title="删除" href="javascript:;" th:onclick="'javascript:emp_del(\''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                        <a title="编辑" href="javascript:;" th:onclick="'javascript:layer_update(this,\''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i> </a>
+                        <a title="删除" href="javascript:;" th:onclick="'javascript:emp_del(this, \''+${item.empId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                     </td>
                 </tr>
                 </tbody>

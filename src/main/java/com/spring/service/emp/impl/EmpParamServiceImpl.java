@@ -30,4 +30,9 @@ public class EmpParamServiceImpl implements EmpParamService{
     public List<EmpParam> getJobMessageById(String jobId) {
         return empParamMapper.getAllByJobId(jobId);
     }
+
+    @Override
+    public Integer getCountByJobId(String jobId) {
+        return empParamMapper.getCountByJobId(jobId);
+    }
 }

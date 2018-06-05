@@ -129,4 +129,9 @@
       )
   </insert>
   
+  <select id="getCountByJobId" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(*) FROM t_emp_param em
+    WHERE em.JOB_ID = #{jobId,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>

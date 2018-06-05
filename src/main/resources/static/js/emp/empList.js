@@ -1,3 +1,6 @@
+$(function () {
+   distinct();
+});
 /**
  * 刷新数据
  */
@@ -49,6 +52,12 @@ function batch_delete() {
         layerOpen("请至少选择一项");
         return;
     }
+    var option=$("input[name='subCheck']:checked");
+    for (var i=0,length=option.length; i<length; i++){
+        var record=option[i];
+        var flag=$("record").parent();
+        console.log(flag);
+    }
     layer.confirm('确定要删除选中内容吗？' ,function (index) {
         var option=$("input[name='subCheck']:checked");
         var checkedId="";
@@ -71,9 +80,15 @@ function batch_delete() {
             data: {empId: checkedId},
             dataType: 'json',
             success: function (result) {
-                layer.msg(result.data, {icon: 6, time: 2000}, function () {
-                    reload();
-                })
+                if (result.code==0){
+                    layer.msg(result.data, {icon: 6, time: 2000}, function () {
+                        reload();
+                    });
+                }else {
+                    layer.msg(result.data, {icon: 5, time:2000}, function () {
+                        reload();
+                    });
+                }
             },
             error: function () {
                 layer.msg('系统错误，请与系统管理员联系', {icon: 5, time: 2000})
@@ -89,6 +104,13 @@ $(function () {
 });
 
 function emp_stop(obj,id) {
+    var record=$(obj).parents("tr").find(".flag").text();
+    var flag=record.substring(record.length-3,record.length);
+    if (flag == '管理员' || flag =='未分配'){
+        layerOpen("您没有权限操作此员工");
+        return;
+    }
+
     layer.confirm('确定要将状态定为异常吗？', function (index) {
         $.ajax({
             type: 'post',
@@ -111,6 +133,13 @@ function emp_stop(obj,id) {
 }
 
 function emp_start(obj,id) {
+    var record=$(obj).parents("tr").find(".flag").text();
+    var flag=record.substring(record.length-3,record.length);
+    if (flag == '管理员' || flag == '未分配'){
+        layerOpen("您没有权限操作此用户");
+        return;
+    }
+
     layer.confirm('确定要将状态修改为正常吗？' , function (index) {
         $.ajax({
             type: 'post',
@@ -128,7 +157,15 @@ function emp_start(obj,id) {
     })
 }
 
-function layer_update(id) {
+function layer_update(obj,id) {
+    var flag=$(obj).parents("tr").find(".flag").text();
+    console.log(flag);
+    var record=flag.substr(flag.length-3,flag.length);
+    console.log(record);
+    if (record == '管理员' || record == '未分配'){
+        layerOpen("你没有权限修改管理员信息");
+        return;
+    }
     var url = '/emp/'+id+'/toUpdate';
     var index=layer.open({
         type: 2,
@@ -144,7 +181,13 @@ function layer_update(id) {
     })
 }
 
-function emp_del(id) {
+function emp_del(obj, id) {
+    var record=$(obj).parents("tr").find(".flag").text();
+    var flag=record.substring(record.length-3,record.length);
+    if (flag =='管理员' || flag == '未分配'){
+        layerOpen("您没有权限操作此用户");
+        return;
+    }
     var index=layer.open({
         content: "确定要删除吗？",
         btn: ['确定', '取消'],

@@ -26,4 +26,6 @@ public interface EmpParamMapper {
     List<EmpParam> getAllByJobId(String jobId);
 
     int saveStaff(Staff staff);
+
+    Integer getCountByJobId(String jobId);
 }

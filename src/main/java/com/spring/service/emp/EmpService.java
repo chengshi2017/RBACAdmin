@@ -30,9 +30,11 @@ public interface EmpService {
 
     void batchDelete(List<String> list);
 
-    Page<Emp> getMessageByCondition(RowBounds rowBounds, EmpFilter filter);
+    Page<Staff> getMessageByCondition(RowBounds rowBounds, EmpFilter filter);
 
     Integer getCountByFilter(Integer count);
 
     List<Emp> getMessage();
+
+    void cascadeUpdate(Staff staff);
 }

@@ -9,6 +9,10 @@
             <input type="hidden" name="empId" id="empId" th:value="${staff.empId}"/>
             <input type="hidden" name="empNum" id="empNum" th:value="${staff.empNum}"/>
             <input type="hidden" name="userPassword" id="userPassword1" th:value="${staff.userPassword}"/>
+            <input type="hidden" name="userId" id="userId" th:value="${staff.userId}"/>
+            <input type="hidden" name="empParamId" id="empParamId" th:value="${staff.empParamId}"/>
+            <input type="hidden" name="userRoleId" id="userRoleId" th:value="${staff.userRoleId}"/>
+            <input type="hidden" name="uStatus" id="uStatus" th:value="${staff.uStatus}"/>
         </span>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>员工姓名：</label>
@@ -86,9 +90,9 @@
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>部门名称：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                 <span class="select-box" style="width:410px;">
-                    <select class="select" name="deptId" size="1">
-                        <option th:text="${staff.deptName}" th:value="${staff.deptId}"></option>
-                        <option th:each="empItem:${deptList}" th:text="${empItem.deptName}" th:value="${empItem.deptId}"></option>
+                    <select class="select" name="deptId" size="1" onchange="changeJobName(this.value)">
+                        <option th:value="${staff.deptId}" th:text="${staff.deptName}"></option>
+                        <option th:each="deptItem:${deptList}" th:text="${deptItem.deptName}" th:value="${deptItem.deptId}"></option>
                     </select>
 			    </span>
                 </div>
@@ -98,20 +102,21 @@
                 <div class="formControls col-xs-8 col-sm-8">
                 <span class="select-box" style="width:410px;">
                     <select class="select" name="jobId" size="1">
-                        <option th:text="${staff.jobName}" th:value="${staff.jobName}"></option>
+                        <option th:value="${staff.jobId}" th:text="${staff.jobName}"></option>
+                        <option th:each="jobItem:${jobList}" th:value="${jobItem.jobId}" th:text="${jobItem.jobName}"></option>
                     </select>
 			    </span>
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>工作状态：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否在职：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                <span class="select-box" style="width:410px;">
-                    <select class="select" name="eStatus" size="1" th:switch="${staff.eStatus}">
-                        <option th:text="${staff.eStatus}==1?'正常':'异常'" th:attr="value=${staff.eStatus}"></option>
+                    <span class="select-box" style="width:410px;">
+                        <select class="select" name="eStatus" size="1">
+                            <option th:text="${staff.eStatus}==1?'正常':'异常'" th:attr="value=${staff.eStatus}"></option>
                         <option th:text="${staff.eStatus}==0?'正常':'异常'" th:attr="value=(${staff.eStatus}==1?'0':'1')"></option>
-                    </select>
-			    </span>
+                        </select>
+                    </span>
                 </div>
             </div>
         </div>

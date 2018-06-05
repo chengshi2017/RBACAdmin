@@ -84,8 +84,8 @@ function changeJobName(deptId) {
         layerOpen("请先选择部门信息");
         return;
     }
-    $("#jobId").empty();
-    $("#jobId").append('<option value="">---请选择所属职位---</option>');
+    $("select[name='jobId']").empty();
+    $("select[name='jobId']").append('<option value="">---请选择所属职位---</option>');
     $.ajax({
         type: 'post',
         data: {deptId: deptId},
@@ -97,7 +97,7 @@ function changeJobName(deptId) {
             for (var i=0,length=data.length; i<length; i++){
                 console.log(data[i].jobName);
                 var jobName = data[i].jobName;
-                $("#jobId").append("<option value="+data[i].jobId+">"+jobName+"</option>");
+                $("select[name='jobId']").append("<option value="+data[i].jobId+">"+jobName+"</option>");
             }
         },
         error: function () {

@@ -37,6 +37,7 @@ import java.util.List;
  * @Describe:
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 
     private static final Logger Log= LoggerFactory.getLogger(UserServiceImpl.class);
@@ -64,7 +65,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
     public void insert(Staff staff) {
         //设置用户UUID
         staff.setUserId(UUID.getUUID());

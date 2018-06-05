@@ -1,6 +1,7 @@
 package com.spring.controller.emp;
 
 import com.github.pagehelper.Page;
+import com.spring.common.exceptions.MyException;
 import com.spring.common.utils.ResponseUtils;
 import com.spring.controller.base.SuperController;
 import com.spring.dao.JobMapper;
@@ -10,6 +11,7 @@ import com.spring.model.Job;
 import com.spring.model.Staff;
 import com.spring.param.EmpFilter;
 import com.spring.service.dept.DeptService;
+import com.spring.service.emp.EmpParamService;
 import com.spring.service.emp.EmpService;
 import com.spring.service.job.JobService;
 import org.apache.ibatis.session.RowBounds;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Filter;
@@ -41,6 +44,9 @@ public class EmpController extends SuperController {
 
     @Autowired
     private JobService jobService;
+
+    @Autowired
+    private EmpParamService empParamService;
 
     @RequiresPermissions(value = "emp:page")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
@@ -69,8 +75,11 @@ public class EmpController extends SuperController {
     public String toUpdate(@PathVariable("empId")String empId, Model model){
         Staff staff=empService.getEmpByEmpId(empId);
         List<Dept> deptList=deptService.getAllDept();
+        List<Job> list=jobService.getAllJobByDeptId(staff.getDeptId());
+        List<Job> jobList=convertList(list);
         model.addAttribute("staff",staff);
         model.addAttribute("deptList",deptList);
+        model.addAttribute("jobList",jobList);
         return "emp/emp_add";
     }
 
@@ -89,11 +98,15 @@ public class EmpController extends SuperController {
             }
         }
         //修改操作
-//        else{
-//            empService.update(emp);
-//            ResponseUtils.writeSuccessReponse(request,response,"修改员工信息成功");
-//        }
+        else{
+            if (count<=1){
+                empService.cascadeUpdate(staff);
+                ResponseUtils.writeSuccessReponse(request,response,"修改员工信息成功");
+            }else {
+                ResponseUtils.writeErrorResponse(request,response,"用户名重复，无法修改");
 
+            }
+        }
     }
 
     //对员工信息进行删除
@@ -108,6 +121,13 @@ public class EmpController extends SuperController {
     public void batchDelete(String empId){
         String[] empArrays=empId.split(",");
         List<String> list=Arrays.asList(empArrays);
+        for (String id:list){
+            Staff staff=empService.getEmpByEmpId(id);
+            if (staff.isFlag()){
+                ResponseUtils.writeErrorResponse(request,response,"选中的员工包括管理员，无法删除");
+                throw new MyException("选中的员工信息包括管理员，无法删除");
+            }
+        }
         empService.batchDelete(list);
         ResponseUtils.writeSuccessReponse(request,response,"批量删除员工信息成功");
 
@@ -117,7 +137,7 @@ public class EmpController extends SuperController {
     public String retrieve(EmpFilter filter,Model model){
         Integer pageNo=filter.getPageNo();
         Integer pageSize=filter.getPageSize();
-        Page<Emp> lists=empService.getMessageByCondition(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
+        Page<Staff> lists=empService.getMessageByCondition(new RowBounds((pageNo-1)*pageSize,pageSize),filter);
         model.addAttribute("lists",lists);
         return "emp/empList";
     }
@@ -126,7 +146,7 @@ public class EmpController extends SuperController {
     public void start(String empId){
         Staff staff=empService.getEmpByEmpId(empId);
         staff.seteStatus(staff.geteStatus()^1);
-        //empService.update(staff);
+        empService.cascadeUpdate(staff);
         ResponseUtils.writeSuccessReponse(request,response,"成功啦！");
     }
 
@@ -140,7 +160,19 @@ public class EmpController extends SuperController {
     @PostMapping(value = "/getJobList")
     public void getJobList(String deptId){
         List<Job> jobList=jobService.getAllJobByDeptId(deptId);
-        ResponseUtils.writeSuccessReponse(request,response,jobList);
+        List<Job> list=convertList(jobList);
+        ResponseUtils.writeSuccessReponse(request,response,list);
+    }
+
+    private List<Job> convertList(List<Job> jobList) {
+        List<Job> list=new ArrayList<>();
+        for (Job job:jobList){
+            Integer count=empParamService.getCountByJobId(job.getJobId());
+            if (count<job.getVolume()){
+                list.add(job);
+            }
+        }
+        return list;
     }
 
 

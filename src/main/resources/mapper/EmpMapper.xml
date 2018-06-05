@@ -286,10 +286,14 @@
   </select>
 
   <delete id="delete" parameterType="java.lang.String">
-    DELETE e.*,em.*
+    DELETE e.*,em.*,u.*,ur.*
     FROM t_emp e
     LEFT JOIN t_emp_param em
     ON e.EMP_ID=em.EMP_ID
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
     WHERE
     e.EMP_ID = #{empId}
   </delete>
@@ -316,10 +320,14 @@
   </select>
   
   <delete id="batchDelete" parameterType="java.util.List">
-    DELETE e.*,em.*
+    DELETE e.*, em.*, u.*, ur.*
     FROM t_emp e
     LEFT JOIN t_emp_param em
     ON e.EMP_ID=em.EMP_ID
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
     WHERE e.EMP_ID IN
     <foreach collection="list" item="item" open="(" close=")" separator=",">
       #{item}
@@ -481,49 +489,57 @@
   </insert>
 
   <update id="cascadeUpdate" parameterType="com.spring.model.Staff">
-    update t_emp
+    update t_emp e
+    LEFT JOIN t_user u
+    ON e.EMP_ID = u.USER_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
     <set>
-      <if test="empNum != null">
-        EMP_NUM = #{empNum,jdbcType=VARCHAR},
-      </if>
       <if test="empName != null">
-        EMP_NAME = #{empName,jdbcType=VARCHAR},
+        e.EMP_NAME = #{empName,jdbcType=VARCHAR},
+        u.USER_NAME = #{empName,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        SEX = #{sex,jdbcType=VARCHAR},
+        e.SEX = #{sex,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
-        AGE = #{age,jdbcType=INTEGER},
+        e.AGE = #{age,jdbcType=INTEGER},
       </if>
       <if test="address != null">
-        ADDRESS = #{address,jdbcType=VARCHAR},
+        e.ADDRESS = #{address,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        PHONE = #{phone,jdbcType=VARCHAR},
+        e.PHONE = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
-        EMAIL = #{email,jdbcType=VARCHAR},
+        e.EMAIL = #{email,jdbcType=VARCHAR},
       </if>
       <if test="pace != null">
-        PACE = #{pace,jdbcType=VARCHAR},
+        e.PACE = #{pace,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
-        REMARK = #{remark,jdbcType=VARCHAR},
+        e.REMARK = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="eStatus != null">
-        STATUS = #{eStatus,jdbcType=INTEGER},
+        e.STATUS = #{eStatus,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+        e.CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
-        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+        e.UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="flag != null">
-        FLAG = #{flag,jdbcType=BOOLEAN}
+        e.FLAG = #{flag,jdbcType=BOOLEAN},
+      </if>
+      <if test="deptId != null">
+        em.DEPT_ID = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="jobId != null">
+        em.JOB_ID = #{jobId,jdbcType=VARCHAR}
       </if>
     </set>
-    where EMP_ID = #{empId,jdbcType=VARCHAR}
+    where e.EMP_ID = #{empId,jdbcType=VARCHAR}
   </update>
 
   <select id="getEmpNum" resultType="java.lang.String">

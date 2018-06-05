@@ -10,6 +10,7 @@ import com.spring.model.Job;
 import com.spring.model.Staff;
 import com.spring.model.permission.User;
 import com.spring.param.UserFilter;
+import com.spring.service.emp.EmpParamService;
 import com.spring.service.job.JobService;
 import com.spring.service.permission.UserService;
 import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,6 +40,9 @@ public class PUserController extends SuperController {
 
     @Autowired
     private JobService jobService;
+
+    @Autowired
+    private EmpParamService empParamService;
     
     //加载用户权限相关页面
     @RequiresPermissions(value = "permission:user:page")
@@ -51,7 +56,8 @@ public class PUserController extends SuperController {
     //加载用户编辑信息页面
     @RequestMapping(value = "/toUpdate",method = RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String toAdd(Model model){
-        List<Job> jobList=jobService.getAllJobByDeptId(Constants.DEPT_HR_ID);
+        List<Job> list=jobService.getAllJobByDeptId(Constants.DEPT_HR_ID);
+        List<Job> jobList=convertList(list);
         model.addAttribute("jobList",jobList);
         return "permission/user/user-add";
     }
@@ -59,9 +65,10 @@ public class PUserController extends SuperController {
     //加载用户信息修改页面
     @RequestMapping(value = "{userId}/toUpdate",method = RequestMethod.GET)
     public String toUpdate(@PathVariable("userId") String userId, Model model){
-        List<Job> jobList =jobService.getAllJobByDeptId(Constants.DEPT_HR_ID);
-        model.addAttribute("jobList", jobList);
         Staff staff=userService.getUserMessageById(userId);
+        List<Job> list =jobService.getAllJobByDeptId(Constants.DEPT_HR_ID);
+        List<Job> jobList=convertList(list);
+        model.addAttribute("jobList", jobList);
         model.addAttribute("staff",staff);
         return "permission/user/user-add";
     }
@@ -141,6 +148,17 @@ public class PUserController extends SuperController {
         model.addAttribute("lists",lists);
         return "permission/user/userList";
 
+    }
+
+    private List<Job> convertList(List<Job> list) {
+        List<Job> jobList=new ArrayList<>();
+        for (Job job:list){
+            Integer count=empParamService.getCountByJobId(job.getJobId());
+            if (count<job.getVolume()){
+                jobList.add(job);
+            }
+        }
+        return jobList;
     }
 
 }

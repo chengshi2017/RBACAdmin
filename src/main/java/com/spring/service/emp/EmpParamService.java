@@ -20,4 +20,5 @@ public interface EmpParamService {
 
     List<EmpParam> getJobMessageById(String jobId);
 
+    Integer getCountByJobId(String jobId);
 }

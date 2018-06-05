@@ -51,10 +51,14 @@ function layerOpen(msg) {
 }
 
 function distinct() {
-    $("select option").each(function () {
-        text=$(this).text();
-        if ($("select option:contains("+text+")").length>1){
-            $("select option:contains("+text+"):gt(0)").remove()
-        }
-    })
+    $("select").each(function(i,n){
+        var options = "";
+        $(n).find("option").each(function(j,m){
+            if(options.indexOf($(m)[0].outerHTML) == -1)
+            {
+                options += $(m)[0].outerHTML;
+            }
+        });
+        $(n).html(options);
+    });
 }
