@@ -6750,9 +6750,9 @@ var template = Object.freeze({
   p$1.getCssTransitionType = function (className) {
     /* istanbul ignore if */
     if (!transitionEndEvent ||
-    // skip CSS transitions if page is not visible -
+    // skip CSS transitions if page.html is not visible -
     // this solves the issue of transitionend events not
-    // firing until the page is visible again.
+    // firing until the page.html is visible again.
     // pageVisibility API is supported in IE10+, same as
     // CSS transitions.
     document.hidden ||

@@ -49,7 +49,7 @@ public class PGrantController extends SuperController {
     private RoleMenuService roleMenuService;
 
     //加载page页面
-    @RequiresPermissions(value = "permission:grant:page")
+    @RequiresPermissions(value = "permission:grant:page.html")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     public String toPage(Model model){
         List<User> lists=userService.getAllUsers();

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header">
+</head>
+<body>
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户管理 <span class="c-gray en">&gt;</span> 个人信息 <a id="btn-refresh" class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" onclick="refresh()" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="Hui-article-from">
+    <table class="table table-border table-bordered table-bg table-hover table-sort mt-20">
+        <thead>
+            <tr>
+                <th colspan="2" scope="col" style="text-align:center;">个人信息</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th width="30%">工号：</th>
+                <td><span id="lbServerName" th:text="${staff.empNum}"></span></td>
+            </tr>
+            <tr>
+                <th>用户名</th>
+                <td th:text="${staff.empName}"></td>
+            </tr>
+            <tr>
+                <th>性别</th>
+                <td th:text="${staff.sex}"></td>
+            </tr>
+            <tr>
+                <th>年龄</th>
+                <td th:text="${staff.age}"></td>
+            </tr>
+            <tr>
+                <th>家庭住址</th>
+                <td th:text="${staff.address}"></td>
+            </tr>
+            <tr>
+                <th>手机号码</th>
+                <td th:text="${staff.phone}"></td>
+            </tr>
+            <tr>
+                <th>民族</th>
+                <td th:text="${staff.pace}"></td>
+            </tr>
+            <tr>
+                <th>入职时间</th>
+                <td th:text="${#dates.format(staff.createTime,'yyyy-MM-dd')}"></td>
+            </tr>
+            <tr>
+                <th>当前部门</th>
+                <td th:text="${staff.deptName}"></td>
+            </tr>
+            <tr>
+                <th>当前职位</th>
+                <td th:text="${staff.jobName}"></td>
+            </tr>
+            <tr>
+                <th>当前角色</th>
+                <td th:text="${staff.roleName}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!--<div class="Hui-aside">-->
+        <!--<img th:src="@{/images/test.jpg}"/>-->
+        <!--<p>111111111111111111111</p>-->
+    <!--</div>-->
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dao.attend.UserAttendMapper">
+  <resultMap id="BaseResultMap" type="com.spring.model.attend.UserAttend">
+    <constructor>
+      <idArg column="USER_ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="USER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="REMARK" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ATTEND_ID, USER_ID, ATTEND_ID, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_attend
+    where USER_ATTEND_ID = #{userAttendId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_user_attend
+    where USER_ATTEND_ID = #{userAttendId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.attend.Attend">
+    insert into t_user_attend (USER_ATTEND_ID, USER_ID, ATTEND_ID, 
+      REMARK)
+    values (#{userAttendId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{attendId,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.attend.UserAttend">
+    insert into t_user_attend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userAttendId != null">
+        USER_ATTEND_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="attendId != null">
+        ATTEND_ID,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userAttendId != null">
+        #{userAttendId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="attendId != null">
+        #{attendId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.attend.UserAttend">
+    update t_user_attend
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="attendId != null">
+        ATTEND_ID = #{attendId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ATTEND_ID = #{userAttendId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.attend.UserAttend">
+    update t_user_attend
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      ATTEND_ID = #{attendId,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where USER_ATTEND_ID = #{userAttendId,jdbcType=VARCHAR}
+  </update>
+</mapper>

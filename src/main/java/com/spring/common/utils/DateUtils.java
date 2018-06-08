@@ -262,5 +262,45 @@ public class DateUtils {
         Date date=calendar.getTime();
         String current=sdf.format(date);
         return current;
+    }
 
-    }}
+    /**
+     * 计算当前是星期几
+     */
+    public static String getCurrentWeek(){
+        final String datNames[]={ "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+        Calendar calendar=Calendar.getInstance();
+        Date date=new Date();
+        calendar.setTime(date);
+        int dayOfWeek=calendar.get(Calendar.DAY_OF_WEEK)-1;
+        if (dayOfWeek<0){
+            dayOfWeek=0;
+        }
+        return datNames[dayOfWeek];
+    }
+
+    /**
+     * 获取当天的某个时间
+     */
+    public static Date getDate(int hour, int minute){
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,minute);
+        return calendar.getTime();
+    }
+
+    /**
+     * 计算缺勤时长
+     */
+    public static int getMinute(Date startTime, Date endTime){
+        int minute;
+        long start = startTime.getTime();
+        long end = endTime.getTime();
+        if (start>=end){
+            minute=0;
+        }else {
+            minute = (int) ((end-start)/(1000*60));
+        }
+        return minute;
+    }
+}

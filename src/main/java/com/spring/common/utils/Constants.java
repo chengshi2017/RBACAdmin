@@ -45,4 +45,31 @@ public class Constants {
     //设置普通员工的UUID常量
     public static String ROLE_STAFF = "126304SL3U29700A";
 
+    public static class AttendConstants{
+        /**
+         * 中午十二点，判定上下午
+         */
+        public static final Integer NOON_HOUR = 12;
+        public static final Integer NOON_MINUTE = 00;
+
+        /**
+         * 早晚上班时间判定
+         */
+        public static final Integer MORNING_HOUR = 9;
+        public static final Integer MORNING_MINUTE = 00;
+        public static final Integer EVENING_HOUR = 17;
+        public static final Integer EVENING_MINUTE = 00;
+
+        /**
+         * 缺勤一整天
+         */
+        public static final Integer ABSENCE_DAY = 480;
+
+        /**
+         * 考勤状态
+         */
+        public static final Integer ATTEND_STATUS_ABNORMAL = 0;  //异常
+        public static final Integer ATTEND_STATUS_NORMAL = 1;    //正常
+    }
+
 }

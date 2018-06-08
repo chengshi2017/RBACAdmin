@@ -72,5 +72,11 @@ mybatis:
   mapper-locations: classpath:/mapper/*Mapper.xml
   config-location: classpath:/configs/mapper-config.xml
 
+#服务器端口
 server:
   port: 9000
+
+#配置logback日志文件
+logging:
+  config: classpath:logback.xml
+

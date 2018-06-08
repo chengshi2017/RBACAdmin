@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header"/>
+<body>
+<div class="page-container">
+    <form action="" method="post" class="form form-horizontal">
+        <div class="row cl">
+            <label class="attend-lable col-sm-3">&nbsp;工&emsp;&emsp;号&nbsp;:</label>
+            <span class="" th:text="${staff.empNum}" style="color: blueviolet;"></span>
+        </div>
+        <div class="row cl">
+            <label class="attend-lable col-sm-3">&nbsp;姓&emsp;&emsp;名&nbsp;:</label>
+            <span th:text="${staff.userName}" style="color: blueviolet;"></span>
+        </div>
+        <div class="row cl">
+            <label class="attend-lable col-sm-3">&nbsp;当前时间&nbsp;:</label>
+            <span id="LocalTime" style="color: blueviolet;"></span>
+        </div>
+        <div class="row c1">
+            <div class="formControls col-xs-8 col-xs-offset-3 mt-20">
+                <input id="attend" type="button" class="btn btn-primary radius " value="&nbsp;打&nbsp;&nbsp;&nbsp;卡&nbsp;"/>
+                <button onclick="layer_close()" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script th:src="@{/js/attend/attend.js}" th:inline="javascript"></script>
+</body>
+</html>

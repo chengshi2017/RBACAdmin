@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dao.attend.AttendMapper">
+  <resultMap id="BaseResultMap" type="com.spring.model.attend.Attend">
+    <constructor>
+      <idArg column="ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ATTEND_DATE" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="ATTEND_WEEK" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ATTEND_MORNING" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="ATTEND_EVENING" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="ABSENCE" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ATTEND_STATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="USER_ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="USER_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="REMARK" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, ATTEND_MORNING, ATTEND_EVENING, ABSENCE, ATTEND_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_attend
+    where ATTEND_ID = #{attendId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_attend
+    where ATTEND_ID = #{attendId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.attend.Attend">
+    insert into t_attend (ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, 
+      ATTEND_MORNING, ATTEND_EVENING, ABSENCE, 
+      ATTEND_STATUS)
+    values (#{attendId,jdbcType=VARCHAR}, #{attendDate,jdbcType=DATE}, #{attendWeek,jdbcType=VARCHAR},
+      #{attendMorning,jdbcType=TIMESTAMP}, #{attendEvening,jdbcType=TIMESTAMP}, #{absence,jdbcType=INTEGER}, 
+      #{attendStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.attend.Attend">
+    insert into t_attend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attendId != null">
+        ATTEND_ID,
+      </if>
+      <if test="attendDate != null">
+        ATTEND_DATE,
+      </if>
+      <if test="attendWeek != null">
+        ATTEND_WEEK,
+      </if>
+      <if test="attendMorning != null">
+        ATTEND_MORNING,
+      </if>
+      <if test="attendEvening != null">
+        ATTEND_EVENING,
+      </if>
+      <if test="absence != null">
+        ABSENCE,
+      </if>
+      <if test="attendStatus != null">
+        ATTEND_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attendId != null">
+        #{attendId,jdbcType=VARCHAR},
+      </if>
+      <if test="attendDate != null">
+        #{attendDate,jdbcType=DATE},
+      </if>
+      <if test="attendWeek != null">
+        #{attendWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="attendMorning != null">
+        #{attendMorning,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attendEvening != null">
+        #{attendEvening,jdbcType=TIMESTAMP},
+      </if>
+      <if test="absence != null">
+        #{absence,jdbcType=INTEGER},
+      </if>
+      <if test="attendStatus != null">
+        #{attendStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.attend.Attend">
+    update t_attend
+    <set>
+      <if test="attendDate != null">
+        ATTEND_DATE = #{attendDate,jdbcType=DATE},
+      </if>
+      <if test="attendWeek != null">
+        ATTEND_WEEK = #{attendWeek,jdbcType=VARCHAR},
+      </if>
+      <if test="attendMorning != null">
+        ATTEND_MORNING = #{attendMorning,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attendEvening != null">
+        ATTEND_EVENING = #{attendEvening,jdbcType=TIMESTAMP},
+      </if>
+      <if test="absence != null">
+        ABSENCE = #{absence,jdbcType=INTEGER},
+      </if>
+      <if test="attendStatus != null">
+        ATTEND_STATUS = #{attendStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ATTEND_ID = #{attendId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.attend.Attend">
+    update t_attend
+    set ATTEND_DATE = #{attendDate,jdbcType=DATE},
+      ATTEND_WEEK = #{attendWeek,jdbcType=VARCHAR},
+      ATTEND_MORNING = #{attendMorning,jdbcType=TIMESTAMP},
+      ATTEND_EVENING = #{attendEvening,jdbcType=TIMESTAMP},
+      ABSENCE = #{absence,jdbcType=INTEGER},
+      ATTEND_STATUS = #{attendStatus,jdbcType=INTEGER}
+    where ATTEND_ID = #{attendId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getTodayRecordAttend" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    WHERE ua.USER_ID = #{userId,jdbcType=VARCHAR}
+    AND a.ATTEND_DATE = CURDATE()
+  </select>
+
+</mapper>

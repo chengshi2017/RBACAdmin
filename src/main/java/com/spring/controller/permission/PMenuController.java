@@ -40,7 +40,7 @@ public class PMenuController extends SuperController {
     private RoleMenuService roleMenuService;
 
     //加载page页面
-    @RequiresPermissions(value = "permission:menu:page")
+    @RequiresPermissions(value = "permission:menu:page.html")
     @RequestMapping(value = "/page")
     public String page(@RequestParam(defaultValue = "1")Integer pageNo,
                        @RequestParam(defaultValue = "10")Integer pageSize,

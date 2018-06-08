@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dao.attend.ApplyMapper">
+  <resultMap id="BaseResultMap" type="com.spring.model.attend.Apply">
+    <constructor>
+      <idArg column="RE_ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ATTEND_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="RE_ATTEND_STARTER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RE_ATTEND_MOR" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="RE_ATTEND_EVE" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="RE_ATTEND_HANDLER_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="STATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="COMMENTS" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    RE_ATTEND_ID, ATTEND_DATE, RE_ATTEND_STARTER_ID, RE_ATTEND_MOR, RE_ATTEND_EVE, RE_ATTEND_HANDLER_ID, 
+    STATUS, COMMENTS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_apply
+    where RE_ATTEND_ID = #{reAttendId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_apply
+    where RE_ATTEND_ID = #{reAttendId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.attend.Apply">
+    insert into t_apply (RE_ATTEND_ID, ATTEND_DATE, RE_ATTEND_STARTER_ID, 
+      RE_ATTEND_MOR, RE_ATTEND_EVE, RE_ATTEND_HANDLER_ID, 
+      STATUS, COMMENTS)
+    values (#{reAttendId,jdbcType=VARCHAR}, #{attendDate,jdbcType=TIMESTAMP}, #{reAttendStarterId,jdbcType=VARCHAR}, 
+      #{reAttendMor,jdbcType=TIMESTAMP}, #{reAttendEve,jdbcType=TIMESTAMP}, #{reAttendHandlerId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{comments,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.attend.Apply">
+    insert into t_apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reAttendId != null">
+        RE_ATTEND_ID,
+      </if>
+      <if test="attendDate != null">
+        ATTEND_DATE,
+      </if>
+      <if test="reAttendStarterId != null">
+        RE_ATTEND_STARTER_ID,
+      </if>
+      <if test="reAttendMor != null">
+        RE_ATTEND_MOR,
+      </if>
+      <if test="reAttendEve != null">
+        RE_ATTEND_EVE,
+      </if>
+      <if test="reAttendHandlerId != null">
+        RE_ATTEND_HANDLER_ID,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reAttendId != null">
+        #{reAttendId,jdbcType=VARCHAR},
+      </if>
+      <if test="attendDate != null">
+        #{attendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reAttendStarterId != null">
+        #{reAttendStarterId,jdbcType=VARCHAR},
+      </if>
+      <if test="reAttendMor != null">
+        #{reAttendMor,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reAttendEve != null">
+        #{reAttendEve,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reAttendHandlerId != null">
+        #{reAttendHandlerId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.attend.Apply">
+    update t_apply
+    <set>
+      <if test="attendDate != null">
+        ATTEND_DATE = #{attendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reAttendStarterId != null">
+        RE_ATTEND_STARTER_ID = #{reAttendStarterId,jdbcType=VARCHAR},
+      </if>
+      <if test="reAttendMor != null">
+        RE_ATTEND_MOR = #{reAttendMor,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reAttendEve != null">
+        RE_ATTEND_EVE = #{reAttendEve,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reAttendHandlerId != null">
+        RE_ATTEND_HANDLER_ID = #{reAttendHandlerId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="comments != null">
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RE_ATTEND_ID = #{reAttendId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.attend.Apply">
+    update t_apply
+    set ATTEND_DATE = #{attendDate,jdbcType=TIMESTAMP},
+      RE_ATTEND_STARTER_ID = #{reAttendStarterId,jdbcType=VARCHAR},
+      RE_ATTEND_MOR = #{reAttendMor,jdbcType=TIMESTAMP},
+      RE_ATTEND_EVE = #{reAttendEve,jdbcType=TIMESTAMP},
+      RE_ATTEND_HANDLER_ID = #{reAttendHandlerId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      COMMENTS = #{comments,jdbcType=VARCHAR}
+    where RE_ATTEND_ID = #{reAttendId,jdbcType=VARCHAR}
+  </update>
+</mapper>

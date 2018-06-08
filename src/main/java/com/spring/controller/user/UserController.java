@@ -27,14 +27,15 @@ public class UserController extends SuperController {
     private UserService userService;
 
     //加载page页面
-    @RequiresPermissions(value = "user:page")
-    @RequestMapping(value = "page",method = RequestMethod.GET)
+    @RequiresPermissions(value = "user:page.html")
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
     public String toPage(Model model){
         User user=getUser();
         if(user!=null){
-            model.addAttribute("user",user);
+            Staff staff=userService.getUserMessageById(user.getUserId());
+            model.addAttribute("staff",staff);
         }
-        return "user/page";
+        return "persion/information";
     }
 
     //修改用户密码

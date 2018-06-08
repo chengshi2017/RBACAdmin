@@ -121,7 +121,8 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">备注：</label>
             <div class="formControls col-xs-8 col-sm-8">
-                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${staff}?(${staff.remark}):''" style="width: 410px"></textarea>
+                <textarea name="remark" id="remark" class="textarea"  placeholder="说点什么吧...100个字符以内" th:text="${staff}?(${staff.remark}):''" style="width: 410px"></textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
             </div>
         </div>
         <div class="row cl">

@@ -45,7 +45,7 @@ public class PUserController extends SuperController {
     private EmpParamService empParamService;
     
     //加载用户权限相关页面
-    @RequiresPermissions(value = "permission:user:page")
+    @RequiresPermissions(value = "permission:user:page.html")
     @RequestMapping(value = "/page")
     public String page(@RequestParam(defaultValue = "1")Integer pageNo, @RequestParam(defaultValue = "10")Integer pageSize, UserFilter filter, Model model){
         Page<Staff> lists=userService.getAllUserMessage(new RowBounds((pageNo-1)*pageSize,pageSize),filter);

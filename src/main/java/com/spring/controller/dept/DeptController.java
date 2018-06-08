@@ -40,7 +40,7 @@ public class DeptController extends SuperController{
     private EmpParamService empParamService;
 
     //加载page页面
-    @RequiresPermissions(value = "dept:page")
+    @RequiresPermissions(value = "dept:page.html")
     @RequestMapping(value = "/page")
     public String toPage(@RequestParam(defaultValue = "1") Integer pageNo,
                          @RequestParam(defaultValue = "10") Integer pageSize,

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dao.attend.AttendApplyMapper">
+  <resultMap id="BaseResultMap" type="com.spring.model.attend.AttendApply">
+    <constructor>
+      <idArg column="ATTEND_REATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="RE_ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="STATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="REMARK" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATTEND_REATTEND_ID, ATTEND_ID, RE_ATTEND_ID, STATUS, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_attend_apply
+    where ATTEND_REATTEND_ID = #{attendReattendId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_attend_apply
+    where ATTEND_REATTEND_ID = #{attendReattendId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.spring.model.attend.AttendApply">
+    insert into t_attend_apply (ATTEND_REATTEND_ID, ATTEND_ID, RE_ATTEND_ID, 
+      STATUS, REMARK)
+    values (#{attendReattendId,jdbcType=VARCHAR}, #{attendId,jdbcType=VARCHAR}, #{reAttendId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.model.attend.AttendApply">
+    insert into t_attend_apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attendReattendId != null">
+        ATTEND_REATTEND_ID,
+      </if>
+      <if test="attendId != null">
+        ATTEND_ID,
+      </if>
+      <if test="reAttendId != null">
+        RE_ATTEND_ID,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attendReattendId != null">
+        #{attendReattendId,jdbcType=VARCHAR},
+      </if>
+      <if test="attendId != null">
+        #{attendId,jdbcType=VARCHAR},
+      </if>
+      <if test="reAttendId != null">
+        #{reAttendId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.model.attend.AttendApply">
+    update t_attend_apply
+    <set>
+      <if test="attendId != null">
+        ATTEND_ID = #{attendId,jdbcType=VARCHAR},
+      </if>
+      <if test="reAttendId != null">
+        RE_ATTEND_ID = #{reAttendId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATTEND_REATTEND_ID = #{attendReattendId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.model.attend.AttendApply">
+    update t_attend_apply
+    set ATTEND_ID = #{attendId,jdbcType=VARCHAR},
+      RE_ATTEND_ID = #{reAttendId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ATTEND_REATTEND_ID = #{attendReattendId,jdbcType=VARCHAR}
+  </update>
+</mapper>

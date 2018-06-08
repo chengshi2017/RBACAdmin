@@ -48,7 +48,7 @@ public class EmpController extends SuperController {
     @Autowired
     private EmpParamService empParamService;
 
-    @RequiresPermissions(value = "emp:page")
+    @RequiresPermissions(value = "emp:page.html")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     public String toPage(@RequestParam(defaultValue = "1")Integer pageNo,
                          @RequestParam(defaultValue = "10")Integer pageSize,

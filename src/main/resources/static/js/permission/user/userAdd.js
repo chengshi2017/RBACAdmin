@@ -68,3 +68,25 @@ $(function(){
         }
     });
 });
+
+$("#remark").keydown(function () {
+    var max = 100;
+    var value = $(this).val();
+    var coun = $(".textarea-length");
+    if (value.length>max){
+        $(this).val(value.substring(0,max));
+        coun.html(0);
+    }else {
+        coun.html(max - value.length);
+    }
+}).keyup(function () {
+    var max = 100;
+    var value = $(this).val();
+    var coun = $(".textarea-length");
+    if (value.length>max){
+        $(this).val(value.substring(0,max));
+        coun.html(0);
+    }else {
+        coun.html(max - value.length);
+    }
+});

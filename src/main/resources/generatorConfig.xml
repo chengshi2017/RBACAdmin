@@ -22,7 +22,7 @@
         <!--jdbc的数据库连接 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/work_attendance"
+                connectionURL="jdbc:mysql://localhost:3306/hrm_db"
                 userId="root"
                 password="123456">
         </jdbcConnection>
@@ -38,7 +38,7 @@
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径
         -->
-        <javaModelGenerator targetPackage="com.spring.model"
+        <javaModelGenerator targetPackage="com.spring.model.attend"
                             targetProject="src/main/java">
 
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
@@ -53,7 +53,7 @@
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
         <sqlMapGenerator targetPackage="mapper"
-                         targetProject="src/main/resources">
+                         targetProject="src/main/resources/">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
@@ -62,7 +62,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator targetPackage="com.spring.dao"
+        <javaClientGenerator targetPackage="com.spring.dao.attend"
                              targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -71,7 +71,7 @@
         <!-- pojo 实体生成器 -->
         <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
         <!-- schema即为数据库名 可不写 -->
-        <table tableName="user" domainObjectName="User"
+        <table tableName="t_attend" domainObjectName="Attend"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -85,7 +85,7 @@
         <!-- pojo 实体生成器 -->
         <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
         <!-- schema即为数据库名 可不写 -->
-        <table tableName="user_role" domainObjectName="UserRole"
+        <table tableName="t_user_attend" domainObjectName="UserAttend"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -99,7 +99,7 @@
         <!-- pojo 实体生成器 -->
         <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
         <!-- schema即为数据库名 可不写 -->
-        <table tableName="role" domainObjectName="Role"
+        <table tableName="t_apply" domainObjectName="Apply"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -113,7 +113,7 @@
         <!-- pojo 实体生成器 -->
         <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
         <!-- schema即为数据库名 可不写 -->
-        <table tableName="role_permission" domainObjectName="RolePermission"
+        <table tableName="t_attend_apply" domainObjectName="AttendApply"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -123,18 +123,5 @@
             <!-- <columnOverride column="city_code" jdbcType="VARCHAR" /> -->
         </table>
 
-        <!-- 必须的（1...N） -->
-        <!-- pojo 实体生成器 -->
-        <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
-        <!-- schema即为数据库名 可不写 -->
-        <table tableName="permission" domainObjectName="Permission"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <!-- 忽略字段 可选的（0 or 1） -->
-            <!-- <ignoreColumn column="is_use" /> -->
-            <!--//无论字段是什么类型，生成的类属性都是varchar。 可选的（0 or 1） 测试无效 -->
-            <!-- <columnOverride column="city_code" jdbcType="VARCHAR" /> -->
-        </table>
     </context>
 </generatorConfiguration>
