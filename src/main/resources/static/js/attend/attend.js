@@ -18,9 +18,12 @@ $("#attend").click(function () {
             if (result.code == 0){
                 layer.msg(result.data, {icon: 6, time: 2000},function () {
                     var index=parent.layer.getFrameIndex(window.name);
-                    layer.close(index);
+                    parent.layer.close(index);
                 })
             }
+        },
+        error: function () {
+            layer.msg("打卡失败，请与系统管理员联系", {icon: 5, time: 2000});
         }
     })
 });

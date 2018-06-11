@@ -25,5 +25,24 @@ tr:hover{ background: #F5F5F5;} /*鼠标悬停后表格背景颜色*/
     margin-left: 150px;
 }
 
+.attend-list{
+    height: 450px;
+    border: 1px solid #FF8C00;
+    padding: 10px;
+}
+
+.start
+{
+    cursor: pointer;
+}
+
+.end
+{
+    cursor: pointer;
+    color: #fff;
+    background: #0000ff;
+    border: none;
+}
+
 
 

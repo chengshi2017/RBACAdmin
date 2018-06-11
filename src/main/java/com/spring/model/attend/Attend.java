@@ -12,7 +12,7 @@ public class Attend {
 
     private String attendId;
 
-    private Date attendDate;
+    private String attendDate;
 
     private String attendWeek;
 
@@ -24,7 +24,9 @@ public class Attend {
 
     private Integer attendStatus;
 
-    public Attend(String attendId, Date attendDate, String attendWeek, Date attendMorning, Date attendEvening, Integer absence, Integer attendStatus) {
+    private Integer workHours;
+
+    public Attend(String attendId, String attendDate, String attendWeek, Date attendMorning, Date attendEvening, Integer absence, Integer attendStatus) {
         this.attendId = attendId;
         this.attendDate = attendDate;
         this.attendWeek = attendWeek;
@@ -70,11 +72,11 @@ public class Attend {
         this.attendId = attendId == null ? null : attendId.trim();
     }
 
-    public Date getAttendDate() {
+    public String getAttendDate() {
         return attendDate;
     }
 
-    public void setAttendDate(Date attendDate) {
+    public void setAttendDate(String attendDate) {
         this.attendDate = attendDate;
     }
 
@@ -116,5 +118,13 @@ public class Attend {
 
     public void setAttendStatus(Integer attendStatus) {
         this.attendStatus = attendStatus;
+    }
+
+    public Integer getWorkHours() {
+        return workHours;
+    }
+
+    public void setWorkHours(Integer workHours) {
+        this.workHours = workHours;
     }
 }

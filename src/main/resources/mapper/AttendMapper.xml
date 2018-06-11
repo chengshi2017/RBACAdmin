@@ -2,18 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.dao.attend.AttendMapper">
   <resultMap id="BaseResultMap" type="com.spring.model.attend.Attend">
-    <constructor>
-      <idArg column="ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="ATTEND_DATE" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="ATTEND_WEEK" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="ATTEND_MORNING" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="ATTEND_EVENING" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="ABSENCE" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="ATTEND_STATUS" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="USER_ATTEND_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="USER_ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="REMARK" javaType="java.lang.String" jdbcType="VARCHAR"/>
-    </constructor>
+    <id column="ATTEND_ID" property="attendId" jdbcType="VARCHAR"/>
+    <result column="ATTEND_DATE" property="attendDate" jdbcType="VARCHAR"/>
+    <result column="ATTEND_WEEK" property="attendWeek" jdbcType="VARCHAR"/>
+    <result column="ATTEND_MORNING" property="attendMorning" jdbcType="TIMESTAMP"/>
+    <result column="ATTEND_EVENING" property="attendEvening" jdbcType="TIMESTAMP"/>
+    <result column="ABSENCE" property="absence" jdbcType="INTEGER"/>
+    <result column="ATTEND_STATUS" property="attendStatus" jdbcType="INTEGER"/>
+    <result column="USER_ATTEND_ID" property="userAttendId" jdbcType="VARCHAR"/>
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+    <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List">
     ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, ATTEND_MORNING, ATTEND_EVENING, ABSENCE, ATTEND_STATUS
@@ -32,7 +30,7 @@
     insert into t_attend (ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, 
       ATTEND_MORNING, ATTEND_EVENING, ABSENCE, 
       ATTEND_STATUS)
-    values (#{attendId,jdbcType=VARCHAR}, #{attendDate,jdbcType=DATE}, #{attendWeek,jdbcType=VARCHAR},
+    values (#{attendId,jdbcType=VARCHAR}, #{attendDate,jdbcType=VARCHAR}, #{attendWeek,jdbcType=VARCHAR},
       #{attendMorning,jdbcType=TIMESTAMP}, #{attendEvening,jdbcType=TIMESTAMP}, #{absence,jdbcType=INTEGER}, 
       #{attendStatus,jdbcType=INTEGER})
   </insert>
@@ -66,7 +64,7 @@
         #{attendId,jdbcType=VARCHAR},
       </if>
       <if test="attendDate != null">
-        #{attendDate,jdbcType=DATE},
+        #{attendDate,jdbcType=VARCHAR},
       </if>
       <if test="attendWeek != null">
         #{attendWeek,jdbcType=VARCHAR},
@@ -89,7 +87,7 @@
     update t_attend
     <set>
       <if test="attendDate != null">
-        ATTEND_DATE = #{attendDate,jdbcType=DATE},
+        ATTEND_DATE = #{attendDate,jdbcType=VARCHAR},
       </if>
       <if test="attendWeek != null">
         ATTEND_WEEK = #{attendWeek,jdbcType=VARCHAR},
@@ -111,7 +109,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.spring.model.attend.Attend">
     update t_attend
-    set ATTEND_DATE = #{attendDate,jdbcType=DATE},
+    set ATTEND_DATE = #{attendDate,jdbcType=VARCHAR},
       ATTEND_WEEK = #{attendWeek,jdbcType=VARCHAR},
       ATTEND_MORNING = #{attendMorning,jdbcType=TIMESTAMP},
       ATTEND_EVENING = #{attendEvening,jdbcType=TIMESTAMP},
@@ -126,6 +124,67 @@
     ON a.ATTEND_ID = ua.ATTEND_ID
     WHERE ua.USER_ID = #{userId,jdbcType=VARCHAR}
     AND a.ATTEND_DATE = CURDATE()
+  </select>
+
+  <select id="getUserIdAbsence" resultType="java.lang.String">
+    SELECT u.USER_ID FROM t_user u
+    WHERE u.USER_ID NOT IN (
+        SELECT ua.USER_ID FROM t_user_attend ua
+        LEFT JOIN t_attend a
+        ON ua.ATTEND_ID = a.ATTEND_ID
+        WHERE a.ATTEND_DATE = CURDATE()
+    )
+  </select>
+  
+  <insert id="batchInsert" parameterType="java.util.List">
+    INSERT  INTO  t_attend(ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, ATTEND_MORNING,
+    ATTEND_EVENING, ABSENCE, ATTEND_STATUS)
+    VALUES 
+    <foreach collection="list" item="item" open="(" close=")" separator=",">
+      (#{item.attendId}, #{item.attendDate}, #{item.attendWeek}, #{item.attendMorning},
+      #{item.attendEvening}, #{item.absence}, #{item.attendStatus})
+    </foreach>
+  </insert>
+
+  <select id="getTodayEveningAbsence" resultMap="BaseResultMap">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    WHERE a.ATTEND_DATE = CURDATE()
+    AND a.ATTEND_EVENING IS NULL
+    AND a.ATTEND_STATUS = 0
+    AND a.ATTEND_WEEK NOT IN ('星期六','星期天')
+  </select>
+  
+  <select id="getAllAttendRecord" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    WHERE ua.USER_ID = #{userId}
+  </select>
+  
+  <select id="getCurrentMonthAttendRecord" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    WHERE ua.USER_ID = #{userId}
+    AND DATE_FORMAT( a.ATTEND_DATE, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' )
+  </select>
+  
+  <select id="getCurrentWeekAttendRecord" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    WHERE ua.USER_ID = #{userId}
+    AND YEARWEEK(date_format(a.ATTEND_DATE,'%Y-%m-%d')) = YEARWEEK(now());
+  </select>
+  
+  <select id="getLastMonthAttendRecord" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    WHERE ua.USER_ID = #{userId}
+    AND PERIOD_DIFF(date_format(now() , '%Y%m' ) , date_format(a.ATTEND_DATE, '%Y%m' ) ) =1
   </select>
 
 </mapper>

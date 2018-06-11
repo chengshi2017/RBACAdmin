@@ -303,4 +303,25 @@ public class DateUtils {
         }
         return minute;
     }
+
+    /**
+     * 计算当天日期
+     */
+    public static String getCurrentDay(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String currentDay=sdf.format(date);
+        return currentDay;
+    }
+
+    public static int getWorkHours(Date startTime, Date endTime){
+        if (startTime!=null&&endTime!=null){
+            long start=startTime.getTime();
+            long end=endTime.getTime();
+            int dd= (int) ((end-start)/1000/60/60);
+            return dd;
+        }else {
+            return 0;
+        }
+    }
 }

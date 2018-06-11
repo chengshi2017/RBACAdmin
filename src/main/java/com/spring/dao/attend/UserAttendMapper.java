@@ -3,6 +3,8 @@ package com.spring.dao.attend;
 import com.spring.model.attend.Attend;
 import com.spring.model.attend.UserAttend;
 
+import java.util.List;
+
 public interface UserAttendMapper {
     int deleteByPrimaryKey(String userAttendId);
 
@@ -15,4 +17,6 @@ public interface UserAttendMapper {
     int updateByPrimaryKeySelective(UserAttend record);
 
     int updateByPrimaryKey(UserAttend record);
+
+    void batchInsert(List<Attend> list);
 }

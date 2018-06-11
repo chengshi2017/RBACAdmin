@@ -27,7 +27,7 @@ public class UserController extends SuperController {
     private UserService userService;
 
     //加载page页面
-    @RequiresPermissions(value = "user:page.html")
+    @RequiresPermissions(value = "user:page")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     public String toPage(Model model){
         User user=getUser();

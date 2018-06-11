@@ -33,7 +33,7 @@ public class NoticeController extends SuperController {
     private NoticeService noticeService;
 
 
-    @RequiresPermissions(value = "notice:page.html")
+    @RequiresPermissions(value = "notice:page")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     public String toPage(){
         return "notice/page.html";

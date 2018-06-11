@@ -81,4 +81,14 @@
       REMARK = #{remark,jdbcType=VARCHAR}
     where USER_ATTEND_ID = #{userAttendId,jdbcType=VARCHAR}
   </update>
+
+  <insert id="batchInsert" parameterType="java.util.List">
+    INSERT INTO t_user_attend
+    (USER_ATTEND_ID, USER_ID, ATTEND_ID, REMARK)
+    VALUES
+    <foreach collection="list" open="(" close=")" item="item" separator=",">
+      (#{item.userAttendId}, #{item.userId}, #{item.attendId}, #{remark})
+    </foreach>
+  </insert>
+
 </mapper>

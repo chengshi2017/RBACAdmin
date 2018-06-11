@@ -45,7 +45,7 @@ public class JobController extends SuperController {
     private DeptService deptService;
 
     //加载page页面
-    @RequiresPermissions(value = "job:page.html")
+    @RequiresPermissions(value = "job:page")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     public String toPage(@RequestParam(defaultValue = "1") Integer pageNo,
                          @RequestParam(defaultValue = "10") Integer pageSize,

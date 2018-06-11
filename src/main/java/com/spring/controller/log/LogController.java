@@ -40,7 +40,7 @@ public class LogController extends SuperController {
     private LogService logService;
 
     //加载page页面
-    @RequiresPermissions(value = "log:page.html")
+    @RequiresPermissions(value = "log:page")
     @RequestMapping(value = "/page")
     public String toPage(@RequestParam(defaultValue = "1")Integer pageNo,
                          @RequestParam(defaultValue = "10")Integer pageSize,

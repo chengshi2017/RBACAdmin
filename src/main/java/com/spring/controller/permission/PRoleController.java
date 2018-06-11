@@ -45,7 +45,7 @@ public class PRoleController extends SuperController {
     private RoleMenuService roleMenuService;
 
     //加载page页面
-    @RequiresPermissions(value = "permission:role:page.html")
+    @RequiresPermissions(value = "permission:role:page")
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     public String page(@RequestParam(defaultValue = "1")Integer pageNo,
                        @RequestParam(defaultValue = "10")Integer pageSize,
