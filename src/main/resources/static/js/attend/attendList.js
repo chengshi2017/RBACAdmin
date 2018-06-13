@@ -5,6 +5,8 @@ var yMax = 8;
 var dateNum = [];  //日期数组，用来放请求的日期
 var timeNum = [];  //考勤时长，用来放用来的考勤时间
 var id;
+var variable ;
+var clickDate;
 $(function () {
 
     //加载事件
@@ -40,11 +42,16 @@ function loadTable() {
         dataShadow.push(yMax);
     }
 
+    myChart.on('click', function (params) {
+        clickDate=params.name;
+        detailed();
+    });
+
     option=({
 
         title: {
             left: 'center',
-            text: "5月考勤信息展示图"
+            text: "考勤信息展示图"
         },
 
         xAxis: {
@@ -123,17 +130,8 @@ function loadTable() {
         ]
     });
 
-    myChart.showLoading(); //数据加载完之前先显示一段简单的loading
+    myChart.hideLoading();  //隐藏加载动画
 
-    var zoomSize = 6;
-    myChart.on('click', function (params) {
-        console.log(dateNum[Math.max(params.dataIndex - zoomSize / 2, 0)]);
-        myChart.dispatchAction({
-            type: 'dataZoom',
-            startValue: dateNum[Math.max(params.dataIndex - zoomSize / 2, 0)],
-            endValue: dateNum[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
-        });
-    });
     if (option && typeof option === "object"){
         myChart.setOption(option,true);
     }
@@ -169,13 +167,18 @@ function dj(dom) {
                 dateNum.push(array1[2]);
                 timeNum.push(data[i].workHours);
             }
-            myChart.hideLoading();  //隐藏加载动画
+
+            myChart.showLoading(); //数据加载完之前先显示一段简单的loading
             loadTable();
         }
     });
+}
 
+function detailed() {
+    layer.open({
+        title: '考勤详细信息',
 
-
+    })
 }
 
 

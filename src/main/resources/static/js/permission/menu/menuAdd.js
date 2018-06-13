@@ -12,7 +12,6 @@ $(function () {
         rules:{
             menuName: "required",
             menuIndex: "required",
-            permission: "required",
             remark: {
                 required: true,
                 minlength: 4,

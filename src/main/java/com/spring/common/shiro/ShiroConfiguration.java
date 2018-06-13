@@ -1,5 +1,6 @@
 package com.spring.common.shiro;
 
+import com.spring.common.override.QuartzSessionValidationScheduler2;
 import com.spring.common.redis.RedisCacheManager;
 import com.spring.common.redis.RedisManager;
 import com.spring.common.redis.RedisSessionDAO;
@@ -35,6 +36,13 @@ public class ShiroConfiguration {
     public MyRealm myShiroRealm(){
         MyRealm myRealm=new MyRealm();
         return myRealm;
+    }
+
+    @Bean
+    public QuartzSessionValidationScheduler2 sessionValidationScheduler(){
+        QuartzSessionValidationScheduler2 sessionValidationScheduler2=new QuartzSessionValidationScheduler2();
+        sessionValidationScheduler2.setSessionValidationInterval(90000);
+        return sessionValidationScheduler2;
     }
 
     @Bean
