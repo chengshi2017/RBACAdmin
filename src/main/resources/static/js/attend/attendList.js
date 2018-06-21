@@ -6,7 +6,8 @@ var dateNum = [];  //日期数组，用来放请求的日期
 var timeNum = [];  //考勤时长，用来放用来的考勤时间
 var id;
 var variable ;
-var clickDate;
+var year;
+var month;
 $(function () {
 
     //加载事件
@@ -16,6 +17,13 @@ $(function () {
     });
     $("#month").addClass("end");
 
+    var gather = $(".cut");
+    $.each(gather, function () {
+        $(this).addClass("start");
+    });
+    $("#bar").addClass("end1");
+    document.getElementById("pages").style.display = "none";
+
     dateNum =[];
     timeNum = [];
     $.ajax({
@@ -24,10 +32,15 @@ $(function () {
         dataType: 'json',
         success: function (result) {
             var data = result.data;
+            console.log(data);
             for (var i = 0, length = data.length; i < length; i++) {
                 var array1 = data[i].attendDate.split("-");
+                year = array1[0];
+                month = array1[1];
                 dateNum.push(array1[2]);
+                console.log(dateNum);
                 timeNum.push(data[i].workHours);
+                console.log(timeNum);
             }
 
             myChart.hideLoading();  //隐藏加载动画
@@ -43,8 +56,12 @@ function loadTable() {
     }
 
     myChart.on('click', function (params) {
-        clickDate=params.name;
-        detailed();
+        console.log(params);
+        var clickDate=params.name;
+        console.log(clickDate);
+        console.log(year);
+        console.log(month);
+        detailed(clickDate);
     });
 
     option=({
@@ -174,11 +191,80 @@ function dj(dom) {
     });
 }
 
-function detailed() {
-    layer.open({
-        title: '考勤详细信息',
+function detailed(clickDate) {
+    var date = year+"-"+month+"-"+clickDate;
+    console.log(date);
+    var url = '/attend/'+date+'/information';
 
+    if (url == null || url == ''){
+        url = '404.html';
+    }
+    var index=layer.open({
+        type: 2,
+        title: '考勤详细信息',
+        area: ['800px','95%'],
+        fix: false, //不固定
+        scrollbar: false,
+        btn: ['知道了'],
+        shade: 0.4,
+        skin: 'layui-layer-rim',
+        content: url
     })
 }
+
+function cut(dom) {
+    var gather = $(".cut");
+    $.each(gather, function () {
+        $(this).removeClass("end1");
+        $(this).addClass("start");
+    });
+    $(dom).removeClass("start");
+    $(dom).addClass("end1");
+    var id=dom.id;
+    console.log(id);
+    if (id == 'bar'){
+        document.getElementById("attend_list").style.display = "block";
+        document.getElementById("page_data").style.display = "none";
+        document.getElementById("pages").style.display = "none";
+    }else {
+        document.getElementById("attend_list").style.display = "none";
+        document.getElementById("page_data").style.display = "block";
+        document.getElementById("pages").style.display = "block";
+    }
+}
+
+
+function reload() {
+    var data = {
+        pageNo: laypage_curr || 1,
+        pageSize: laypage_limit || 10
+    };
+    common.getData('post', '/attend/page', data, 'html', $("#page_data"));
+}
+
+function attend_show(id) {
+
+    var url = '/attend/'+id+'/message';
+    if (url == null || url == ''){
+        url = '404.html';
+    }
+    var index = layer.open({
+        type: 2,
+        title: '考勤详细信息',
+        area: ['800px','95%'],
+        fix: false, //不固定
+        scrollbar: false,
+        btn: ['知道了'],
+        shade: 0.4,
+        skin: 'layui-layer-rim',
+        content: url
+    })
+}
+
+function reAttend() {
+    
+}
+
+
 
 

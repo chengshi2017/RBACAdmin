@@ -7,6 +7,7 @@ import com.spring.controller.base.SuperController;
 import com.spring.model.Staff;
 import com.spring.model.attend.Attend;
 import com.spring.model.permission.User;
+import com.spring.param.AttendFilter;
 import com.spring.service.attend.AttendService;
 import com.spring.service.permission.UserService;
 import org.apache.ibatis.session.RowBounds;
@@ -54,8 +55,13 @@ public class AttendController extends SuperController{
 
     @RequestMapping(value = "/page")
     @RequiresPermissions(value = "attend:page")
-    public String toPage(Model model){
-        return "/attend/attendList";
+    public String toPage(@RequestParam(defaultValue = "1")Integer pageNo,
+                         @RequestParam(defaultValue = "10")Integer pageSize,
+                         Model model){
+        User user=getUser();
+        Page<Attend> lists = attendService.selectAttend(new RowBounds((pageNo-1)*pageSize,pageSize),user.getUserId());
+        model.addAttribute("lists",lists);
+        return "attend/attendList";
     }
 
 
@@ -66,4 +72,23 @@ public class AttendController extends SuperController{
         List<Attend> lists=attendService.getAllAttendRecord(user.getUserId(),id);
         ResponseUtils.writeSuccessReponse(request,response,lists);
     }
+
+    @RequestMapping(value = "/{date}/information")
+    public String getMessage(@PathVariable("date")String date,Model model){
+        User user=getUser();
+        AttendFilter filter=new AttendFilter();
+        filter.setUserId(user.getUserId());
+        filter.setDate(date);
+        Attend attend=attendService.getMessageByDate(filter);
+        model.addAttribute("attend",attend);
+        return "attend/attendInformation";
+    }
+
+    @RequestMapping(value = "/{id}/message")
+    public String retrieve(@PathVariable("id")String attendId, Model model){
+        Attend attend=attendService.getAttendRecordByAttendId(attendId);
+        model.addAttribute("attend",attend);
+        return "attend/attendInformation";
+    }
+
 }

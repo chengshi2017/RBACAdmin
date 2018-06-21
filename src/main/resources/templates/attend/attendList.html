@@ -9,17 +9,72 @@
     </nav>
     <div class="page-container" id="form_data">
         <section class="text-c" id="search">
-            <span class="r">
-                <div class="layui-btn-group">
-                  <button id="week" class="layui-btn layui-btn-lg" onclick="dj(this)">本周</button>
-                  <button id="month" class="layui-btn layui-btn-lg" onclick="dj(this)">本月</button>
-                  <button id="lastmonth" class="layui-btn layui-btn-lg" onclick="dj(this)">上月</button>
-                </div>
-            </span>
+            <div class="layui-btn-group table-cut">
+              <button id="bar" class="cut layui-btn layui-btn-lg" onclick="cut(this)">柱状图</button>
+              <button id="table" class="cut layui-btn layui-btn-lg" onclick="cut(this)">表格</button>
+            </div>
+            <div class="layui-btn-group r">
+              <button id="week" class="layui-btn layui-btn-lg" onclick="dj(this)">本周</button>
+              <button id="month" class="layui-btn layui-btn-lg" onclick="dj(this)">本月</button>
+              <button id="lastmonth" class="layui-btn layui-btn-lg" onclick="dj(this)">上月</button>
+            </div>
         </section>
-        <div id="attend_list" class="attend-list mt-40"></div>
+        <div id="attend_list" class="attend-list mt-40" style="display: block"></div>
+        <div class="mt-40" id="page_data" style="display: none">
+
+            <table class="table table-border table-bordered table-bg table-hover table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th width="25"><input type="checkbox" name="subCheck" id="subCheck"/></th>
+                    <th width="40">序号</th>
+                    <th width="">员工姓名</th>
+                    <th width="">打卡日期</th>
+                    <th width="">打卡星期</th>
+                    <th width="">上午打卡时间</th>
+                    <th width="">下午打卡时间</th>
+                    <th width="">上班时间</th>
+                    <th width="">缺勤时间</th>
+                    <th width="">考勤状态</th>
+                    <th width="">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-c" th:each="item:${lists}">
+                    <td><input type="checkbox" th:attr="value=${item.attendId}" name="subCheck" /></td>
+                    <td th:text="${itemStat.count}"></td>
+                    <td th:text="${item.userName}"></td>
+                    <td th:text="${item.attendDate}"></td>
+                    <td th:text="${item.attendWeek}"></td>
+                    <td th:text="${#dates.format(item.attendMorning,'HH:mm:ss')}"></td>
+                    <td th:text="${#dates.format(item.attendEvening,'HH:mm:ss')}"></td>
+                    <td id="workHours" th:text="${item.workHours}+'h'"></td>
+                    <td th:text="${item.absence}==0?'暂未缺勤':${item.absence}+'min'"></td>
+                    <th:block th:if="${item.attendStatus}==1">
+                        <td class="td-status"><span class="label label-success radius">正常</span></td>
+                    </th:block>
+                    <th:block th:if="${item.attendStatus}==0">
+                        <td class="td-status"><span class="label radius">异常</span></td>
+                    </th:block>
+                    <th:block th:if="${item.attendStatus}==0">
+                    <td class="td-manage">
+                        <a title="申请补签" href="javascript:;" th:onclick="'javascript: reAttend(\''+${item.attendId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"> &#xe6dc;</i></a>
+                        <a title="详情" href="javascript:;" th:onclick="'javascript:attend_show(\''+${item.attendId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>
+                    </td>
+                    </th:block>
+                    <th:block th:if="${item.attendStatus}==1">
+                        <td class="td-manage">
+                            <a title="状态正常" href="javascript:return false;" onclick="return false;" class="ml-5" style="text-decoration:none ;cursor: default;opacity: 0.2;"><i class="Hui-iconfont"> &#xe6dc;</i></a>
+                            <a title="详情" href="javascript:;" th:onclick="'javascript:attend_show(\''+${item.attendId}+'\')'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe665;</i></a>
+                        </td>
+                    </th:block>
+                </tr>
+                </tbody>
+            </table>
+            <script th:include="common/pages::pages" th:inline="javascript"></script>
+        </div>
+
     </div>
 </body>
-
+<footer id="pages" th:replace="common/footer::footer" style="display: none"></footer>
 <script type="text/javascript" th:src="@{/js/attend/attendList.js}"></script>
 </html>

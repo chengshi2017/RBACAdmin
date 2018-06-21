@@ -2,6 +2,8 @@ package com.spring.dao.attend;
 
 import com.github.pagehelper.Page;
 import com.spring.model.attend.Attend;
+import com.spring.param.AttendFilter;
+import com.spring.param.SystemFilter;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
@@ -34,4 +36,14 @@ public interface AttendMapper {
     List<Attend> getCurrentWeekAttendRecord(String userId);
 
     List<Attend> getLastMonthAttendRecord(String userId);
+
+    Attend getMessageByDate(AttendFilter filter);
+
+    Page<Attend> selectAll(RowBounds rowBounds);
+
+    Page<Attend> selectAttendRecordByCondition(RowBounds rowBounds, SystemFilter filter);
+
+    Page<Attend> selectAttend(RowBounds rowBounds, String userId);
+
+    Attend getAttendRecordByAttendId(String attendId);
 }

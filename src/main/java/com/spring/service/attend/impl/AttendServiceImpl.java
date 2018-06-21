@@ -10,6 +10,8 @@ import com.spring.dao.attend.AttendMapper;
 import com.spring.dao.attend.UserAttendMapper;
 import com.spring.model.attend.Attend;
 import com.spring.model.permission.User;
+import com.spring.param.AttendFilter;
+import com.spring.param.SystemFilter;
 import com.spring.service.attend.AttendService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.ibatis.session.RowBounds;
@@ -44,14 +46,15 @@ public class AttendServiceImpl implements AttendService {
     @Override
     public void sign(User user) {
         Date today=new Date();
+        Attend attend=new Attend();
         //查询当天此人有没有打卡记录
-        Attend attend=attendMapper.getTodayRecordAttend(user.getUserId());
+        Attend attend1=attendMapper.getTodayRecordAttend(user.getUserId());
         //判定上下午
         Date noon = DateUtils.getDate(Constants.AttendConstants.NOON_HOUR,Constants.AttendConstants.NOON_MINUTE);
         //判定早上是否迟到
         Date morningDate = DateUtils.getDate(Constants.AttendConstants.MORNING_HOUR,Constants.AttendConstants.MORNING_MINUTE);
         //第一次打卡
-        if (attend==null){
+        if (attend1==null){
             //关联表UUID
             attend.setUserAttendId(UUID.getUUID());
             //设置当前考勤数据UUID
@@ -88,25 +91,25 @@ public class AttendServiceImpl implements AttendService {
             if (today.compareTo(noon)>0){
                 //下午打卡
                 Date eveningDate = DateUtils.getDate(Constants.AttendConstants.EVENING_HOUR,Constants.AttendConstants.EVENING_MINUTE);
-                attend.setAttendEvening(today);
+                attend1.setAttendEvening(today);
                 //早退
                 int flag=today.compareTo(eveningDate);
                 if (flag<0){
-                    attend.setAttendStatus(Constants.AttendConstants.ATTEND_STATUS_ABNORMAL);
+                    attend1.setAttendStatus(Constants.AttendConstants.ATTEND_STATUS_ABNORMAL);
                     int eveningAbsence=DateUtils.getMinute(today,eveningDate);
-                    int morningAbsence=attend.getAbsence();
+                    int morningAbsence=attend1.getAbsence();
                     int totalAbsence=morningAbsence+eveningAbsence;
-                    attend.setAbsence(totalAbsence);
+                    attend1.setAbsence(totalAbsence);
                 }
                 //弹性工作制
-                if (attend.getAttendMorning()!=null){
-                    int officeHours=DateUtils.getMinute(attend.getAttendMorning(),today);
+                if (attend1.getAttendMorning()!=null){
+                    int officeHours=DateUtils.getMinute(attend1.getAttendMorning(),today);
                     if (officeHours>=Constants.AttendConstants.ABSENCE_DAY){
-                        attend.setAttendStatus(Constants.AttendConstants.ATTEND_STATUS_NORMAL);
-                        attend.setAbsence(null);
+                        attend1.setAttendStatus(Constants.AttendConstants.ATTEND_STATUS_NORMAL);
+                        attend1.setAbsence(null);
                     }
                 }
-                attendMapper.updateByPrimaryKeySelective(attend);
+                attendMapper.updateByPrimaryKeySelective(attend1);
             }else {
                 throw new MyException("请下班之后再重新打卡");
             }
@@ -179,4 +182,65 @@ public class AttendServiceImpl implements AttendService {
          return list;
 
     }
+
+    @Override
+    public Attend getMessageByDate(AttendFilter filter) {
+        Attend attend=attendMapper.getMessageByDate(filter);
+        Date startTime = attend.getAttendMorning();
+        Date endTime = attend.getAttendEvening();
+        attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
+        return attend;
+    }
+
+    @Override
+    public Page<Attend> selectAll(RowBounds rowBounds) {
+        Page<Attend> page=attendMapper.selectAll(rowBounds);
+        Page<Attend> page1 = new Page<>();
+        for (Attend attend: page){
+            Date startTime = attend.getAttendMorning();
+            Date endTime = attend.getAttendEvening();
+            attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
+            page1.add(attend);
+        }
+        page1.setTotal(page.getTotal());
+        return page1;
+    }
+
+    @Override
+    public Page<Attend> selectAttendRecordByCondition(RowBounds rowBounds, SystemFilter filter) {
+        Page<Attend> page=attendMapper.selectAttendRecordByCondition(rowBounds,filter);
+        Page<Attend> page1 = new Page<>();
+        for (Attend attend: page){
+            Date startTime = attend.getAttendMorning();
+            Date endTime = attend.getAttendEvening();
+            attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
+            page1.add(attend);
+        }
+        page1.setTotal(page.getTotal());
+        return page1;
+    }
+
+    @Override
+    public Page<Attend> selectAttend(RowBounds rowBounds, String userId) {
+        Page<Attend> page=attendMapper.selectAttend(rowBounds,userId);
+        Page<Attend> page1 = new Page<>();
+        for (Attend attend: page){
+            Date startTime = attend.getAttendMorning();
+            Date endTime = attend.getAttendEvening();
+            attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
+            page1.add(attend);
+        }
+        page1.setTotal(page.getTotal());
+        return page1;
+    }
+
+    @Override
+    public Attend getAttendRecordByAttendId(String attendId) {
+        Attend attend=attendMapper.getAttendRecordByAttendId(attendId);
+        Date startTime = attend.getAttendMorning();
+        Date endTime = attend.getAttendEvening();
+        attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
+        return attend;
+    }
+
 }

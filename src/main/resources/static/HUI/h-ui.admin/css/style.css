@@ -44,5 +44,25 @@ tr:hover{ background: #F5F5F5;} /*鼠标悬停后表格背景颜色*/
     border: none;
 }
 
+.end1
+{
+    cursor: pointer;
+    color: #fff;
+    background: #FF8C00;
+    border: none;
+}
+
+.table-cut{
+    margin-left: 20px;
+    position:absolute;
+    left: 20px;
+}
+
+.cut
+{
+    margin-left: 20px;
+}
+
+
 
 

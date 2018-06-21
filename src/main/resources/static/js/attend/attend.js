@@ -18,6 +18,7 @@ $("#attend").click(function () {
             if (result.code == 0){
                 layer.msg(result.data, {icon: 6, time: 2000},function () {
                     var index=parent.layer.getFrameIndex(window.name);
+                    parent.refresh();
                     parent.layer.close(index);
                 })
             }

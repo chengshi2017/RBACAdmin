@@ -187,4 +187,70 @@
     AND PERIOD_DIFF(date_format(now() , '%Y%m' ) , date_format(a.ATTEND_DATE, '%Y%m' ) ) =1
   </select>
 
+  <select id="getMessageByDate" parameterType="com.spring.param.AttendFilter" resultMap="BaseResultMap">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_DATE = #{date}
+    AND ua.USER_ID = #{userId}
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_WEEK NOT IN ('星期六', '星期日')
+    ORDER BY a.ATTEND_DATE DESC
+  </select>
+
+  <select id="selectAllData" resultMap="BaseResultMap">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_WEEK NOT IN ('星期六', '星期日')
+    ORDER BY a.ATTEND_DATE DESC
+  </select>
+
+  <select id="selectAttendRecordByCondition" resultMap="BaseResultMap" parameterType="com.spring.param.SystemFilter">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_WEEK NOT IN ('星期六', '星期日')
+    <if test="userName !=null and userName != ''">
+      AND u.USER_NAME LIKE concat(concat('%', #{userName}, '%'))
+    </if>
+    <if test="attendStatus != null">
+      AND a.ATTEND_STATUS = #{attendStatus}
+    </if>
+    ORDER BY a.ATTEND_DATE DESC
+  </select>
+
+  <select id="selectAttend" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_WEEK NOT IN ('星期六', '星期日')
+    AND u.USER_ID = #{userId}
+    ORDER BY a.ATTEND_DATE DESC
+  </select>
+
+  <select id="getAttendRecordByAttendId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_ID = #{attendId}
+  </select>
+
 </mapper>

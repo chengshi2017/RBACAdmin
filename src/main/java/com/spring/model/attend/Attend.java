@@ -8,6 +8,8 @@ public class Attend {
 
     private String userId;
 
+    private String userName;
+
     private String remark;
 
     private String attendId;
@@ -126,5 +128,13 @@ public class Attend {
 
     public void setWorkHours(Integer workHours) {
         this.workHours = workHours;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

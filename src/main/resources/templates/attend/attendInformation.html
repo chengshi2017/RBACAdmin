@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header"/>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-emp-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">当前账户：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" name="userName" id="userName" th:value="${attend.userName}" disabled="disabled" style="width: 410px"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">打卡日期：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="attendDate" name="attendDate" th:value="${attend.attendDate}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">打卡星期几：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="attendWeek" name="attendWeek" th:value="${attend.attendWeek}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">上午打卡时间：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" value="" placeholder="" id="attendMorning" name="attendMorning" th:value="${#dates.format(attend.attendMorning,'HH:mm:ss')}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">下午打卡时间：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="attendEvening" name="attendEvening" th:value="${#dates.format(attend.attendEvening,'HH:mm:ss')}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">缺勤时间：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="absence" name="absence" th:value="${attend.absence}==0?'暂未缺勤':${attend.absence}+'分钟'" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">考勤状态：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" name="attendStatus" id="attendStatus" th:value="${attend.attendStatus==1?'正常':'异常'}" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">工作时长：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <input type="text" class="input-text" placeholder="" id="workHours" name="workHours" th:value="${attend.workHours}+'小时'" style="width: 410px" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">备注：</label>
+            <div class="formControls col-xs-8 col-sm-8">
+                <textarea name="remark" id="remark" class="textarea"  placeholder="" th:text="${attend.remark}" style="width: 410px" disabled="disabled"></textarea>
+            </div>
+        </div>
+    </form>
+</article>
+</body>
+</html>
