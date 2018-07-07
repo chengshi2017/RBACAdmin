@@ -181,6 +181,8 @@ function dj(dom) {
             var data = result.data;
             for (var i = 0, length = data.length; i < length; i++) {
                 var array1 = data[i].attendDate.split("-");
+                year=array1[0];
+                month=array1[1];
                 dateNum.push(array1[2]);
                 timeNum.push(data[i].workHours);
             }
@@ -261,8 +263,13 @@ function attend_show(id) {
     })
 }
 
-function reAttend() {
-    
+function reAttend(id) {
+    var url = '/attend/'+id+'/reAttend';
+    if (url == null || url == ''){
+        url = '404.html';
+    }
+    layer.alert("补签功能正在完善中，可以去看看我的博客哦。。。", {icon: 5});
+
 }
 
 

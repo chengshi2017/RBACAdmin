@@ -1,5 +1,7 @@
 package com.spring.model;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 import java.util.Date;
 
 public class Log {
@@ -9,21 +11,29 @@ public class Log {
 
     private String userId;
 
-    private String ip;
+    @Excel(name = "操作用户",isImportField = "true_log")
+    private String userName;
 
-    private Date operateTime;
-
-    private String requestUrl;
-
-    private String responseCode;
-
-    private Integer status;
-
-    private String remark;
-
+    @Excel(name = "日志类型", isImportField = "true_log")
     private String typeName;
 
-    private String userName;
+    @Excel(name = "登录IP",width = 20)
+    private String ip;
+
+    @Excel(name = "操作时间", databaseFormat = "yyyy-MM-dd HH:mm:ss", format = "yyyy-MM-dd HH:mm:ss",isImportField = "true_log",width = 20)
+    private Date operateTime;
+
+    @Excel(name = "请求URL", width = 25, isImportField = "true_log")
+    private String requestUrl;
+
+    @Excel(name = "相应状态",replace = {"成功_0","失败_100"}, isImportField = "true_log")
+    private String responseCode;
+
+    @Excel(name = "是否有效", replace = {"有_1","无_2"},suffix = "效",isImportField = "true_log")
+    private Integer status;
+
+    @Excel(name = "描述", isImportField = "true_log")
+    private String remark;
 
     public String getTypeName() {
         return typeName;

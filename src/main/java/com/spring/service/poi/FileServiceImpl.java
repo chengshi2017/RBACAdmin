@@ -11,8 +11,10 @@ import com.spring.common.utils.DateUtils;
 import com.spring.common.utils.EncodeMD5;
 import com.spring.common.utils.UUID;
 import com.spring.dao.DeptMapper;
+import com.spring.dao.LogMapper;
 import com.spring.dao.UserMapper;
 import com.spring.model.Log;
+import com.spring.model.Staff;
 import com.spring.model.permission.User;
 import com.spring.model.poi.DeptEntity;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -48,6 +50,9 @@ public class FileServiceImpl implements FileService{
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private LogMapper logMapper;
+
     @Override
     public void download(HttpServletRequest request, HttpServletResponse response,String obj)  {
         try {
@@ -65,8 +70,18 @@ public class FileServiceImpl implements FileService{
             if (obj.equals("user")){
                 //下载文件时默认名
                 response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("用户信息报表","UTF-8") + ".xls");
-                List<User> list=userMapper.getAllMessage();
-                workbook=ExcelExportUtil.exportExcel(new ExportParams("用户信息报表",date+"_用户信息报表"),User.class,list);
+                List<Staff> list=userMapper.getAllMessage();
+                workbook=ExcelExportUtil.exportExcel(new ExportParams("用户信息报表",date+"_用户信息报表"),Staff.class,list);
+            }
+            if (obj.equals("emp")){
+                response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("员工信息报表","UTF-8") + ".xls");
+                List<DeptEntity> list=deptMapper.getMessage();
+                workbook=ExcelExportUtil.exportExcel(new ExportParams("员工信息报表",date+"_员工信息报表"),DeptEntity.class,list);
+            }
+            if (obj.equals("log")){
+                response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("日志信息报表","UTF-8") + ".xls");
+                List<Log> list=logMapper.getAllMessage();
+                workbook=ExcelExportUtil.exportExcel(new ExportParams("日志信息报表","日志信息报表"),Log.class,list);
             }
             workbook.write(response.getOutputStream());
         } catch (IOException e) {

@@ -1,5 +1,8 @@
 package com.spring.model;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -19,31 +22,50 @@ public class Staff {
 
     private String userRoleId;
 
+    @Excel(name = "用户工号")
+    private String empNum;
+
+    @Excel(name = "用户姓名", isImportField = "true_emp")
     private String userName;
 
     private String empName;
 
+    @Excel(name = "用户角色", isImportField = "true_emp")
+    private String roleName;
+
     private String userPassword;
 
-    private String empNum;
-
-    private Integer uStatus;
-
+    @Excel(name = "用户性别",isImportField = "true_emp")
     private String sex;
 
+    @Excel(name = "用户年龄")
     private Integer age;
 
+    @Excel(name = "用户现居地址",width = 15)
     private String address;
 
+    @Excel(name = "用户电话",width = 15)
     private String phone;
 
+    @Excel(name = "邮箱",width = 25,isImportField = "true_emp")
+    @Pattern(regexp = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$",message = "不是中文")
     private String email;
 
+    @Excel(name = "民族")
     private String pace;
 
     private Date createTime;
 
     private Date updateTime;
+
+    @Excel(name = "所属部门",isImportField = "true_emp", width = 20)
+    private String deptName;
+
+    @Excel(name = "所属职位",isImportField = "true_emp", width = 20)
+    private String jobName;
+
+    @Excel(name = "用户状态",replace = {"正_1","异_0"},suffix = "常", isImportField = "true_emp")
+    private Integer uStatus;
 
     private Integer eStatus;
 
@@ -51,17 +73,11 @@ public class Staff {
 
     private String deptId;
 
-    private String deptName;
-
     private String jobId;
-
-    private String jobName;
 
     private boolean flag;
 
     private String roleId;
-
-    private String roleName;
 
     private String userRoleRemark;
 

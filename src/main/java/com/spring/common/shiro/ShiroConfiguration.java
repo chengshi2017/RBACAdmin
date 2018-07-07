@@ -58,7 +58,7 @@ public class ShiroConfiguration {
         //设置realm
         securityManager.setRealm(myShiroRealm());
         //注入缓存管理器
-        securityManager.setCacheManager(ehCacheManager());
+        securityManager.setCacheManager(cacheManager());
         //自定义session管理，使用redis
 //        securityManager.setSessionManager(sessionManager());
         //注入记住我管理器
@@ -86,62 +86,57 @@ public class ShiroConfiguration {
         return shiroFilterFactoryBean;
     }
 
-    @Bean
-    public EhCacheManager ehCacheManager(){
-        EhCacheManager ehCacheManager=new EhCacheManager();
-        ehCacheManager.setCacheManagerConfigFile("classpath:configs/ehcache-shiro.xml");
-        return ehCacheManager;
-    }
+//    @Bean
+//    public EhCacheManager ehCacheManager(){
+//        EhCacheManager ehCacheManager=new EhCacheManager();
+//        ehCacheManager.setCacheManagerConfigFile("classpath:configs/ehcache-shiro.xml");
+//        return ehCacheManager;
+//    }
 
     /**
      * cacheManager 缓存 redis实现
-     * 使用的是shiro-redis开源插件
-     *
      * @return
      */
-//    public RedisCacheManager cacheManager() {
-//        RedisCacheManager redisCacheManager = new RedisCacheManager();
-//        redisCacheManager.setRedisManager(redisManager());
-//        return redisCacheManager;
-//    }
+    public RedisCacheManager cacheManager() {
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        redisCacheManager.setRedisManager(redisManager());
+        return redisCacheManager;
+    }
 
     /**
      * 配置shiro redisManager
-     * 使用的是shiro-redis开源插件
      *
      * @return
      */
-//    public RedisManager redisManager() {
-//        RedisManager redisManager = new RedisManager();
-//        redisManager.setHost("localhost");
-//        redisManager.setPort(6379);
-//        redisManager.setExpire(1800);// 配置缓存过期时间
-//        redisManager.setTimeout(1000);
-//        redisManager.setPassword("123456");
-//        return redisManager;
-//    }
+    public RedisManager redisManager() {
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost("47.96.112.160");
+        redisManager.setPort(6379);
+        redisManager.setExpire(1800);// 配置缓存过期时间
+        redisManager.setTimeout(1000);
+        redisManager.setPassword("123456");
+        return redisManager;
+    }
 
     /**
      * Session Manager
-     * 使用的是shiro-redis开源插件
      */
-//    @Bean
-//    public DefaultWebSessionManager sessionManager() {
-//        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-//        sessionManager.setSessionDAO(redisSessionDAO());
-//        return sessionManager;
-//    }
+    @Bean
+    public DefaultWebSessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setSessionDAO(redisSessionDAO());
+        return sessionManager;
+    }
 
     /**
      * RedisSessionDAO shiro sessionDao层的实现 通过redis
-     * 使用的是shiro-redis开源插件
      */
-//    @Bean
-//    public RedisSessionDAO redisSessionDAO() {
-//        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-//        redisSessionDAO.setRedisManager(redisManager());
-//        return redisSessionDAO;
-//    }
+    @Bean
+    public RedisSessionDAO redisSessionDAO() {
+        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+        redisSessionDAO.setRedisManager(redisManager());
+        return redisSessionDAO;
+    }
 
 
     @Bean

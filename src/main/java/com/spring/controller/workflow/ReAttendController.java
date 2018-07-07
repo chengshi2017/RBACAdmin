@@ -1,5 +1,6 @@
 package com.spring.controller.workflow;
 
+import com.spring.controller.base.SuperController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = "/reAttend")
-public class ReAttendController {
+public class ReAttendController extends SuperController {
 
-
+    
 
 
 

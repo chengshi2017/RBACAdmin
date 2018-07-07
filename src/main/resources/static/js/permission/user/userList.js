@@ -251,7 +251,7 @@ function upload_excel() {
         shadeClose: true,
         maxmin: true,
         skin: 'layui-layer-rim', //加上边框
-        area: ['510px', '400px'], //宽高
+        area: ['520px', '440px'], //宽高
         content: $("#upload_excel")
     })
 }
@@ -285,13 +285,15 @@ layui.use('upload', function () {
         },
         error: function (index, upload) {
             layer.closeAll('loading'); //关闭loading
-            layer.alert("当前系统有误，请尝试与管理员联系", {icon: 5});
+            layer.alert("导入功能正在完善中。。。", {icon: 5});
         }
     })
 
 
 
 });
+
+
 
 
 

@@ -52,7 +52,18 @@ public class ExcelExportController extends SuperController {
     public void exportUserExcel(){
         String obj= "user";
         fileService.download(request,response,obj);
+    }
 
+    @RequestMapping(value = "/empExcel")
+    public void exportEmpExcel(){
+        String obj = "emp";
+        fileService.download(request,response,obj);
+    }
+
+    @RequestMapping(value = "/logExcel")
+    public void exportLogExcel(){
+        String obj = "log";
+        fileService.download(request,response,obj);
     }
 
 
@@ -62,9 +73,5 @@ public class ExcelExportController extends SuperController {
         return Result.success(codeMsg);
     }
 
-
-
-
-
-
 }
+

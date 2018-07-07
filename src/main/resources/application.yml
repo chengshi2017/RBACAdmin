@@ -3,7 +3,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hrm_db?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+    url: jdbc:mysql://47.96.112.160:3306/hrm_db?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
     password: 123456
 
@@ -31,16 +31,16 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
   #配置redis
-#  redis:
-#    host: localhost
-#    port: 6379
-#    password: 123456
-#    pool:
-#      max-active: 8
-#      min-idle: 0
-#      max-idle: 8
-#      max-wait: -1
-#    timeout: 1000
+  redis:
+    host: 47.96.112.160
+    port: 6379
+    password: 123456
+    pool:
+      max-active: 8
+      min-idle: 0
+      max-idle: 8
+      max-wait: -1
+    timeout: 1000
 
   #配置thymeleaf
   thymeleaf:

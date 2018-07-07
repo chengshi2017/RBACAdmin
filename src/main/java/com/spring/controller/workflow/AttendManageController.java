@@ -46,5 +46,10 @@ public class AttendManageController  extends SuperController{
         return "system/attend/page";
     }
 
+    @RequestMapping(value = "/reAttend")
+    public String reAttend(){
+        return "system/attend/reAttend";
+    }
+
 
 }

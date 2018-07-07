@@ -237,9 +237,21 @@
   </select>
 
   <select id="getAllMessage" resultMap="ResultMap">
-    SELECT * FROM t_user u
+    select u.*, e.*, d.DEPT_ID, d.DEPT_NAME,
+    j.JOB_ID, j.JOB_NAME, r.ROLE_ID, r.ROLE_NAME
+    from t_user u
     LEFT JOIN t_emp e
     ON u.USER_ID = e.EMP_ID
+    LEFT JOIN t_user_role ur
+    ON u.USER_ID = ur.USER_ID
+    LEFT JOIN t_role r
+    ON ur.ROLE_ID = r.ROLE_ID
+    LEFT JOIN t_emp_param em
+    ON e.EMP_ID = em.EMP_ID
+    LEFT JOIN t_dept d
+    ON em.DEPT_ID = d.DEPT_ID
+    LEFT JOIN t_job j
+    ON em.JOB_ID = j.JOB_ID
   </select>
 
   <select id="getUserByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">

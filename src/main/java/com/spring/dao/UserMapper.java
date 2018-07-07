@@ -37,7 +37,7 @@ public interface UserMapper {
 
     Integer getCountByFilter(String startTime);
 
-    List<User> getAllMessage();
+    List<Staff> getAllMessage();
 
     User getUserByUserId(String userId);
 

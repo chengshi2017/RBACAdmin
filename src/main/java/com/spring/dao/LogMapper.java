@@ -2,6 +2,7 @@ package com.spring.dao;
 
 import com.github.pagehelper.Page;
 import com.spring.model.Log;
+import com.spring.model.Staff;
 import com.spring.param.LogFilter;
 import org.apache.ibatis.session.RowBounds;
 
@@ -31,4 +32,6 @@ public interface LogMapper {
     Integer getCountByFilter(String startTime);
 
     Log getMessageByRecent();
+
+    List<Log> getAllMessage();
 }

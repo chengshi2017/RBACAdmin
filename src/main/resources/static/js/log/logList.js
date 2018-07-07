@@ -147,4 +147,10 @@ function retrieve() {
     })
 }
 
+function download_excel() {
+    layer.msg("正在导出Excel数据格式模板，请稍等...", {icon: 1,time:1000},function () {
+        location.href='http://localhost:9000/excel/logExcel';
+    });
+}
+
 
