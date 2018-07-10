@@ -175,5 +175,10 @@ public class EmpController extends SuperController {
         return list;
     }
 
+    @RequestMapping(value = "/skip")
+    public String skip(){
+        return "poi/upload";
+    }
+
 
 }

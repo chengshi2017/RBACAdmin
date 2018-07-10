@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -64,6 +65,17 @@ public class ExcelExportController extends SuperController {
     public void exportLogExcel(){
         String obj = "log";
         fileService.download(request,response,obj);
+    }
+
+    @RequestMapping(value = "/attendExcel")
+    public void exportExcel(){
+        String obj = "attend";
+        fileService.download(request,response,obj);
+    }
+
+    @RequestMapping(value = "/{date}/attendExcel")
+    public void exportAttendExcel(@PathVariable("date")String filter){
+        fileService.downLoadAttend(request,response,filter);
     }
 
 

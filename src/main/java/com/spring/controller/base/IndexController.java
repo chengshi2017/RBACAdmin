@@ -107,7 +107,8 @@ public class IndexController extends SuperController {
                 Log log=new Log();
                 log.setLogTypeId(LogTypeEnums.LOGIN.getValue()); //设置日志类型
                 log.setRequestUrl(request.getRequestURI().toString());
-                log.setUserId(getUser().getUserId());
+                User user1=getUser();
+                log.setUserId(user1.getUserId());
                 log.setIp(SysInfo.getDefaultIpAddress());
                 log.setRemark("登录日志");
                 logService.addloginLog(log);

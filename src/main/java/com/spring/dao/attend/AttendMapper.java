@@ -46,4 +46,18 @@ public interface AttendMapper {
     Page<Attend> selectAttend(RowBounds rowBounds, String userId);
 
     Attend getAttendRecordByAttendId(String attendId);
+
+    Page<Attend> getLastMonthTableData(RowBounds rowBounds, String userId);
+
+    Page<Attend> getWeekTableData(RowBounds rowBounds, String userId);
+
+    Page<Attend> getMonthTableData(RowBounds rowBounds, String userId);
+
+    List<Attend> getAllAttend();
+
+    List<Attend> getLastMonthAttend();
+
+    List<Attend> getCurrentMonthAttend();
+
+    List<Attend> getWeekAttend();
 }

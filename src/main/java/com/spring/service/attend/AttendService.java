@@ -32,4 +32,6 @@ public interface AttendService {
     Page<Attend> selectAttend(RowBounds rowBounds, String userId);
 
     Attend getAttendRecordByAttendId(String attendId);
+
+    Page<Attend> getAllAttendByRecord(RowBounds rowBounds,String userId, String id);
 }

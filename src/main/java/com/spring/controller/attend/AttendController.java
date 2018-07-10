@@ -57,9 +57,10 @@ public class AttendController extends SuperController{
     @RequiresPermissions(value = "attend:page")
     public String toPage(@RequestParam(defaultValue = "1")Integer pageNo,
                          @RequestParam(defaultValue = "10")Integer pageSize,
+                         @RequestParam(defaultValue = "month")String id,
                          Model model){
         User user=getUser();
-        Page<Attend> lists = attendService.selectAttend(new RowBounds((pageNo-1)*pageSize,pageSize),user.getUserId());
+        Page<Attend> lists = attendService.getAllAttendByRecord(new RowBounds((pageNo-1)*pageSize,pageSize),user.getUserId(),id);
         model.addAttribute("lists",lists);
         return "attend/attendList";
     }
@@ -89,6 +90,27 @@ public class AttendController extends SuperController{
         Attend attend=attendService.getAttendRecordByAttendId(attendId);
         model.addAttribute("attend",attend);
         return "attend/attendInformation";
+    }
+
+    @RequestMapping(value = "/dataPage")
+    public String dataPage(@RequestParam(defaultValue = "1")Integer pageNo,
+                           @RequestParam(defaultValue = "10")Integer pageSize,
+                           String id, Model model){
+        String userId=getUser().getUserId();
+        Page<Attend> lists=attendService.getAllAttendByRecord(new RowBounds((pageNo-1)*pageSize,pageSize),userId,id);
+        model.addAttribute("lists",lists);
+        return "attend/attendList";
+
+    }
+
+    @RequestMapping(value = "/retrieve")
+    public String retrieve(@RequestParam(defaultValue = "1")Integer pageNo,
+                           @RequestParam(defaultValue = "10")Integer pageSize,
+                           String id,Model model){
+        User user=getUser();
+        Page<Attend> lists = attendService.getAllAttendByRecord(new RowBounds((pageNo-1)*pageSize,pageSize),user.getUserId(),id);
+        model.addAttribute("lists",lists);
+        return "attend/attendList";
     }
 
 }

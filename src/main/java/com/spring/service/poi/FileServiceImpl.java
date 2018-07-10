@@ -13,8 +13,10 @@ import com.spring.common.utils.UUID;
 import com.spring.dao.DeptMapper;
 import com.spring.dao.LogMapper;
 import com.spring.dao.UserMapper;
+import com.spring.dao.attend.AttendMapper;
 import com.spring.model.Log;
 import com.spring.model.Staff;
+import com.spring.model.attend.Attend;
 import com.spring.model.permission.User;
 import com.spring.model.poi.DeptEntity;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -52,6 +54,9 @@ public class FileServiceImpl implements FileService{
 
     @Autowired
     private LogMapper logMapper;
+
+    @Autowired
+    private AttendMapper attendMapper;
 
     @Override
     public void download(HttpServletRequest request, HttpServletResponse response,String obj)  {
@@ -122,6 +127,44 @@ public class FileServiceImpl implements FileService{
         return CodeMsg.SERVER_ERROR;
     }
 
+    @Override
+    public void downLoadAttend(HttpServletRequest request, HttpServletResponse response, String filter) {
+        try {
+            response.setHeader("content-Type", "application/vnd.ms-excel");
+            //编码
+            response.setCharacterEncoding("UTF-8");
+            String date= null;
+            Workbook workbook=null;
+            if (filter.equals("all")){
+                //下载文件时默认名
+                response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("全部考勤信息报表","UTF-8") + ".xls");
+                List<Attend> list=attendMapper.getAllAttend();
+                workbook= ExcelExportUtil.exportExcel(new ExportParams("部门信息报表","全部考勤信息报表"),Attend.class,list);
+            }
+            if (filter.equals("lastMonth")){
+                date=DateUtils.getLastMonth();
+                response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(date+"_考勤信息报表","UTF-8") + ".xls");
+                List<Attend> list=attendMapper.getLastMonthAttend();
+                workbook= ExcelExportUtil.exportExcel(new ExportParams(date+"_考勤信息报表",date+"_考勤信息报表"),Attend.class,list);
+            }
+            if (filter.equals("month")){
+                date=DateUtils.getCurrentMonth();
+                response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(date+"_考勤信息报表","UTF-8") + ".xls");
+                List<Attend> list=attendMapper.getCurrentMonthAttend();
+                workbook= ExcelExportUtil.exportExcel(new ExportParams(date+"_考勤信息报表",date+"_考勤信息报表"),Attend.class,list);
+            }
+            if (filter.equals("week")){
+                response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("本周考勤信息报表","UTF-8") + ".xls");
+                List<Attend> list=attendMapper.getWeekAttend();
+                workbook= ExcelExportUtil.exportExcel(new ExportParams("本周考勤信息报表","本周考勤信息报表"),Attend.class,list);
+
+            }
+            workbook.write(response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 //    @Transactional
 //    private void saveToDataBase(ExcelImportResult<User> result) {
 //        List<User> succList=result.getList();
@@ -137,4 +180,5 @@ public class FileServiceImpl implements FileService{
 //        //将失败的数据存入redis数据库,待续
 //    }
 }
+
 

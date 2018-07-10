@@ -18,4 +18,6 @@ public interface FileService {
     void download(HttpServletRequest request, HttpServletResponse response,String obj);
 
     CodeMsg upload(MultipartFile file);
+
+    void downLoadAttend(HttpServletRequest request, HttpServletResponse response, String filter);
 }

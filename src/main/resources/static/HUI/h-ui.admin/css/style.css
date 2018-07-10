@@ -63,8 +63,18 @@ tr:hover{ background: #F5F5F5;} /*鼠标悬停后表格背景颜色*/
     margin-left: 20px;
 }
 
-.center {
-
+.main{
+    text-align: center; /*让div内部文字居中*/
+    background-color: #fff;
+    border-radius: 20px;
+    width: 300px;
+    height: 350px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 

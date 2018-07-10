@@ -5,6 +5,7 @@ var yMax = 8;
 var dateNum = [];  //日期数组，用来放请求的日期
 var timeNum = [];  //考勤时长，用来放用来的考勤时间
 var id;
+var typeId;
 var variable ;
 var year;
 var month;
@@ -162,35 +163,56 @@ function dj(dom) {
     });
     $(dom).removeClass("start");
     $(dom).addClass("end");
+    id=dom.id;
     console.log(id);
+    if (typeId == 'table'){
+        var data1 = {
+            id: dom.id,
+            pageNo: laypage_curr || 1,
+            pageSize: laypage_limit || 10
+        };
+        console.log(data1);
 
-    var data = {
-        id: dom.id
-    };
-    console.log(data);
-
-    dateNum =[];
-    timeNum = [];
-    $.ajax({
-        type: 'post', //异步请求(同步请求将会锁住浏览器，用户必须等待其他的操作完成后才能进行其它的操作)
-        url: '/attend/data',
-        dataType: 'json',
-        data: data,
-        async: true,
-        success: function (result) {
-            var data = result.data;
-            for (var i = 0, length = data.length; i < length; i++) {
-                var array1 = data[i].attendDate.split("-");
-                year=array1[0];
-                month=array1[1];
-                dateNum.push(array1[2]);
-                timeNum.push(data[i].workHours);
+        $.ajax({
+            type: 'post',
+            url: '/attend/dataPage',
+            async: true,
+            data: data1,
+            dataType: 'html',
+            success: function (result) {
+                var record=$(result).find("section");
+                $("#page_data").html(record);
             }
+        });
+    }else {
+        var data = {
+            id: dom.id
+        };
+        console.log(data);
+        dateNum =[];
+        timeNum = [];
+        $.ajax({
+            type: 'post', //异步请求(同步请求将会锁住浏览器，用户必须等待其他的操作完成后才能进行其它的操作)
+            url: '/attend/data',
+            dataType: 'json',
+            data: data,
+            async: true,
+            success: function (result) {
+                var data = result.data;
+                for (var i = 0, length = data.length; i < length; i++) {
+                    var array1 = data[i].attendDate.split("-");
+                    year=array1[0];
+                    month=array1[1];
+                    dateNum.push(array1[2]);
+                    timeNum.push(data[i].workHours);
+                }
 
-            myChart.showLoading(); //数据加载完之前先显示一段简单的loading
-            loadTable();
-        }
-    });
+                myChart.showLoading(); //数据加载完之前先显示一段简单的loading
+                loadTable();
+            }
+        });
+
+    }
 }
 
 function detailed(clickDate) {
@@ -222,9 +244,9 @@ function cut(dom) {
     });
     $(dom).removeClass("start");
     $(dom).addClass("end1");
-    var id=dom.id;
-    console.log(id);
-    if (id == 'bar'){
+    typeId=dom.id;
+    console.log(typeId);
+    if (typeId == 'bar'){
         document.getElementById("attend_list").style.display = "block";
         document.getElementById("page_data").style.display = "none";
         document.getElementById("pages").style.display = "none";
@@ -235,13 +257,14 @@ function cut(dom) {
     }
 }
 
-
+console.log(id);
 function reload() {
     var data = {
+        id: id,
         pageNo: laypage_curr || 1,
         pageSize: laypage_limit || 10
     };
-    common.getData('post', '/attend/page', data, 'html', $("#page_data"));
+    common.getData('post', '/attend/retrieve', data, 'html', $("#page_data"));
 }
 
 function attend_show(id) {

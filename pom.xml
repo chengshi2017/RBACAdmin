@@ -166,13 +166,6 @@
       <version>3.7</version>
     </dependency>
 
-    <!--springboot 热部署-->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <optional>true</optional>
-    </dependency>
-
     <!--第三方jar包，获取服务器状态数据-->
     <!-- https://mvnrepository.com/artifact/org.fusesource/sigar -->
     <dependency>

@@ -60,7 +60,7 @@ public class ShiroConfiguration {
         //注入缓存管理器
         securityManager.setCacheManager(cacheManager());
         //自定义session管理，使用redis
-//        securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(sessionManager());
         //注入记住我管理器
         securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;

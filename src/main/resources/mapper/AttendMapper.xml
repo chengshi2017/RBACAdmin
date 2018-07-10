@@ -7,14 +7,16 @@
     <result column="ATTEND_WEEK" property="attendWeek" jdbcType="VARCHAR"/>
     <result column="ATTEND_MORNING" property="attendMorning" jdbcType="TIMESTAMP"/>
     <result column="ATTEND_EVENING" property="attendEvening" jdbcType="TIMESTAMP"/>
+    <result column="WORK_HOURS" property="workHours" jdbcType="INTEGER"/>
     <result column="ABSENCE" property="absence" jdbcType="INTEGER"/>
     <result column="ATTEND_STATUS" property="attendStatus" jdbcType="INTEGER"/>
     <result column="USER_ATTEND_ID" property="userAttendId" jdbcType="VARCHAR"/>
     <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
     <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List">
-    ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, ATTEND_MORNING, ATTEND_EVENING, ABSENCE, ATTEND_STATUS
+    ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, ATTEND_MORNING, ATTEND_EVENING, WORK_HOURS, ABSENCE, ATTEND_STATUS
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -28,11 +30,11 @@
   </delete>
   <insert id="insert" parameterType="com.spring.model.attend.Attend">
     insert into t_attend (ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, 
-      ATTEND_MORNING, ATTEND_EVENING, ABSENCE, 
+      ATTEND_MORNING, ATTEND_EVENING, WORK_HOURS, ABSENCE,
       ATTEND_STATUS)
     values (#{attendId,jdbcType=VARCHAR}, #{attendDate,jdbcType=VARCHAR}, #{attendWeek,jdbcType=VARCHAR},
-      #{attendMorning,jdbcType=TIMESTAMP}, #{attendEvening,jdbcType=TIMESTAMP}, #{absence,jdbcType=INTEGER}, 
-      #{attendStatus,jdbcType=INTEGER})
+      #{attendMorning,jdbcType=TIMESTAMP}, #{attendEvening,jdbcType=TIMESTAMP}, #{workHours,jdbcType=INTEGER},
+      #{absence,jdbcType=INTEGER},#{attendStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.spring.model.attend.Attend">
     insert into t_attend
@@ -51,6 +53,9 @@
       </if>
       <if test="attendEvening != null">
         ATTEND_EVENING,
+      </if>
+      <if test="workHours != null">
+        WORK_HOURS,
       </if>
       <if test="absence != null">
         ABSENCE,
@@ -75,6 +80,9 @@
       <if test="attendEvening != null">
         #{attendEvening,jdbcType=TIMESTAMP},
       </if>
+      <if test="workHours != null">
+        #{workHours,jdbcType=INTEGER},
+      </if>
       <if test="absence != null">
         #{absence,jdbcType=INTEGER},
       </if>
@@ -98,6 +106,9 @@
       <if test="attendEvening != null">
         ATTEND_EVENING = #{attendEvening,jdbcType=TIMESTAMP},
       </if>
+      <if test="workHours != null">
+        WORK_HOURS = #{workHours,jdbcType=INTEGER},
+      </if>
       <if test="absence != null">
         ABSENCE = #{absence,jdbcType=INTEGER},
       </if>
@@ -113,6 +124,7 @@
       ATTEND_WEEK = #{attendWeek,jdbcType=VARCHAR},
       ATTEND_MORNING = #{attendMorning,jdbcType=TIMESTAMP},
       ATTEND_EVENING = #{attendEvening,jdbcType=TIMESTAMP},
+      WORK_HOURS = #{workHours,jdbcType=INTEGER},
       ABSENCE = #{absence,jdbcType=INTEGER},
       ATTEND_STATUS = #{attendStatus,jdbcType=INTEGER}
     where ATTEND_ID = #{attendId,jdbcType=VARCHAR}
@@ -138,11 +150,11 @@
   
   <insert id="batchInsert" parameterType="java.util.List">
     INSERT  INTO  t_attend(ATTEND_ID, ATTEND_DATE, ATTEND_WEEK, ATTEND_MORNING,
-    ATTEND_EVENING, ABSENCE, ATTEND_STATUS)
+    ATTEND_EVENING, WORK_HOURS, ABSENCE, ATTEND_STATUS)
     VALUES 
     <foreach collection="list" item="item" open="(" close=")" separator=",">
       (#{item.attendId}, #{item.attendDate}, #{item.attendWeek}, #{item.attendMorning},
-      #{item.attendEvening}, #{item.absence}, #{item.attendStatus})
+      #{item.attendEvening}, #{item.workHours}, #{item.absence}, #{item.attendStatus})
     </foreach>
   </insert>
 
@@ -176,7 +188,7 @@
     LEFT JOIN t_user_attend ua
     ON a.ATTEND_ID = ua.ATTEND_ID
     WHERE ua.USER_ID = #{userId}
-    AND YEARWEEK(date_format(a.ATTEND_DATE,'%Y-%m-%d')) = YEARWEEK(now());
+    AND YEARWEEK(date_format(a.ATTEND_DATE,'%Y-%m-%d')) = YEARWEEK(now())
   </select>
   
   <select id="getLastMonthAttendRecord" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -251,6 +263,74 @@
     LEFT JOIN t_user u
     ON ua.USER_ID = u.USER_ID
     WHERE a.ATTEND_ID = #{attendId}
+  </select>
+  
+  <select id="getLastMonthTableData" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_WEEK NOT IN ('星期六', '星期日')
+    AND ua.USER_ID = #{userId}
+    AND PERIOD_DIFF(date_format(now() , '%Y%m' ) , date_format(a.ATTEND_DATE, '%Y%m' ) ) =1
+  </select>
+
+  <select id="getWeekTableData" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_WEEK NOT IN ('星期六', '星期日')
+    AND ua.USER_ID = #{userId}
+    AND YEARWEEK(date_format(a.ATTEND_DATE,'%Y-%m-%d')) = YEARWEEK(now())
+  </select>
+
+  <select id="getMonthTableData" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE a.ATTEND_WEEK NOT IN ('星期六', '星期日')
+    AND ua.USER_ID = #{userId}
+    AND DATE_FORMAT( a.ATTEND_DATE, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' )
+  </select>
+
+  <select id="getAllAttend" resultMap="BaseResultMap">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+  </select>
+  
+  <select id="getLastMonthAttend" resultMap="BaseResultMap">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE PERIOD_DIFF(date_format(now() , '%Y%m' ) , date_format(a.ATTEND_DATE, '%Y%m' ) ) =1
+  </select>
+
+  <select id="getCurrentMonthAttend" resultMap="BaseResultMap">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE DATE_FORMAT( a.ATTEND_DATE, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' )
+  </select>
+
+  <select id="getWeekAttend" resultMap="BaseResultMap">
+    SELECT * FROM t_attend a
+    LEFT JOIN t_user_attend ua
+    ON a.ATTEND_ID = ua.ATTEND_ID
+    LEFT JOIN t_user u
+    ON ua.USER_ID = u.USER_ID
+    WHERE YEARWEEK(date_format(a.ATTEND_DATE,'%Y-%m-%d')) = YEARWEEK(now())
   </select>
 
 </mapper>

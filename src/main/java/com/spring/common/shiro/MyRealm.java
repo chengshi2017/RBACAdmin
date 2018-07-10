@@ -76,7 +76,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new AuthenticationException();
         }
         SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(username,user.getUserPassword(),this.getName());
-        clearCache(info.getPrincipals());//清除缓存
+        //clearCache(info.getPrincipals());//清除缓存
         logger.info("认证成功");
         return info;
     }

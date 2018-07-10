@@ -51,5 +51,8 @@ public class AttendManageController  extends SuperController{
         return "system/attend/reAttend";
     }
 
-
+    @RequestMapping(value = "/toSkip")
+    public String skip(){
+        return "system/attend/dateSelect";
+    }
 }

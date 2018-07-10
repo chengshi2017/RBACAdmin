@@ -65,6 +65,7 @@ public class AttendServiceImpl implements AttendService {
             attend.setAttendDate(DateUtils.getCurrentDay());
             //打卡是星期几
             attend.setAttendWeek(DateUtils.getCurrentWeek());
+            attend.setWorkHours(0);
             //拼装备注信息
             //根据用户Id查询用户名称
             String userName=user.getUserName();
@@ -92,6 +93,7 @@ public class AttendServiceImpl implements AttendService {
                 //下午打卡
                 Date eveningDate = DateUtils.getDate(Constants.AttendConstants.EVENING_HOUR,Constants.AttendConstants.EVENING_MINUTE);
                 attend1.setAttendEvening(today);
+                attend1.setWorkHours(DateUtils.getWorkHours(attend1.getAttendMorning(),today));
                 //早退
                 int flag=today.compareTo(eveningDate);
                 if (flag<0){
@@ -164,7 +166,7 @@ public class AttendServiceImpl implements AttendService {
     @Override
     public List<Attend> getAllAttendRecord(String userId,String id) {
 
-        List<Attend> list1=null ;
+        List<Attend> list1=new ArrayList<>() ;
         if (id.equals("lastmonth")){
             list1=attendMapper.getLastMonthAttendRecord(userId);
         }else if (id.equals("week")){
@@ -172,75 +174,52 @@ public class AttendServiceImpl implements AttendService {
         }else {
             list1=attendMapper.getCurrentMonthAttendRecord(userId);
         }
-         List<Attend> list=new ArrayList<>();
-         for (Attend attend: list1){
-             Date startTime = attend.getAttendMorning();
-             Date endTime = attend.getAttendEvening();
-             attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
-             list.add(attend);
-         }
-         return list;
+         return list1;
 
     }
 
     @Override
     public Attend getMessageByDate(AttendFilter filter) {
         Attend attend=attendMapper.getMessageByDate(filter);
-        Date startTime = attend.getAttendMorning();
-        Date endTime = attend.getAttendEvening();
-        attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
         return attend;
     }
 
     @Override
     public Page<Attend> selectAll(RowBounds rowBounds) {
         Page<Attend> page=attendMapper.selectAll(rowBounds);
-        Page<Attend> page1 = new Page<>();
-        for (Attend attend: page){
-            Date startTime = attend.getAttendMorning();
-            Date endTime = attend.getAttendEvening();
-            attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
-            page1.add(attend);
-        }
-        page1.setTotal(page.getTotal());
-        return page1;
+        return page;
     }
 
     @Override
     public Page<Attend> selectAttendRecordByCondition(RowBounds rowBounds, SystemFilter filter) {
         Page<Attend> page=attendMapper.selectAttendRecordByCondition(rowBounds,filter);
-        Page<Attend> page1 = new Page<>();
-        for (Attend attend: page){
-            Date startTime = attend.getAttendMorning();
-            Date endTime = attend.getAttendEvening();
-            attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
-            page1.add(attend);
-        }
-        page1.setTotal(page.getTotal());
-        return page1;
+
+        return page;
     }
 
     @Override
     public Page<Attend> selectAttend(RowBounds rowBounds, String userId) {
         Page<Attend> page=attendMapper.selectAttend(rowBounds,userId);
-        Page<Attend> page1 = new Page<>();
-        for (Attend attend: page){
-            Date startTime = attend.getAttendMorning();
-            Date endTime = attend.getAttendEvening();
-            attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
-            page1.add(attend);
-        }
-        page1.setTotal(page.getTotal());
-        return page1;
+        return page;
     }
 
     @Override
     public Attend getAttendRecordByAttendId(String attendId) {
         Attend attend=attendMapper.getAttendRecordByAttendId(attendId);
-        Date startTime = attend.getAttendMorning();
-        Date endTime = attend.getAttendEvening();
-        attend.setWorkHours(DateUtils.getWorkHours(startTime,endTime));
         return attend;
+    }
+
+    @Override
+    public Page<Attend> getAllAttendByRecord(RowBounds rowBounds, String userId, String id) {
+        Page<Attend> page = null;
+        if (id.equals("lastmonth")){
+            page=attendMapper.getLastMonthTableData(rowBounds,userId);
+        }else if (id.equals("week")){
+            page=attendMapper.getWeekTableData(rowBounds,userId);
+        }else {
+            page=attendMapper.getMonthTableData(rowBounds,userId);
+        }
+        return page;
     }
 
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="common/header::header">
+</head>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-emp-add">
+        <div class="row cl" style="text-align:center;margin:0 auto;margin-top:5%;">
+            <input type="radio" value="all" id="all" name="radio"  checked="checked"/>
+            &nbsp;&nbsp;
+            <label>全部考勤数据</label>
+        </div>
+        <div class="row cl" style="text-align:center;margin:0 auto;">
+            <input type="radio" value="lastMonth" id="selectLastMonth" name="radio"/>
+            &nbsp;&nbsp;
+            <label>上月考勤数据</label>
+        </div>
+        <div class="row cl" style="text-align:center;margin:0 auto;">
+            <input type="radio" value="month" id="selectCurrentMonth" name="radio"/>
+            &nbsp;&nbsp;
+            <label>本月考勤数据</label>
+        </div>
+        <div class="row cl" style="text-align:center;margin:0 auto;">
+            <input type="radio" value="week" id="selectCurrentWeek" name="radio"/>
+            &nbsp;&nbsp;
+            <label>本周考勤数据</label>
+        </div>
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-3">
+                <input onclick="refer()" name="" type="submit" class="btn btn-success radius size-M" value="&nbsp;确&nbsp;&nbsp;定&nbsp;"/>
+                <input onclick="cancel()" name="" type="reset" class="btn btn-default radius size-M" value="&nbsp;取&nbsp;&nbsp;消&nbsp;"/>
+            </div>
+        </div>
+    </form>
+</article>
+<script th:src="@{/js/system/attend/attendList.js}" th:inline="javascript"></script>
+</body>
+</html>

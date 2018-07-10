@@ -1,5 +1,7 @@
 package com.spring.model.attend;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+
 import java.util.Date;
 
 public class Attend {
@@ -8,25 +10,34 @@ public class Attend {
 
     private String userId;
 
+    @Excel(name = "员工姓名",isImportField = "true_attend")
     private String userName;
-
-    private String remark;
 
     private String attendId;
 
+    @Excel(name = "考勤日期",databaseFormat = "yyyy-MM-dd", format = "yyyy-MM-dd",isImportField = "true_attend",width = 18)
     private String attendDate;
 
+    @Excel(name = "考勤周期",isImportField = "true_attend")
     private String attendWeek;
 
+    @Excel(name = "上午打卡时间",databaseFormat = "yyyy-MM-dd HH:mm:ss", format = "yyyy-MM-dd HH:mm:ss",isImportField = "true_attend",width = 20)
     private Date attendMorning;
 
+    @Excel(name = "下午打卡时间",databaseFormat = "yyyy-MM-dd HH:mm:ss", format = "yyyy-MM-dd HH:mm:ss",isImportField = "true_attend",width = 20)
     private Date attendEvening;
 
+    @Excel(name = "工作时长",suffix = "小时")
+    private Integer workHours;
+
+    @Excel(name = "缺勤时长",suffix = "分钟",isImportField = "true_attend")
     private Integer absence;
 
+    @Excel(name = "考勤状态",replace = {"正_1","异_0"}, suffix = "常",isImportField = "true_attend")
     private Integer attendStatus;
 
-    private Integer workHours;
+    @Excel(name = "备注",width = 25 )
+    private String remark;
 
     public Attend(String attendId, String attendDate, String attendWeek, Date attendMorning, Date attendEvening, Integer absence, Integer attendStatus) {
         this.attendId = attendId;

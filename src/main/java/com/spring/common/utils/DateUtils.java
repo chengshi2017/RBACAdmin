@@ -1,5 +1,7 @@
 package com.spring.common.utils;
 
+import org.apache.poi.hssf.util.HSSFColor;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -323,5 +325,23 @@ public class DateUtils {
         }else {
             return 0;
         }
+    }
+
+    public static String getLastMonth(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM");
+        Date date=new Date();
+        Calendar c=Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.MONTH,-1);
+        Date d=c.getTime();
+        return sdf.format(d);
+    }
+
+    public static String getCurrentMonth(){
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy_MM");
+        Date date=new Date();
+        return sdf.format(date);
+
+
     }
 }
