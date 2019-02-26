@@ -17,6 +17,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -31,7 +33,6 @@ import java.util.List;
  * @Describe:
  */
 @Service
-@Transactional
 public class AttendServiceImpl implements AttendService {
 
     @Autowired
@@ -44,6 +45,7 @@ public class AttendServiceImpl implements AttendService {
     private UserMapper userMapper;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void sign(User user) {
         Date today=new Date();
         Attend attend=new Attend();
@@ -119,10 +121,11 @@ public class AttendServiceImpl implements AttendService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout=36000,rollbackFor=Exception.class)
     public void checkAttend() {
         /**
-         * 第一种情况，上下午都没有打卡，调用自动执行任务，将打卡记录补上，
-         * 记为缺勤一整天，状态为异常
+         * 第一种情况，上午没有打卡，中午12点触发定时任务，给未打卡员工补上打卡信息
+         * 缺勤时间记为240分钟，考勤状态定为异常
          */
         List<String> userIdList = attendMapper.getUserIdAbsence();
         if (CollectionUtils.isNotEmpty(userIdList)){
@@ -139,7 +142,7 @@ public class AttendServiceImpl implements AttendService {
                 String userName=userMapper.getUserByUserId(userId).getUserName();
                 String currentDay=DateUtils.getCurrentDay();
                 attend.setRemark(userName+"-"+currentDay+"打卡记录");
-                attend.setAbsence(Constants.AttendConstants.ABSENCE_DAY);
+                attend.setAbsence(Constants.AttendConstants.ABSENCE_DAY>>1);
                 attend.setAttendStatus(Constants.AttendConstants.ATTEND_STATUS_ABNORMAL);
                 list.add(attend);
             }
@@ -157,7 +160,7 @@ public class AttendServiceImpl implements AttendService {
         if (CollectionUtils.isNotEmpty(attendList)){
             for (Attend attend:attendList){
                 attend.setAttendStatus(Constants.AttendConstants.ATTEND_STATUS_ABNORMAL);
-                attend.setAbsence(attend.getAbsence()+Constants.AttendConstants.ABSENCE_DAY/2);
+                attend.setAbsence(attend.getAbsence()+Constants.AttendConstants.ABSENCE_DAY>>1);
                 attendMapper.updateByPrimaryKeySelective(attend);
             }
         }

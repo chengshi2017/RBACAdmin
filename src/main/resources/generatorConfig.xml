@@ -22,9 +22,9 @@
         <!--jdbc的数据库连接 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/hrm_db"
+                connectionURL="jdbc:mysql://10.4.168.221:3366/itsm-0.5.0"
                 userId="root"
-                password="123456">
+                password="root">
         </jdbcConnection>
 
 
@@ -71,7 +71,7 @@
         <!-- pojo 实体生成器 -->
         <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
         <!-- schema即为数据库名 可不写 -->
-        <table tableName="t_attend" domainObjectName="Attend"
+        <table tableName="itsm_publish" domainObjectName="Publish"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -80,48 +80,5 @@
             <!--//无论字段是什么类型，生成的类属性都是varchar。 可选的（0 or 1） 测试无效 -->
             <!-- <columnOverride column="city_code" jdbcType="VARCHAR" /> -->
         </table>
-
-        <!-- 必须的（1...N） -->
-        <!-- pojo 实体生成器 -->
-        <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
-        <!-- schema即为数据库名 可不写 -->
-        <table tableName="t_user_attend" domainObjectName="UserAttend"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <!-- 忽略字段 可选的（0 or 1） -->
-            <!-- <ignoreColumn column="is_use" /> -->
-            <!--//无论字段是什么类型，生成的类属性都是varchar。 可选的（0 or 1） 测试无效 -->
-            <!-- <columnOverride column="city_code" jdbcType="VARCHAR" /> -->
-        </table>
-
-        <!-- 必须的（1...N） -->
-        <!-- pojo 实体生成器 -->
-        <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
-        <!-- schema即为数据库名 可不写 -->
-        <table tableName="t_apply" domainObjectName="Apply"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <!-- 忽略字段 可选的（0 or 1） -->
-            <!-- <ignoreColumn column="is_use" /> -->
-            <!--//无论字段是什么类型，生成的类属性都是varchar。 可选的（0 or 1） 测试无效 -->
-            <!-- <columnOverride column="city_code" jdbcType="VARCHAR" /> -->
-        </table>
-
-        <!-- 必须的（1...N） -->
-        <!-- pojo 实体生成器 -->
-        <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
-        <!-- schema即为数据库名 可不写 -->
-        <table tableName="t_attend_apply" domainObjectName="AttendApply"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <!-- 忽略字段 可选的（0 or 1） -->
-            <!-- <ignoreColumn column="is_use" /> -->
-            <!--//无论字段是什么类型，生成的类属性都是varchar。 可选的（0 or 1） 测试无效 -->
-            <!-- <columnOverride column="city_code" jdbcType="VARCHAR" /> -->
-        </table>
-
     </context>
 </generatorConfiguration>

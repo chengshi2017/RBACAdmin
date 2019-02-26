@@ -45,8 +45,8 @@
                         <td th:text="${item.userName}"></td>
                         <td th:text="${item.attendDate}"></td>
                         <td th:text="${item.attendWeek}"></td>
-                        <td th:text="${#dates.format(item.attendMorning,'HH:mm:ss')}"></td>
-                        <td th:text="${#dates.format(item.attendEvening,'HH:mm:ss')}"></td>
+                        <td th:text="${item.attendMorning}==null?'忘记打卡':${#dates.format(item.attendMorning,'HH:mm:ss')}"></td>
+                        <td th:text="${item.attendEvening}==null?'忘记打卡':${#dates.format(item.attendEvening,'HH:mm:ss')}"></td>
                         <td id="workHours" th:text="${item.workHours}+'h'"></td>
                         <td th:text="${item.absence}==0?'暂未缺勤':${item.absence}+'min'"></td>
                         <th:block th:if="${item.attendStatus}==1">

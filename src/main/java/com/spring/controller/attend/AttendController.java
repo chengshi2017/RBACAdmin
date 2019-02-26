@@ -113,4 +113,9 @@ public class AttendController extends SuperController{
         return "attend/attendList";
     }
 
+    @RequestMapping(value = "/checkAttend")
+    public void checkAttend(){
+        attendService.checkAttend();
+    }
+
 }

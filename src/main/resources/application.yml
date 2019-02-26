@@ -58,6 +58,15 @@ spring:
     restart:
       enabled: true
 
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+
+
   # 配置velocity
 #  velocity:
 #    charset: UTF-8
@@ -80,3 +89,4 @@ server:
 logging:
   config: classpath:logback.xml
   level: debug
+

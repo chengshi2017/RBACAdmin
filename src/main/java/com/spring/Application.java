@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @Describe:
  */
 @SpringBootApplication
-@MapperScan(basePackages ="com.spring.dao")
 @EnableTransactionManagement
+@MapperScan(basePackages ="com.spring.dao")
 public class Application {
 
     public static void main(String[] args){
