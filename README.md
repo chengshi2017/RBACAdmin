@@ -20,3 +20,14 @@
 3. 系统对权限进行很细的划分，例如权限管理员无法修改系统管理员信息。
 4. 更多的功能可以去系统中体验
 5. 流程审批正在开发中，待后期完善。。。。。
+
+#### 演示图片
+![登录页面](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_230435.png)
+![系统首页](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_231137.png)
+![动态授权](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_231205.png)
+![考勤数据动态展示](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_232415.png)
+![用户管理](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_232435.png)
+![日志展示](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_232515.png)
+![细粒度权限控制](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_232534.png)
+![修改用户信息](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_232609.png)
+![考勤打卡](https://hrm-github.oss-cn-hangzhou.aliyuncs.com/2019-02-26_232624.png)
