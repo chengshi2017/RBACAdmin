@@ -1,4 +1,4 @@
-# HRM
+# RBACAdmin
 
 #### 项目介绍
 &emsp;&emsp;个人空闲时间用来学习新技术的一个可进化型项目，后台使用SpringBoot搭建的一套框架，用MyBatis进行数据库操作。数据库主要是用MySQL，同时项目整合Shiro实现权限管理，Quartz实现定时任务的配置，Spring AOP实现操作日志的收集，同时使用redis做Shiro权限框架的缓存管理机制和Session共享；前台使用thymeleaf模板引擎,H-ui前端框架，使用layer弹出层实现页面的跳转，ztree权限信息的展示，Echarts柱状图展示考勤信息。
